@@ -3977,7 +3977,8 @@
       ],
       "is_a": "NamedThing",
       "mixins": [
-        "HasContextAliases"
+        "HasContextAliases",
+        "HasTranslations"
       ],
       "slots": [
         "id",
@@ -3995,7 +3996,8 @@
         "grouping_id_list",
         "relevant_observable_entity_types",
         "biochementity_links",
-        "context_aliases"
+        "context_aliases",
+        "translations"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/peh/terms/Indicator",
@@ -4980,9 +4982,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "peh.yaml",
-  "source_file_date": "2025-05-20T06:42:12",
-  "source_file_size": 35620,
-  "generation_date": "2025-05-20T06:42:39",
+  "source_file_date": "2025-06-04T18:29:44",
+  "source_file_size": 35644,
+  "generation_date": "2025-06-04T18:30:08",
   "@type": "SchemaDefinition",
   "@context": [
     "_temp/jsonld/peh.context.jsonld",
