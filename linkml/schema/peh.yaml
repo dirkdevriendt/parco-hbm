@@ -192,6 +192,7 @@ classes:
     is_a: NamedThing
     mixins:
       - HasContextAliases
+      - HasTranslations
     slots:
       - indicator_type
       - varname
