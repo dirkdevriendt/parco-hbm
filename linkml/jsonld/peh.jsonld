@@ -825,7 +825,12 @@
       "from_schema": "https://w3id.org/peh/peh-model",
       "permissible_values": [
         {
-          "text": "PERCENT"
+          "text": "PERCENT",
+          "meaning": "qudtunit:PERCENT"
+        },
+        {
+          "text": "PPTH",
+          "meaning": "qudtunit:PPTH"
         },
         {
           "text": "KiloGM-PER-M3",
@@ -960,6 +965,10 @@
           "meaning": "qudtunit:IU-PER-L"
         },
         {
+          "text": "IU-PER-MilliL",
+          "meaning": "qudtunit:IU-PER-MilliL"
+        },
+        {
           "text": "NUM-PER-MilliL",
           "meaning": "qudtunit:NUM-PER-MilliL"
         },
@@ -988,6 +997,10 @@
           "meaning": "qudtunit:PicoGM-PER-MilliGM"
         },
         {
+          "text": "MilliGM-PER-GM",
+          "meaning": "qudtunit:MilliGM-PER-GM"
+        },
+        {
           "text": "MicroGM-PER-L",
           "meaning": "qudtunit:MicroGM-PER-L"
         },
@@ -998,6 +1011,10 @@
         {
           "text": "MilliGM-PER-DeciL",
           "meaning": "qudtunit:MilliGM-PER-DeciL"
+        },
+        {
+          "text": "MilliM_HG",
+          "meaning": "qudtunit:MilliM_HG"
         }
       ],
       "include": [
@@ -1082,6 +1099,10 @@
         {
           "text": "Volume",
           "meaning": "qudtqk:Volume"
+        },
+        {
+          "text": "Pressure",
+          "meaning": "qudtqk:Pressure"
         }
       ],
       "include": [
@@ -3844,6 +3865,7 @@
       "from_schema": "https://w3id.org/peh/peh-model",
       "is_a": "NamedThing",
       "mixins": [
+        "HasAliases",
         "HasContextAliases",
         "HasTranslations",
         "HasValidationStatus"
@@ -3857,6 +3879,7 @@
         "remark",
         "same_unit_as",
         "quantity_kind",
+        "aliases",
         "context_aliases",
         "translations",
         "current_validation_status",
@@ -4982,9 +5005,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "peh.yaml",
-  "source_file_date": "2025-06-04T18:29:44",
-  "source_file_size": 35644,
-  "generation_date": "2025-06-04T18:30:08",
+  "source_file_date": "2025-06-16T16:30:07",
+  "source_file_size": 35948,
+  "generation_date": "2025-06-16T16:30:28",
   "@type": "SchemaDefinition",
   "@context": [
     "_temp/jsonld/peh.context.jsonld",

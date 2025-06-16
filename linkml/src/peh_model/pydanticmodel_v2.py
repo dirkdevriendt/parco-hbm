@@ -211,6 +211,7 @@ class DataRole(str, Enum):
 
 class QudtUnit(str, Enum):
     PERCENT = "PERCENT"
+    PPTH = "PPTH"
     KiloGM_PER_M3 = "KiloGM-PER-M3"
     DAY = "DAY"
     NanoGM = "NanoGM"
@@ -244,6 +245,7 @@ class QudtUnit(str, Enum):
     L = "L"
     NanoGM_PER_M2 = "NanoGM-PER-M2"
     IU_PER_L = "IU-PER-L"
+    IU_PER_MilliL = "IU-PER-MilliL"
     NUM_PER_MilliL = "NUM-PER-MilliL"
     GM_PER_MOL = "GM-PER-MOL"
     PER_WK = "PER-WK"
@@ -251,9 +253,11 @@ class QudtUnit(str, Enum):
     YR = "YR"
     PER_DAY = "PER-DAY"
     PicoGM_PER_MilliGM = "PicoGM-PER-MilliGM"
+    MilliGM_PER_GM = "MilliGM-PER-GM"
     MicroGM_PER_L = "MicroGM-PER-L"
     KiloGM_PER_M2 = "KiloGM-PER-M2"
     MilliGM_PER_DeciL = "MilliGM-PER-DeciL"
+    MilliM_HG = "MilliM_HG"
 
 
 class QudtQuantityKind(str, Enum):
@@ -273,6 +277,7 @@ class QudtQuantityKind(str, Enum):
     MolarRatio = "MolarRatio"
     NumberDensity = "NumberDensity"
     Volume = "Volume"
+    Pressure = "Pressure"
 
 
 class EntityList(ConfiguredBaseModel):
@@ -398,13 +403,16 @@ class Translation(ConfiguredBaseModel):
     translated_value: Optional[str] = Field(default=None)
 
 
-class Unit(HasTranslations, HasContextAliases, HasValidationStatus, NamedThing):
+class Unit(
+    HasTranslations, HasContextAliases, HasAliases, HasValidationStatus, NamedThing
+):
     """
     A unit of measurement, a quantity chosen as a standard in terms of which other quantities may be expressed
     """
 
     same_unit_as: Optional[QudtUnit] = Field(default=None)
     quantity_kind: Optional[QudtQuantityKind] = Field(default=None)
+    aliases: Optional[list[str]] = Field(default=None)
     context_aliases: Optional[list[ContextAlias]] = Field(default=None)
     translations: Optional[list[Translation]] = Field(default=None)
     current_validation_status: Optional[ValidationStatus] = Field(default=None)

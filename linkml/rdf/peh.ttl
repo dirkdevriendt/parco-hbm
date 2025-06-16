@@ -14,28 +14,28 @@
     dcterms:license "https://creativecommons.org/publicdomain/zero/1.0/" ;
     pav:version "0.0.1a2" ;
     skos:definition "Entity and relation ontology and datamodel for Personal Exposure and Health data" ;
-    sh:declare [ sh:namespace skos: ;
+    sh:declare [ sh:namespace <https://w3id.org/iadopt/ont/> ;
+            sh:prefix "iop" ],
+        [ sh:namespace skos: ;
             sh:prefix "skos" ],
-        [ sh:namespace <https://w3id.org/peh/> ;
-            sh:prefix "peh" ],
-        [ sh:namespace linkml: ;
-            sh:prefix "linkml" ],
-        [ sh:namespace <http://qudt.org/2.1/vocab/quantitykind> ;
-            sh:prefix "qudtqk" ],
         [ sh:namespace <https://qudt.org/vocab/unit/> ;
             sh:prefix "qudtunit" ],
-        [ sh:namespace schema1: ;
-            sh:prefix "schema" ],
+        [ sh:namespace <https://w3id.org/peh/> ;
+            sh:prefix "peh" ],
+        [ sh:namespace <https://w3id.org/peh/terms/> ;
+            sh:prefix "pehterms" ],
+        [ sh:namespace <http://qudt.org/2.1/vocab/quantitykind> ;
+            sh:prefix "qudtqk" ],
         [ sh:namespace rdfs: ;
             sh:prefix "rdfs" ],
+        [ sh:namespace linkml: ;
+            sh:prefix "linkml" ],
         [ sh:namespace <http://qudt.org/2.1/schema/qudt> ;
             sh:prefix "qudt" ],
+        [ sh:namespace schema1: ;
+            sh:prefix "schema" ],
         [ sh:namespace prov: ;
-            sh:prefix "prov" ],
-        [ sh:namespace <https://w3id.org/iadopt/ont/> ;
-            sh:prefix "iop" ],
-        [ sh:namespace <https://w3id.org/peh/terms/> ;
-            sh:prefix "pehterms" ] ;
+            sh:prefix "prov" ] ;
     linkml:classes <https://w3id.org/peh/terms/BioChemEntity>,
         <https://w3id.org/peh/terms/BioChemEntityLink>,
         <https://w3id.org/peh/terms/BioChemIdentifier>,
@@ -124,7 +124,7 @@
         <https://w3id.org/peh/terms/ValidationCommand>,
         <https://w3id.org/peh/terms/ValidationErrorLevel>,
         <https://w3id.org/peh/terms/ValidationStatus> ;
-    linkml:generation_date "2025-06-04T18:30:12"^^xsd:dateTime ;
+    linkml:generation_date "2025-06-16T16:30:32"^^xsd:dateTime ;
     linkml:id <https://w3id.org/peh/peh-model> ;
     linkml:imports linkml:types ;
     linkml:metamodel_version "1.7.0" ;
@@ -320,8 +320,8 @@
         <https://w3id.org/peh/terms/varname>,
         <https://w3id.org/peh/terms/web_uri> ;
     linkml:source_file "peh.yaml" ;
-    linkml:source_file_date "2025-06-04T18:29:44"^^xsd:dateTime ;
-    linkml:source_file_size 35644 ;
+    linkml:source_file_date "2025-06-16T16:30:07"^^xsd:dateTime ;
+    linkml:source_file_size 35948 ;
     linkml:types <https://w3id.org/peh/terms/boolean>,
         <https://w3id.org/peh/terms/curie>,
         <https://w3id.org/peh/terms/date>,
@@ -372,6 +372,8 @@
 
 <https://w3id.org/peh/terms/IU-PER-L> linkml:meaning <qudtunit:IU-PER-L> .
 
+<https://w3id.org/peh/terms/IU-PER-MilliL> linkml:meaning <qudtunit:IU-PER-MilliL> .
+
 <https://w3id.org/peh/terms/KiloGM> linkml:meaning <qudtunit:KiloGM> .
 
 <https://w3id.org/peh/terms/KiloGM-PER-M2> linkml:meaning <qudtunit:KiloGM-PER-M2> .
@@ -406,6 +408,8 @@
 
 <https://w3id.org/peh/terms/MilliGM-PER-DeciL> linkml:meaning <qudtunit:MilliGM-PER-DeciL> .
 
+<https://w3id.org/peh/terms/MilliGM-PER-GM> linkml:meaning <qudtunit:MilliGM-PER-GM> .
+
 <https://w3id.org/peh/terms/MilliGM-PER-KiloGM> linkml:meaning <qudtunit:MilliGM-PER-KiloGM> .
 
 <https://w3id.org/peh/terms/MilliGM-PER-L> linkml:meaning <qudtunit:MilliGM-PER-L> .
@@ -413,6 +417,8 @@
 <https://w3id.org/peh/terms/MilliL> linkml:meaning <qudtunit:MilliL> .
 
 <https://w3id.org/peh/terms/MilliMOL-PER-MOL> linkml:meaning <qudtunit:MilliMOL-PER-MOL> .
+
+<https://w3id.org/peh/terms/MilliM_HG> linkml:meaning <qudtunit:MilliM_HG> .
 
 <https://w3id.org/peh/terms/MolarMass> linkml:meaning <qudtqk:MolarMass> .
 
@@ -442,6 +448,10 @@
 
 <https://w3id.org/peh/terms/PER-WK> linkml:meaning <qudtunit:PER-WK> .
 
+<https://w3id.org/peh/terms/PERCENT> linkml:meaning <qudtunit:PERCENT> .
+
+<https://w3id.org/peh/terms/PPTH> linkml:meaning <qudtunit:PPTH> .
+
 <https://w3id.org/peh/terms/PicoGM> linkml:meaning <qudtunit:PicoGM> .
 
 <https://w3id.org/peh/terms/PicoGM-PER-GM> linkml:meaning <qudtunit:PicoGM-PER-GM> .
@@ -449,6 +459,8 @@
 <https://w3id.org/peh/terms/PicoGM-PER-MilliGM> linkml:meaning <qudtunit:PicoGM-PER-MilliGM> .
 
 <https://w3id.org/peh/terms/PicoGM-PER-MilliL> linkml:meaning <qudtunit:PicoGM-PER-MilliL> .
+
+<https://w3id.org/peh/terms/Pressure> linkml:meaning <qudtqk:Pressure> .
 
 <https://w3id.org/peh/terms/Time> linkml:meaning <qudtqk:Time> .
 
@@ -727,6 +739,7 @@
         <https://w3id.org/peh/terms/MolarMass>,
         <https://w3id.org/peh/terms/MolarRatio>,
         <https://w3id.org/peh/terms/NumberDensity>,
+        <https://w3id.org/peh/terms/Pressure>,
         <https://w3id.org/peh/terms/Time>,
         <https://w3id.org/peh/terms/Volume> .
 
@@ -744,6 +757,7 @@
         <https://w3id.org/peh/terms/GM-PER-MOL>,
         <https://w3id.org/peh/terms/HR>,
         <https://w3id.org/peh/terms/IU-PER-L>,
+        <https://w3id.org/peh/terms/IU-PER-MilliL>,
         <https://w3id.org/peh/terms/KiloGM>,
         <https://w3id.org/peh/terms/KiloGM-PER-M2>,
         <https://w3id.org/peh/terms/KiloGM-PER-M3>,
@@ -756,10 +770,12 @@
         <https://w3id.org/peh/terms/MicroGM-PER-MilliL>,
         <https://w3id.org/peh/terms/MicroMOL-PER-L>,
         <https://w3id.org/peh/terms/MilliGM-PER-DeciL>,
+        <https://w3id.org/peh/terms/MilliGM-PER-GM>,
         <https://w3id.org/peh/terms/MilliGM-PER-KiloGM>,
         <https://w3id.org/peh/terms/MilliGM-PER-L>,
         <https://w3id.org/peh/terms/MilliL>,
         <https://w3id.org/peh/terms/MilliMOL-PER-MOL>,
+        <https://w3id.org/peh/terms/MilliM_HG>,
         <https://w3id.org/peh/terms/NUM>,
         <https://w3id.org/peh/terms/NUM-PER-MilliL>,
         <https://w3id.org/peh/terms/NanoGM>,
@@ -772,6 +788,7 @@
         <https://w3id.org/peh/terms/PER-DAY>,
         <https://w3id.org/peh/terms/PER-WK>,
         <https://w3id.org/peh/terms/PERCENT>,
+        <https://w3id.org/peh/terms/PPTH>,
         <https://w3id.org/peh/terms/PicoGM>,
         <https://w3id.org/peh/terms/PicoGM-PER-GM>,
         <https://w3id.org/peh/terms/PicoGM-PER-MilliGM>,
@@ -2328,16 +2345,6 @@
         <https://w3id.org/peh/terms/remark>,
         <https://w3id.org/peh/terms/unique_name> .
 
-<https://w3id.org/peh/terms/aliases> a linkml:SlotDefinition ;
-    skos:inScheme <https://w3id.org/peh/peh-model> ;
-    linkml:definition_uri <https://w3id.org/peh/terms/aliases> ;
-    linkml:domain_of <https://w3id.org/peh/terms/HasAliases> ;
-    linkml:inlined_as_list true ;
-    linkml:multivalued true ;
-    linkml:owner <https://w3id.org/peh/terms/HasAliases> ;
-    linkml:range <https://w3id.org/peh/terms/string> ;
-    linkml:slot_uri <https://w3id.org/peh/terms/aliases> .
-
 <https://w3id.org/peh/terms/biochementity_links> a linkml:SlotDefinition ;
     skos:inScheme <https://w3id.org/peh/peh-model> ;
     linkml:definition_uri <https://w3id.org/peh/terms/biochementity_links> ;
@@ -2499,15 +2506,6 @@
         <https://w3id.org/peh/terms/sections>,
         <https://w3id.org/peh/terms/unique_name> .
 
-<https://w3id.org/peh/terms/HasAliases> a linkml:ClassDefinition ;
-    skos:definition "The capacity of including one or more alternative naming terms (without qualifying the usage context)" ;
-    skos:inScheme <https://w3id.org/peh/peh-model> ;
-    linkml:class_uri <https://w3id.org/peh/terms/HasAliases> ;
-    linkml:definition_uri <https://w3id.org/peh/terms/HasAliases> ;
-    linkml:mixin true ;
-    linkml:slot_usage [ ] ;
-    linkml:slots <https://w3id.org/peh/terms/aliases> .
-
 <https://w3id.org/peh/terms/ObservablePropertyMetadataField> a linkml:ClassDefinition ;
     skos:definition "Predefined contextual qualifier for Observable Property metadata" ;
     skos:inScheme <https://w3id.org/peh/peh-model> ;
@@ -2531,6 +2529,16 @@
     linkml:slot_usage [ ] ;
     linkml:slots <https://w3id.org/peh/terms/linktype>,
         <https://w3id.org/peh/terms/physical_entity> .
+
+<https://w3id.org/peh/terms/aliases> a linkml:SlotDefinition ;
+    skos:inScheme <https://w3id.org/peh/peh-model> ;
+    linkml:definition_uri <https://w3id.org/peh/terms/aliases> ;
+    linkml:domain_of <https://w3id.org/peh/terms/HasAliases> ;
+    linkml:inlined_as_list true ;
+    linkml:multivalued true ;
+    linkml:owner <https://w3id.org/peh/terms/HasAliases> ;
+    linkml:range <https://w3id.org/peh/terms/string> ;
+    linkml:slot_uri <https://w3id.org/peh/terms/aliases> .
 
 <https://w3id.org/peh/terms/constraints> a linkml:SlotDefinition ;
     skos:inScheme <https://w3id.org/peh/peh-model> ;
@@ -2636,6 +2644,15 @@
     linkml:owner <https://w3id.org/peh/terms/ObservedValue> ;
     linkml:range <https://w3id.org/peh/terms/string> ;
     linkml:slot_uri <https://w3id.org/peh/terms/value> .
+
+<https://w3id.org/peh/terms/HasAliases> a linkml:ClassDefinition ;
+    skos:definition "The capacity of including one or more alternative naming terms (without qualifying the usage context)" ;
+    skos:inScheme <https://w3id.org/peh/peh-model> ;
+    linkml:class_uri <https://w3id.org/peh/terms/HasAliases> ;
+    linkml:definition_uri <https://w3id.org/peh/terms/HasAliases> ;
+    linkml:mixin true ;
+    linkml:slot_usage [ ] ;
+    linkml:slots <https://w3id.org/peh/terms/aliases> .
 
 <https://w3id.org/peh/terms/ObservablePropertyMetadataElement> a linkml:ClassDefinition ;
     skos:definition "Key-value element that adds contextual metadata to an Observable Property instance" ;
@@ -2860,11 +2877,13 @@
     linkml:class_uri <https://w3id.org/peh/terms/Unit> ;
     linkml:definition_uri <https://w3id.org/peh/terms/Unit> ;
     linkml:is_a <https://w3id.org/peh/terms/NamedThing> ;
-    linkml:mixins <https://w3id.org/peh/terms/HasContextAliases>,
+    linkml:mixins <https://w3id.org/peh/terms/HasAliases>,
+        <https://w3id.org/peh/terms/HasContextAliases>,
         <https://w3id.org/peh/terms/HasTranslations>,
         <https://w3id.org/peh/terms/HasValidationStatus> ;
     linkml:slot_usage [ ] ;
-    linkml:slots <https://w3id.org/peh/terms/context_aliases>,
+    linkml:slots <https://w3id.org/peh/terms/aliases>,
+        <https://w3id.org/peh/terms/context_aliases>,
         <https://w3id.org/peh/terms/current_validation_status>,
         <https://w3id.org/peh/terms/description>,
         <https://w3id.org/peh/terms/id>,

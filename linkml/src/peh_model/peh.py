@@ -1,5 +1,5 @@
 # Auto generated from peh.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-06-04T18:30:08
+# Generation date: 2025-06-16T16:30:28
 # Schema: PEH-Model
 #
 # id: https://w3id.org/peh/peh-model
@@ -785,6 +785,7 @@ class Unit(NamedThing):
     id: Union[str, UnitId] = None
     same_unit_as: Optional[Union[str, "QudtUnit"]] = None
     quantity_kind: Optional[Union[str, "QudtQuantityKind"]] = None
+    aliases: Optional[Union[str, list[str]]] = empty_list()
     context_aliases: Optional[
         Union[Union[dict, ContextAlias], list[Union[dict, ContextAlias]]]
     ] = empty_list()
@@ -814,6 +815,10 @@ class Unit(NamedThing):
             self.quantity_kind, QudtQuantityKind
         ):
             self.quantity_kind = QudtQuantityKind(self.quantity_kind)
+
+        if not isinstance(self.aliases, list):
+            self.aliases = [self.aliases] if self.aliases is not None else []
+        self.aliases = [v if isinstance(v, str) else str(v) for v in self.aliases]
 
         if not isinstance(self.context_aliases, list):
             self.context_aliases = (
@@ -4088,7 +4093,8 @@ class DataRole(EnumDefinitionImpl):
 
 class QudtUnit(EnumDefinitionImpl):
 
-    PERCENT = PermissibleValue(text="PERCENT")
+    PERCENT = PermissibleValue(text="PERCENT", meaning=QUDTUNIT["PERCENT"])
+    PPTH = PermissibleValue(text="PPTH", meaning=QUDTUNIT["PPTH"])
     DAY = PermissibleValue(text="DAY", meaning=QUDTUNIT["DAY"])
     NanoGM = PermissibleValue(text="NanoGM", meaning=QUDTUNIT["NanoGM"])
     GM = PermissibleValue(text="GM", meaning=QUDTUNIT["GM"])
@@ -4104,6 +4110,7 @@ class QudtUnit(EnumDefinitionImpl):
     WK = PermissibleValue(text="WK", meaning=QUDTUNIT["WK"])
     L = PermissibleValue(text="L", meaning=QUDTUNIT["L"])
     YR = PermissibleValue(text="YR", meaning=QUDTUNIT["YR"])
+    MilliM_HG = PermissibleValue(text="MilliM_HG", meaning=QUDTUNIT["MilliM_HG"])
 
     _defn = EnumDefinition(
         name="QudtUnit",
@@ -4222,6 +4229,11 @@ class QudtUnit(EnumDefinitionImpl):
         )
         setattr(
             cls,
+            "IU-PER-MilliL",
+            PermissibleValue(text="IU-PER-MilliL", meaning=QUDTUNIT["IU-PER-MilliL"]),
+        )
+        setattr(
+            cls,
             "NUM-PER-MilliL",
             PermissibleValue(text="NUM-PER-MilliL", meaning=QUDTUNIT["NUM-PER-MilliL"]),
         )
@@ -4251,6 +4263,11 @@ class QudtUnit(EnumDefinitionImpl):
             PermissibleValue(
                 text="PicoGM-PER-MilliGM", meaning=QUDTUNIT["PicoGM-PER-MilliGM"]
             ),
+        )
+        setattr(
+            cls,
+            "MilliGM-PER-GM",
+            PermissibleValue(text="MilliGM-PER-GM", meaning=QUDTUNIT["MilliGM-PER-GM"]),
         )
         setattr(
             cls,
@@ -4302,6 +4319,7 @@ class QudtQuantityKind(EnumDefinitionImpl):
         text="NumberDensity", meaning=QUDTQK["NumberDensity"]
     )
     Volume = PermissibleValue(text="Volume", meaning=QUDTQK["Volume"])
+    Pressure = PermissibleValue(text="Pressure", meaning=QUDTQK["Pressure"])
 
     _defn = EnumDefinition(
         name="QudtQuantityKind",
