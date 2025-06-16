@@ -1266,7 +1266,9 @@ enums:
   QudtUnit:
     permissible_values:
       PERCENT:
-        meaning: 
+        meaning: qudtunit:PERCENT
+      PPTH:
+        meaning: qudtunit:PPTH
       KiloGM-PER-M3:
         meaning: qudtunit:KiloGM-PER-M3
       DAY:
@@ -1333,6 +1335,8 @@ enums:
         meaning: qudtunit:NanoGM-PER-M2
       IU-PER-L:
         meaning: qudtunit:IU-PER-L
+      IU-PER-MilliL:
+        meaning: qudtunit:IU-PER-MilliL
       NUM-PER-MilliL:
         meaning: qudtunit:NUM-PER-MilliL
       GM-PER-MOL:
@@ -1347,12 +1351,16 @@ enums:
         meaning: qudtunit:PER-DAY
       PicoGM-PER-MilliGM:
         meaning: qudtunit:PicoGM-PER-MilliGM
+      MilliGM-PER-GM:
+        meaning: qudtunit:MilliGM-PER-GM
       MicroGM-PER-L:
         meaning: qudtunit:MicroGM-PER-L
       KiloGM-PER-M2:
         meaning: qudtunit:KiloGM-PER-M2
       MilliGM-PER-DeciL:
         meaning: qudtunit:MilliGM-PER-DeciL
+      MilliM_HG:
+        meaning: qudtunit:MilliM_HG
     include:
     - reachable_from:
         source_ontology: qudt
@@ -1395,6 +1403,8 @@ enums:
         meaning: qudtqk:NumberDensity
       Volume:
         meaning: qudtqk:Volume
+      Pressure:
+        meaning: qudtqk:Pressure
     include:
     - reachable_from:
         source_ontology: qudtqk
