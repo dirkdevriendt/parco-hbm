@@ -135,6 +135,7 @@ classes:
       A unit of measurement, a quantity chosen as a standard in terms of which other quantities may be expressed
     is_a: NamedThing
     mixins:
+      - HasAliases
       - HasContextAliases
       - HasTranslations
       - HasValidationStatus
