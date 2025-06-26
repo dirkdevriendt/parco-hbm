@@ -104,22 +104,19 @@ class NanopubGenerator:
         intro_nanopub_uri: str,
         test_server: bool,
     ):
-        self.profile = None
-        attribute_to_profile = not test_server
-        if not test_server:
-            self.profile = nanopub.Profile(
-                orcid_id=orcid_id,
-                name=name,
-                private_key=private_key,
-                public_key=public_key,
-                introduction_nanopub_uri=intro_nanopub_uri,
-            )
+        self.profile = nanopub.Profile(
+            orcid_id=orcid_id,
+            name=name,
+            private_key=private_key,
+            public_key=public_key,
+            introduction_nanopub_uri=intro_nanopub_uri,
+        )
 
         self.np_conf = nanopub.NanopubConf(
             profile=self.profile,
             use_test_server=test_server,
             add_prov_generated_time=True,
-            attribute_publication_to_profile=attribute_to_profile,
+            attribute_publication_to_profile=True,
         )
 
     def create_nanopub(self, assertion: rdflib.Graph) -> nanopub.Nanopub:
@@ -480,6 +477,7 @@ def add_term(
     np_generator: NanopubGenerator,
     dry_run: bool,
     identifier_pairs: list,
+    np_index: Optional[dict] = None,
     additional_statements: Optional[rdflib.Graph] = None,
 ) -> nanopub.Nanopub:
     try:
@@ -499,6 +497,8 @@ def add_term(
             logger.info(f"Nanopub published: {publication_info}")
         # create w3id - nanopub pairs
         identifier_pairs.append((term_uri, np_uri))
+        if np_index is not None:
+            np_index[term_uri] = np_uri
     except Exception as e:
         logger.error(f"Error in add_term: {e}")
         sys.exit(1)
@@ -511,6 +511,7 @@ def modify_term() -> nanopub.Nanopub:
 
 
 def deprecate_term() -> nanopub.Nanopub:
+    # del np_index[term_uri]
     pass
 
 
@@ -681,6 +682,14 @@ def list_terms(
     help="Path to output identifier nanopub pairs",
     default=None,
 )
+@click.option(
+    "--index-path",
+    "index_path",
+    required=False,
+    type=click.Path(),
+    help="Path to output index file",
+    default=None,
+)
 @dry_run_flag
 @nanopub_identifier_args
 def publish(
@@ -695,6 +704,7 @@ def publish(
     dry_run: bool = True,
     verbose: bool = False,
     htaccess_path: str = None,
+    index_path: str = None,
 ):
     """
     Create and publish nanopublications from changelog.
@@ -729,6 +739,15 @@ def publish(
         click.echo("Validating changelog ...")
         with open(changelog_path, "r") as f:
             changelog = yaml.safe_load(f)
+        # Load index file
+        click.echo("Loading index file ...")
+        index_file = "linkml/changelog/nanopub-index.yaml"
+        with open(index_file, "r") as f:
+            np_index = yaml.safe_load(f)
+            all_terms = np_index.get("terms", None)
+            if all_terms is None:
+                all_terms = {}
+                np_index["terms"] = all_terms
 
         # iterate across changes
         for change in changelog["changes"]:
@@ -747,6 +766,7 @@ def publish(
                     nanopub_generator,
                     dry_run,
                     identifier_pairs,
+                    np_index=all_terms,
                     additional_statements=additional_statements,
                 )
                 processed += 1
@@ -780,6 +800,11 @@ def publish(
             htaccess_path = "./htaccess.txt"
         htaccess_path = pathlib.Path(htaccess_path).resolve()
         _ = update_htaccess(identifier_pairs, htaccess_path)
+        if index_path is None:
+            index_path = index_file
+        with open(index_path, "w") as f:
+            yaml.safe_dump(np_index, f, sort_keys=False)
+        logger.info(f"Successfully wrote index-file to {index_path}")
 
     except Exception as e:
         logger.error(f"Error in processing: {e}")
@@ -891,8 +916,8 @@ def get_np_uri_from_linkml(uri: str) -> str:
     help="Path to the LinkML schema from which to publish terms.",
 )
 @click.option(
-    "--htaccess-file",
-    "htaccess_file",
+    "--index-file",
+    "index_file",
     required=False,
     type=click.Path(exists=True),
     default=None,
@@ -907,11 +932,10 @@ def push_index(
     private_key: str,
     public_key: str,
     intro_nanopub_uri: str,
-    htaccess_file: Optional[str] = None,
+    index_file: Optional[str] = None,
     dry_run: bool = True,
 ):
     logger.info(f"Running dry run is set to {dry_run}. Starting ...")
-    uri_mapping = {}
 
     schema_view = SchemaView(schema_path)
     version = schema_view.schema.version
@@ -929,34 +953,20 @@ def push_index(
         intro_nanopub_uri=intro_nanopub_uri,
         test_server=True,
     )
-    if htaccess_file is not None:
-        logger.info(f"Fetching nanopub uris for statements in {htaccess_file}")
-        with open(htaccess_file, "r") as file:
-            for line in file:
-                # Example content of uri_pairs
-                # RewriteRule ^EntityList$ http://purl.org/np/RAucNj8-CjIWhDt8y8arZ-Sgcr_-roQBzAohHRHww7bWQ [R=302,L]
-                rewrite_rule = line.rstrip().split(" ")
-                nanopub_uri = rewrite_rule[-2]
-                term = rewrite_rule[1].replace("^", "", 1)
-                term = re.sub(r"\$", "", term, count=1)
-                uri_mapping[term] = nanopub_uri
+    if index_file is not None:
+        logger.info(f"Fetching nanopub uris in {index_file}")
+        with open(index_file, "r") as file:
+            changelog = yaml.safe_load(file)
+    else:
+        logger.error("Index file could not be found")
+        sys.exit(1)
 
-    ## iterate over schema and add each of terms to index.
-    # STEPS:
-    # 1/ check if term in htaccess_file
-    # 2/ check if nanopub can be found (request)
-    logger.info(f"Collecting all terms that are part of the ontology version {version}")
-    for cls in schema_view.all_classes():
-        if cls not in uri_mapping:
-            uri_mapping[cls] = get_np_uri_from_linkml(cls)
-    for slot in schema_view.all_slots():
-        if slot not in uri_mapping:
-            uri_mapping[slot] = get_np_uri_from_linkml(slot)
-    for enum in schema_view.all_enums():
-        if enum not in uri_mapping:
-            uri_mapping[enum] = get_np_uri_from_linkml(enum)
+    all_terms = changelog["terms"]
+    if not isinstance(all_terms, dict):
+        logger.error("index-file does not contain any terms.")
+        sys.exit(1)
 
-    np_uri_list = list(uri_mapping.values())
+    np_uri_list = all_terms.values()
     np_list = nanopub.create_nanopub_index(
         nanopub_generator.np_conf,
         np_uri_list,

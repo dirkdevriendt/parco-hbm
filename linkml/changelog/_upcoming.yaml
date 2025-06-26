@@ -513,9 +513,6 @@ changes:
 - term_uri: https://w3id.org/peh/terms/geographic_scope
   action: added
   linkml_element_type: slot
-- term_uri: https://w3id.org/peh/terms/project
-  action: added
-  linkml_element_type: slot
 - term_uri: https://w3id.org/peh/terms/default_language
   action: added
   linkml_element_type: slot

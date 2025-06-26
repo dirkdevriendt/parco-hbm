@@ -24,6 +24,7 @@ SCHEMA_NAME = peh
 SRC = linkml
 DEST = _temp
 SOURCE_SCHEMA_PATH = $(SRC)/schema/$(SCHEMA_NAME).yaml
+INDEX_FILE_PATH = $(SRC)/changelog/nanopub-index.yaml
 SOURCE_SCHEMA_DIR = $(dir $(SOURCE_SCHEMA_PATH))
 PYMODEL = $(SRC)/src/peh_model
 
@@ -206,7 +207,7 @@ push-index:
 	set -a && source .env && set +a && \
 	python3 $(PUBLISH_SCRIPT_PATH) push-index \
 		-s $(SOURCE_SCHEMA_PATH) \
-		--htaccess-file htaccess.txt
+		--index-file $(INDEX_FILE_PATH)
 
 # ================================
 # EXAMPLE NANOPUB

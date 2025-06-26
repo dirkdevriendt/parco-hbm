@@ -57,6 +57,12 @@ jobs:
           name: htaccess.txt
           path: ./htaccess.txt
 
+      - name: Upload index.yaml
+        uses: actions/upload-artifact@v4 
+        with:
+          name: nanopub-index.yaml
+          path: ./nanopub-index.yaml
+
   NanopubIndex:
     needs: Terms2Nanopub
     runs-on: ubuntu-latest  
@@ -76,11 +82,11 @@ jobs:
       run: |
         pip install "linkml-runtime>=1.9,<2" nanopub pydantic 
 
-    - name: Download htaccess.txt
+    - name: Download nanopub-index.yaml
       uses: actions/download-artifact@v4
       with:
-        name: htaccess.txt
-        path: ./
+        name: nanopub-index.yaml
+        path: ./linkml/changelog/nanopub-index.yaml
 
     - name: Make index
       run: |
