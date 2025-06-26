@@ -1,5 +1,5 @@
 # Auto generated from peh.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-06-16T16:30:28
+# Generation date: 2025-06-26T10:26:14
 # Schema: PEH-Model
 #
 # id: https://w3id.org/peh/peh-model
@@ -5359,15 +5359,6 @@ slots.geographic_scope = Slot(
     range=Optional[str],
 )
 
-slots.project = Slot(
-    uri=SCHEMA.ResearchProject,
-    name="project",
-    curie=SCHEMA.curie("ResearchProject"),
-    model_uri=PEHTERMS.project,
-    domain=None,
-    range=Optional[str],
-)
-
 slots.default_language = Slot(
     uri=PEHTERMS.default_language,
     name="default_language",
@@ -5691,20 +5682,6 @@ slots.observable_entity_id_list = Slot(
     model_uri=PEHTERMS.observable_entity_id_list,
     domain=None,
     range=Optional[Union[Union[str, StudyEntityId], list[Union[str, StudyEntityId]]]],
-)
-
-slots.observable_entities = Slot(
-    uri=PEHTERMS.observable_entities,
-    name="observable_entities",
-    curie=PEHTERMS.curie("observable_entities"),
-    model_uri=PEHTERMS.observable_entities,
-    domain=None,
-    range=Optional[
-        Union[
-            dict[Union[str, StudyEntityId], Union[dict, StudyEntity]],
-            list[Union[dict, StudyEntity]],
-        ]
-    ],
 )
 
 slots.observable_entity = Slot(

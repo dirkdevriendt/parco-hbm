@@ -2550,17 +2550,6 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "project",
-      "definition_uri": "https://w3id.org/peh/terms/project",
-      "from_schema": "https://w3id.org/peh/peh-model",
-      "mappings": [
-        "http://schema.org/ResearchProject"
-      ],
-      "slot_uri": "http://schema.org/ResearchProject",
-      "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
       "name": "default_language",
       "definition_uri": "https://w3id.org/peh/terms/default_language",
       "from_schema": "https://w3id.org/peh/peh-model",
@@ -2976,17 +2965,6 @@
       ],
       "range": "StudyEntity",
       "multivalued": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "observable_entities",
-      "definition_uri": "https://w3id.org/peh/terms/observable_entities",
-      "from_schema": "https://w3id.org/peh/peh-model",
-      "slot_uri": "https://w3id.org/peh/terms/observable_entities",
-      "range": "StudyEntity",
-      "multivalued": true,
-      "inlined": true,
-      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -5005,9 +4983,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "peh.yaml",
-  "source_file_date": "2025-06-16T16:30:07",
-  "source_file_size": 35948,
-  "generation_date": "2025-06-16T16:30:28",
+  "source_file_date": "2025-06-26T10:25:50",
+  "source_file_size": 35974,
+  "generation_date": "2025-06-26T10:26:14",
   "@type": "SchemaDefinition",
   "@context": [
     "_temp/jsonld/peh.context.jsonld",

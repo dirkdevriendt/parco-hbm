@@ -14,28 +14,28 @@
     dcterms:license "https://creativecommons.org/publicdomain/zero/1.0/" ;
     pav:version "0.0.1a2" ;
     skos:definition "Entity and relation ontology and datamodel for Personal Exposure and Health data" ;
-    sh:declare [ sh:namespace <https://w3id.org/iadopt/ont/> ;
-            sh:prefix "iop" ],
-        [ sh:namespace skos: ;
+    sh:declare [ sh:namespace skos: ;
             sh:prefix "skos" ],
+        [ sh:namespace <http://qudt.org/2.1/schema/qudt> ;
+            sh:prefix "qudt" ],
+        [ sh:namespace schema1: ;
+            sh:prefix "schema" ],
+        [ sh:namespace <http://qudt.org/2.1/vocab/quantitykind> ;
+            sh:prefix "qudtqk" ],
         [ sh:namespace <https://qudt.org/vocab/unit/> ;
             sh:prefix "qudtunit" ],
         [ sh:namespace <https://w3id.org/peh/> ;
             sh:prefix "peh" ],
         [ sh:namespace <https://w3id.org/peh/terms/> ;
             sh:prefix "pehterms" ],
-        [ sh:namespace <http://qudt.org/2.1/vocab/quantitykind> ;
-            sh:prefix "qudtqk" ],
-        [ sh:namespace rdfs: ;
-            sh:prefix "rdfs" ],
         [ sh:namespace linkml: ;
             sh:prefix "linkml" ],
-        [ sh:namespace <http://qudt.org/2.1/schema/qudt> ;
-            sh:prefix "qudt" ],
-        [ sh:namespace schema1: ;
-            sh:prefix "schema" ],
         [ sh:namespace prov: ;
-            sh:prefix "prov" ] ;
+            sh:prefix "prov" ],
+        [ sh:namespace rdfs: ;
+            sh:prefix "rdfs" ],
+        [ sh:namespace <https://w3id.org/iadopt/ont/> ;
+            sh:prefix "iop" ] ;
     linkml:classes <https://w3id.org/peh/terms/BioChemEntity>,
         <https://w3id.org/peh/terms/BioChemEntityLink>,
         <https://w3id.org/peh/terms/BioChemIdentifier>,
@@ -124,7 +124,7 @@
         <https://w3id.org/peh/terms/ValidationCommand>,
         <https://w3id.org/peh/terms/ValidationErrorLevel>,
         <https://w3id.org/peh/terms/ValidationStatus> ;
-    linkml:generation_date "2025-06-16T16:30:32"^^xsd:dateTime ;
+    linkml:generation_date "2025-06-26T10:26:18"^^xsd:dateTime ;
     linkml:id <https://w3id.org/peh/peh-model> ;
     linkml:imports linkml:types ;
     linkml:metamodel_version "1.7.0" ;
@@ -208,7 +208,6 @@
         <https://w3id.org/peh/terms/normalised_unit>,
         <https://w3id.org/peh/terms/normalised_value>,
         <https://w3id.org/peh/terms/objective_type>,
-        <https://w3id.org/peh/terms/observable_entities>,
         <https://w3id.org/peh/terms/observable_entity>,
         <https://w3id.org/peh/terms/observable_entity_grouping_id_list>,
         <https://w3id.org/peh/terms/observable_entity_id_list>,
@@ -242,7 +241,6 @@
         <https://w3id.org/peh/terms/processing_actions>,
         <https://w3id.org/peh/terms/processing_description>,
         <https://w3id.org/peh/terms/processing_steps>,
-        <https://w3id.org/peh/terms/project>,
         <https://w3id.org/peh/terms/project_id_list>,
         <https://w3id.org/peh/terms/project_roles>,
         <https://w3id.org/peh/terms/project_stakeholders>,
@@ -320,8 +318,8 @@
         <https://w3id.org/peh/terms/varname>,
         <https://w3id.org/peh/terms/web_uri> ;
     linkml:source_file "peh.yaml" ;
-    linkml:source_file_date "2025-06-16T16:30:07"^^xsd:dateTime ;
-    linkml:source_file_size 35948 ;
+    linkml:source_file_date "2025-06-26T10:25:50"^^xsd:dateTime ;
+    linkml:source_file_size 35974 ;
     linkml:types <https://w3id.org/peh/terms/boolean>,
         <https://w3id.org/peh/terms/curie>,
         <https://w3id.org/peh/terms/date>,
@@ -899,15 +897,6 @@
     linkml:imported_from "linkml:types" ;
     linkml:uri xsd:integer .
 
-<https://w3id.org/peh/terms/observable_entities> a linkml:SlotDefinition ;
-    skos:inScheme <https://w3id.org/peh/peh-model> ;
-    linkml:definition_uri <https://w3id.org/peh/terms/observable_entities> ;
-    linkml:inlined true ;
-    linkml:inlined_as_list true ;
-    linkml:multivalued true ;
-    linkml:range <https://w3id.org/peh/terms/StudyEntity> ;
-    linkml:slot_uri <https://w3id.org/peh/terms/observable_entities> .
-
 <https://w3id.org/peh/terms/orcid> a linkml:SlotDefinition ;
     skos:inScheme <https://w3id.org/peh/peh-model> ;
     skos:mappingRelation schema1:identifier ;
@@ -935,13 +924,6 @@
     linkml:owner <https://w3id.org/peh/terms/Matrix> ;
     linkml:range <https://w3id.org/peh/terms/Matrix> ;
     linkml:slot_uri skos:broader .
-
-<https://w3id.org/peh/terms/project> a linkml:SlotDefinition ;
-    skos:inScheme <https://w3id.org/peh/peh-model> ;
-    skos:mappingRelation schema1:ResearchProject ;
-    linkml:definition_uri <https://w3id.org/peh/terms/project> ;
-    linkml:range <https://w3id.org/peh/terms/string> ;
-    linkml:slot_uri schema1:ResearchProject .
 
 <https://w3id.org/peh/terms/rorid> a linkml:SlotDefinition ;
     skos:inScheme <https://w3id.org/peh/peh-model> ;
