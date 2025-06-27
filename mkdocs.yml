@@ -3,7 +3,7 @@ site_name: "PEH-model Documentation"
 theme:
   name: material
   palette:
-    scheme: slate
+    scheme: default
     primary: cyan
   features:
     - content.tabs.link
@@ -25,3 +25,9 @@ markdown_extensions:
 extra_javascript:
   - https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js
   - javascripts/tablesort.js
+extra:
+  version: "0.0.1a2"
+  announcement:
+    type: info
+    text: |
+      📘 You are viewing version 0.0.1a2 of the documentation.
