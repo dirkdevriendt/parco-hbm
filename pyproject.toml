@@ -16,6 +16,7 @@ email = "dirk.devriendt.ext@vito.be"
 
 [project.optional-dependencies]
 docs = [
+    "linkml",
     "mkdocs",
     "mkdocs-material>=8.2.8",
     "mkdocs-mermaid2-plugin>=1.1.1",

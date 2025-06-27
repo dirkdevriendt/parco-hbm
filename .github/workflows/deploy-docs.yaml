@@ -32,5 +32,5 @@ jobs:
           mkdir -p docs
           touch docs/.nojekyll
           gen-doc -d docs linkml/schema/peh.yaml
-          ([ ! -f docs/about.md ] && cp src/docs/about.md docs/) || true
-          make mkd-gh-deploy
+          cp README.md docs/about.md
+          mkdocs gh-deploy
