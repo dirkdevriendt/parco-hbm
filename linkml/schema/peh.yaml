@@ -1317,8 +1317,12 @@ enums:
         meaning: qudtunit:NanoGM-PER-L
       MicroMOL-PER-L:
         meaning: qudtunit:MicroMOL-PER-L
+      M:
+        meaning: qudtunit:M
       CentiM:
         meaning: qudtunit:CentiM
+      MilliM:
+        meaning: qudtunit:MilliM
       MicroGM-PER-GM:
         meaning: qudtunit:MicroGM-PER-GM
       WK:
@@ -1361,6 +1365,16 @@ enums:
         meaning: qudtunit:MilliGM-PER-DeciL
       MilliM_HG:
         meaning: qudtunit:MilliM_HG
+      PER-KiloM:
+        meaning: qudtunit:PER-KiloM
+      NUM-PER-KiloM2___:
+        meaning: qudtunit:NUM-PER-KiloM2
+      M2:
+        meaning: qudtunit:M2
+      M-PER-SEC:
+        meaning: qudtunit:M-PER-SEC
+      GM-PER-HA:
+        meaning: qudtunit:GM-PER-HA
     include:
     - reachable_from:
         source_ontology: qudt
@@ -1383,10 +1397,16 @@ enums:
         meaning: qudtqk:DimensionlessRatio
       Time:
         meaning: qudtqk:Time
+      Speed:
+        meaning: qudtqk:Speed
       Frequency:
         meaning: qudtqk:Frequency
       Length:
         meaning: qudtqk:Length
+      InverseLength:
+        meaning: qudtqk:InverseLength
+      Area:
+        meaning: qudtqk:Area
       Mass:
         meaning: qudtqk:Mass
       MassPerArea:
