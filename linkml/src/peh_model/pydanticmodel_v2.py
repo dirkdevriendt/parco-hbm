@@ -324,9 +324,11 @@ class NamedThing(ConfiguredBaseModel):
 
     id: str = Field(default=...)
     unique_name: Optional[str] = Field(default=None)
+    short_name: Optional[str] = Field(default=None)
     name: Optional[str] = Field(default=None)
     description: Optional[str] = Field(default=None)
     label: Optional[str] = Field(default=None)
+    ui_label: Optional[str] = Field(default=None)
     remark: Optional[str] = Field(default=None)
 
 
@@ -397,9 +399,11 @@ class Grouping(HasTranslations, HasContextAliases, NamedThing):
     translations: Optional[list[Translation]] = Field(default=None)
     id: str = Field(default=...)
     unique_name: Optional[str] = Field(default=None)
+    short_name: Optional[str] = Field(default=None)
     name: Optional[str] = Field(default=None)
     description: Optional[str] = Field(default=None)
     label: Optional[str] = Field(default=None)
+    ui_label: Optional[str] = Field(default=None)
     remark: Optional[str] = Field(default=None)
 
 
@@ -429,9 +433,11 @@ class Unit(
     validation_history: Optional[list[ValidationHistoryRecord]] = Field(default=None)
     id: str = Field(default=...)
     unique_name: Optional[str] = Field(default=None)
+    short_name: Optional[str] = Field(default=None)
     name: Optional[str] = Field(default=None)
     description: Optional[str] = Field(default=None)
     label: Optional[str] = Field(default=None)
+    ui_label: Optional[str] = Field(default=None)
     remark: Optional[str] = Field(default=None)
 
 
@@ -453,9 +459,11 @@ class BioChemEntity(
     validation_history: Optional[list[ValidationHistoryRecord]] = Field(default=None)
     id: str = Field(default=...)
     unique_name: Optional[str] = Field(default=None)
+    short_name: Optional[str] = Field(default=None)
     name: Optional[str] = Field(default=None)
     description: Optional[str] = Field(default=None)
     label: Optional[str] = Field(default=None)
+    ui_label: Optional[str] = Field(default=None)
     remark: Optional[str] = Field(default=None)
 
 
@@ -478,9 +486,11 @@ class BioChemIdentifierSchema(NamedThing):
     web_uri: Optional[str] = Field(default=None)
     id: str = Field(default=...)
     unique_name: Optional[str] = Field(default=None)
+    short_name: Optional[str] = Field(default=None)
     name: Optional[str] = Field(default=None)
     description: Optional[str] = Field(default=None)
     label: Optional[str] = Field(default=None)
+    ui_label: Optional[str] = Field(default=None)
     remark: Optional[str] = Field(default=None)
 
 
@@ -497,9 +507,11 @@ class Matrix(HasTranslations, HasContextAliases, NamedThing):
     translations: Optional[list[Translation]] = Field(default=None)
     id: str = Field(default=...)
     unique_name: Optional[str] = Field(default=None)
+    short_name: Optional[str] = Field(default=None)
     name: Optional[str] = Field(default=None)
     description: Optional[str] = Field(default=None)
     label: Optional[str] = Field(default=None)
+    ui_label: Optional[str] = Field(default=None)
     remark: Optional[str] = Field(default=None)
 
 
@@ -523,9 +535,11 @@ class Indicator(HasTranslations, HasContextAliases, NamedThing):
     translations: Optional[list[Translation]] = Field(default=None)
     id: str = Field(default=...)
     unique_name: Optional[str] = Field(default=None)
+    short_name: Optional[str] = Field(default=None)
     name: Optional[str] = Field(default=None)
     description: Optional[str] = Field(default=None)
     label: Optional[str] = Field(default=None)
+    ui_label: Optional[str] = Field(default=None)
     remark: Optional[str] = Field(default=None)
 
 
@@ -546,9 +560,11 @@ class PhysicalEntity(NamedThing):
     physical_entity_links: Optional[list[PhysicalEntityLink]] = Field(default=None)
     id: str = Field(default=...)
     unique_name: Optional[str] = Field(default=None)
+    short_name: Optional[str] = Field(default=None)
     name: Optional[str] = Field(default=None)
     description: Optional[str] = Field(default=None)
     label: Optional[str] = Field(default=None)
+    ui_label: Optional[str] = Field(default=None)
     remark: Optional[str] = Field(default=None)
 
 
@@ -574,9 +590,11 @@ class Sample(PhysicalEntity):
     physical_entity_links: Optional[list[PhysicalEntityLink]] = Field(default=None)
     id: str = Field(default=...)
     unique_name: Optional[str] = Field(default=None)
+    short_name: Optional[str] = Field(default=None)
     name: Optional[str] = Field(default=None)
     description: Optional[str] = Field(default=None)
     label: Optional[str] = Field(default=None)
+    ui_label: Optional[str] = Field(default=None)
     remark: Optional[str] = Field(default=None)
 
 
@@ -589,9 +607,11 @@ class Person(PhysicalEntity):
     physical_entity_links: Optional[list[PhysicalEntityLink]] = Field(default=None)
     id: str = Field(default=...)
     unique_name: Optional[str] = Field(default=None)
+    short_name: Optional[str] = Field(default=None)
     name: Optional[str] = Field(default=None)
     description: Optional[str] = Field(default=None)
     label: Optional[str] = Field(default=None)
+    ui_label: Optional[str] = Field(default=None)
     remark: Optional[str] = Field(default=None)
 
 
@@ -604,9 +624,11 @@ class Geolocation(PhysicalEntity):
     physical_entity_links: Optional[list[PhysicalEntityLink]] = Field(default=None)
     id: str = Field(default=...)
     unique_name: Optional[str] = Field(default=None)
+    short_name: Optional[str] = Field(default=None)
     name: Optional[str] = Field(default=None)
     description: Optional[str] = Field(default=None)
     label: Optional[str] = Field(default=None)
+    ui_label: Optional[str] = Field(default=None)
     remark: Optional[str] = Field(default=None)
 
 
@@ -618,9 +640,11 @@ class Environment(PhysicalEntity):
     physical_entity_links: Optional[list[PhysicalEntityLink]] = Field(default=None)
     id: str = Field(default=...)
     unique_name: Optional[str] = Field(default=None)
+    short_name: Optional[str] = Field(default=None)
     name: Optional[str] = Field(default=None)
     description: Optional[str] = Field(default=None)
     label: Optional[str] = Field(default=None)
+    ui_label: Optional[str] = Field(default=None)
     remark: Optional[str] = Field(default=None)
 
 
@@ -632,9 +656,11 @@ class HomeEnvironment(Environment):
     physical_entity_links: Optional[list[PhysicalEntityLink]] = Field(default=None)
     id: str = Field(default=...)
     unique_name: Optional[str] = Field(default=None)
+    short_name: Optional[str] = Field(default=None)
     name: Optional[str] = Field(default=None)
     description: Optional[str] = Field(default=None)
     label: Optional[str] = Field(default=None)
+    ui_label: Optional[str] = Field(default=None)
     remark: Optional[str] = Field(default=None)
 
 
@@ -646,9 +672,11 @@ class WorkEnvironment(Environment):
     physical_entity_links: Optional[list[PhysicalEntityLink]] = Field(default=None)
     id: str = Field(default=...)
     unique_name: Optional[str] = Field(default=None)
+    short_name: Optional[str] = Field(default=None)
     name: Optional[str] = Field(default=None)
     description: Optional[str] = Field(default=None)
     label: Optional[str] = Field(default=None)
+    ui_label: Optional[str] = Field(default=None)
     remark: Optional[str] = Field(default=None)
 
 
@@ -687,9 +715,11 @@ class ObservableProperty(HasTranslations, HasContextAliases, NamedThing):
     context_aliases: Optional[list[ContextAlias]] = Field(default=None)
     id: str = Field(default=...)
     unique_name: Optional[str] = Field(default=None)
+    short_name: Optional[str] = Field(default=None)
     name: Optional[str] = Field(default=None)
     description: Optional[str] = Field(default=None)
     label: Optional[str] = Field(default=None)
+    ui_label: Optional[str] = Field(default=None)
     remark: Optional[str] = Field(default=None)
 
 
@@ -721,9 +751,11 @@ class ObservablePropertyMetadataField(NamedThing):
     value_type: Optional[str] = Field(default=None)
     id: str = Field(default=...)
     unique_name: Optional[str] = Field(default=None)
+    short_name: Optional[str] = Field(default=None)
     name: Optional[str] = Field(default=None)
     description: Optional[str] = Field(default=None)
     label: Optional[str] = Field(default=None)
+    ui_label: Optional[str] = Field(default=None)
     remark: Optional[str] = Field(default=None)
 
 
@@ -843,9 +875,11 @@ class Stakeholder(HasTranslations, NamedThing):
     translations: Optional[list[Translation]] = Field(default=None)
     id: str = Field(default=...)
     unique_name: Optional[str] = Field(default=None)
+    short_name: Optional[str] = Field(default=None)
     name: Optional[str] = Field(default=None)
     description: Optional[str] = Field(default=None)
     label: Optional[str] = Field(default=None)
+    ui_label: Optional[str] = Field(default=None)
     remark: Optional[str] = Field(default=None)
 
 
@@ -869,9 +903,11 @@ class StudyEntity(NamedThing):
     study_entity_links: Optional[list[StudyEntityLink]] = Field(default=None)
     id: str = Field(default=...)
     unique_name: Optional[str] = Field(default=None)
+    short_name: Optional[str] = Field(default=None)
     name: Optional[str] = Field(default=None)
     description: Optional[str] = Field(default=None)
     label: Optional[str] = Field(default=None)
+    ui_label: Optional[str] = Field(default=None)
     remark: Optional[str] = Field(default=None)
 
 
@@ -891,9 +927,11 @@ class Project(StudyEntity, HasTranslations, HasContextAliases):
     study_entity_links: Optional[list[StudyEntityLink]] = Field(default=None)
     id: str = Field(default=...)
     unique_name: Optional[str] = Field(default=None)
+    short_name: Optional[str] = Field(default=None)
     name: Optional[str] = Field(default=None)
     description: Optional[str] = Field(default=None)
     label: Optional[str] = Field(default=None)
+    ui_label: Optional[str] = Field(default=None)
     remark: Optional[str] = Field(default=None)
 
 
@@ -924,9 +962,11 @@ class Study(StudyEntity, HasTranslations, HasContextAliases):
     study_entity_links: Optional[list[StudyEntityLink]] = Field(default=None)
     id: str = Field(default=...)
     unique_name: Optional[str] = Field(default=None)
+    short_name: Optional[str] = Field(default=None)
     name: Optional[str] = Field(default=None)
     description: Optional[str] = Field(default=None)
     label: Optional[str] = Field(default=None)
+    ui_label: Optional[str] = Field(default=None)
     remark: Optional[str] = Field(default=None)
 
 
@@ -953,9 +993,11 @@ class ObservationGroup(StudyEntity):
     study_entity_links: Optional[list[StudyEntityLink]] = Field(default=None)
     id: str = Field(default=...)
     unique_name: Optional[str] = Field(default=None)
+    short_name: Optional[str] = Field(default=None)
     name: Optional[str] = Field(default=None)
     description: Optional[str] = Field(default=None)
     label: Optional[str] = Field(default=None)
+    ui_label: Optional[str] = Field(default=None)
     remark: Optional[str] = Field(default=None)
 
 
@@ -970,9 +1012,11 @@ class StudyPopulation(StudyEntity):
     study_entity_links: Optional[list[StudyEntityLink]] = Field(default=None)
     id: str = Field(default=...)
     unique_name: Optional[str] = Field(default=None)
+    short_name: Optional[str] = Field(default=None)
     name: Optional[str] = Field(default=None)
     description: Optional[str] = Field(default=None)
     label: Optional[str] = Field(default=None)
+    ui_label: Optional[str] = Field(default=None)
     remark: Optional[str] = Field(default=None)
 
 
@@ -988,9 +1032,11 @@ class SampleCollection(StudyEntity):
     study_entity_links: Optional[list[StudyEntityLink]] = Field(default=None)
     id: str = Field(default=...)
     unique_name: Optional[str] = Field(default=None)
+    short_name: Optional[str] = Field(default=None)
     name: Optional[str] = Field(default=None)
     description: Optional[str] = Field(default=None)
     label: Optional[str] = Field(default=None)
+    ui_label: Optional[str] = Field(default=None)
     remark: Optional[str] = Field(default=None)
 
 
@@ -1003,9 +1049,11 @@ class StudySubject(StudyEntity):
     study_entity_links: Optional[list[StudyEntityLink]] = Field(default=None)
     id: str = Field(default=...)
     unique_name: Optional[str] = Field(default=None)
+    short_name: Optional[str] = Field(default=None)
     name: Optional[str] = Field(default=None)
     description: Optional[str] = Field(default=None)
     label: Optional[str] = Field(default=None)
+    ui_label: Optional[str] = Field(default=None)
     remark: Optional[str] = Field(default=None)
 
 
@@ -1018,9 +1066,11 @@ class StudySubjectGroup(StudyEntity):
     study_entity_links: Optional[list[StudyEntityLink]] = Field(default=None)
     id: str = Field(default=...)
     unique_name: Optional[str] = Field(default=None)
+    short_name: Optional[str] = Field(default=None)
     name: Optional[str] = Field(default=None)
     description: Optional[str] = Field(default=None)
     label: Optional[str] = Field(default=None)
+    ui_label: Optional[str] = Field(default=None)
     remark: Optional[str] = Field(default=None)
 
 
@@ -1034,9 +1084,11 @@ class Observation(NamedThing):
     observation_result_id_list: Optional[list[str]] = Field(default=None)
     id: str = Field(default=...)
     unique_name: Optional[str] = Field(default=None)
+    short_name: Optional[str] = Field(default=None)
     name: Optional[str] = Field(default=None)
     description: Optional[str] = Field(default=None)
     label: Optional[str] = Field(default=None)
+    ui_label: Optional[str] = Field(default=None)
     remark: Optional[str] = Field(default=None)
 
 
@@ -1074,9 +1126,11 @@ class ObservationResult(NamedThing):
     observed_values: Optional[list[ObservedValue]] = Field(default=None)
     id: str = Field(default=...)
     unique_name: Optional[str] = Field(default=None)
+    short_name: Optional[str] = Field(default=None)
     name: Optional[str] = Field(default=None)
     description: Optional[str] = Field(default=None)
     label: Optional[str] = Field(default=None)
+    ui_label: Optional[str] = Field(default=None)
     remark: Optional[str] = Field(default=None)
 
 
@@ -1127,9 +1181,11 @@ class DataLayout(NamedThing):
     sections: Optional[list[DataLayoutSection]] = Field(default=None)
     id: str = Field(default=...)
     unique_name: Optional[str] = Field(default=None)
+    short_name: Optional[str] = Field(default=None)
     name: Optional[str] = Field(default=None)
     description: Optional[str] = Field(default=None)
     label: Optional[str] = Field(default=None)
+    ui_label: Optional[str] = Field(default=None)
     remark: Optional[str] = Field(default=None)
 
 
@@ -1144,9 +1200,11 @@ class DataLayoutSection(NamedThing):
     elements: Optional[list[DataLayoutElement]] = Field(default=None)
     id: str = Field(default=...)
     unique_name: Optional[str] = Field(default=None)
+    short_name: Optional[str] = Field(default=None)
     name: Optional[str] = Field(default=None)
     description: Optional[str] = Field(default=None)
     label: Optional[str] = Field(default=None)
+    ui_label: Optional[str] = Field(default=None)
     remark: Optional[str] = Field(default=None)
 
 
@@ -1185,9 +1243,11 @@ class DataRequest(NamedThing):
     )
     id: str = Field(default=...)
     unique_name: Optional[str] = Field(default=None)
+    short_name: Optional[str] = Field(default=None)
     name: Optional[str] = Field(default=None)
     description: Optional[str] = Field(default=None)
     label: Optional[str] = Field(default=None)
+    ui_label: Optional[str] = Field(default=None)
     remark: Optional[str] = Field(default=None)
 
 
@@ -1211,9 +1271,11 @@ class DataStakeholder(NamedThing):
     processing_description: Optional[str] = Field(default=None)
     id: str = Field(default=...)
     unique_name: Optional[str] = Field(default=None)
+    short_name: Optional[str] = Field(default=None)
     name: Optional[str] = Field(default=None)
     description: Optional[str] = Field(default=None)
     label: Optional[str] = Field(default=None)
+    ui_label: Optional[str] = Field(default=None)
     remark: Optional[str] = Field(default=None)
 
 
@@ -1226,9 +1288,11 @@ class ResearchObjective(NamedThing):
     authors: Optional[list[str]] = Field(default=None)
     id: str = Field(default=...)
     unique_name: Optional[str] = Field(default=None)
+    short_name: Optional[str] = Field(default=None)
     name: Optional[str] = Field(default=None)
     description: Optional[str] = Field(default=None)
     label: Optional[str] = Field(default=None)
+    ui_label: Optional[str] = Field(default=None)
     remark: Optional[str] = Field(default=None)
 
 
@@ -1239,9 +1303,11 @@ class ProcessingAction(NamedThing):
 
     id: str = Field(default=...)
     unique_name: Optional[str] = Field(default=None)
+    short_name: Optional[str] = Field(default=None)
     name: Optional[str] = Field(default=None)
     description: Optional[str] = Field(default=None)
     label: Optional[str] = Field(default=None)
+    ui_label: Optional[str] = Field(default=None)
     remark: Optional[str] = Field(default=None)
 
 
@@ -1254,9 +1320,11 @@ class ProcessingStep(NamedThing):
     delivery_date: Optional[date] = Field(default=None)
     id: str = Field(default=...)
     unique_name: Optional[str] = Field(default=None)
+    short_name: Optional[str] = Field(default=None)
     name: Optional[str] = Field(default=None)
     description: Optional[str] = Field(default=None)
     label: Optional[str] = Field(default=None)
+    ui_label: Optional[str] = Field(default=None)
     remark: Optional[str] = Field(default=None)
 
 

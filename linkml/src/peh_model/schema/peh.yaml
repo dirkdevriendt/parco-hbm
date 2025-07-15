@@ -61,9 +61,11 @@ classes:
     slots:
       - id
       - unique_name
+      - short_name
       - name
       - description
       - label
+      - ui_label
       - remark
     close_mappings:
      - schema:Thing
@@ -635,11 +637,10 @@ slots:
     identifier: true
     slot_uri: schema:identifier
   unique_name:
-    slot_uri: schema:alternateName
-    exact_mappings:
-    - skos:altLabel
+    slot_uri: skos:prefLabel
     close_mappings:
     - schema:identifier
+  short_name:
   name:
     slot_uri: schema:name
     exact_mappings:
@@ -649,9 +650,7 @@ slots:
     exact_mappings:
     - skos:definition
   label:
-    slot_uri: skos:prefLabel
-    exact_mappings:
-    - schema:alternateName
+  ui_label:
   remark:
     slot_uri: schema:comment
     exact_mappings:

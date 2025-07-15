@@ -14,28 +14,28 @@
     dcterms:license "https://creativecommons.org/publicdomain/zero/1.0/" ;
     pav:version "0.0.1a2" ;
     skos:definition "Entity and relation ontology and datamodel for Personal Exposure and Health data" ;
-    sh:declare [ sh:namespace linkml: ;
-            sh:prefix "linkml" ],
-        [ sh:namespace rdfs: ;
-            sh:prefix "rdfs" ],
-        [ sh:namespace <https://w3id.org/peh/> ;
-            sh:prefix "peh" ],
+    sh:declare [ sh:namespace <http://qudt.org/2.1/schema/qudt> ;
+            sh:prefix "qudt" ],
         [ sh:namespace schema1: ;
             sh:prefix "schema" ],
         [ sh:namespace <https://w3id.org/iadopt/ont/> ;
             sh:prefix "iop" ],
-        [ sh:namespace <http://qudt.org/2.1/vocab/quantitykind> ;
-            sh:prefix "qudtqk" ],
-        [ sh:namespace <http://qudt.org/2.1/schema/qudt> ;
-            sh:prefix "qudt" ],
-        [ sh:namespace skos: ;
-            sh:prefix "skos" ],
-        [ sh:namespace <https://w3id.org/peh/terms/> ;
-            sh:prefix "pehterms" ],
         [ sh:namespace prov: ;
             sh:prefix "prov" ],
         [ sh:namespace <https://qudt.org/vocab/unit/> ;
-            sh:prefix "qudtunit" ] ;
+            sh:prefix "qudtunit" ],
+        [ sh:namespace linkml: ;
+            sh:prefix "linkml" ],
+        [ sh:namespace <https://w3id.org/peh/> ;
+            sh:prefix "peh" ],
+        [ sh:namespace rdfs: ;
+            sh:prefix "rdfs" ],
+        [ sh:namespace <https://w3id.org/peh/terms/> ;
+            sh:prefix "pehterms" ],
+        [ sh:namespace <http://qudt.org/2.1/vocab/quantitykind> ;
+            sh:prefix "qudtqk" ],
+        [ sh:namespace skos: ;
+            sh:prefix "skos" ] ;
     linkml:classes <https://w3id.org/peh/terms/BioChemEntity>,
         <https://w3id.org/peh/terms/BioChemEntityLink>,
         <https://w3id.org/peh/terms/BioChemIdentifier>,
@@ -124,7 +124,7 @@
         <https://w3id.org/peh/terms/ValidationCommand>,
         <https://w3id.org/peh/terms/ValidationErrorLevel>,
         <https://w3id.org/peh/terms/ValidationStatus> ;
-    linkml:generation_date "2025-07-15T12:32:48"^^xsd:dateTime ;
+    linkml:generation_date "2025-07-15T13:51:52"^^xsd:dateTime ;
     linkml:id <https://w3id.org/peh/peh-model> ;
     linkml:imports linkml:types ;
     linkml:metamodel_version "1.7.0" ;
@@ -275,6 +275,7 @@
         <https://w3id.org/peh/terms/secondary_parent_matrix_id_list>,
         <https://w3id.org/peh/terms/section_type>,
         <https://w3id.org/peh/terms/sections>,
+        <https://w3id.org/peh/terms/short_name>,
         <https://w3id.org/peh/terms/sort_order>,
         <https://w3id.org/peh/terms/source_path>,
         <https://w3id.org/peh/terms/stakeholder>,
@@ -290,6 +291,7 @@
         <https://w3id.org/peh/terms/study_stakeholders>,
         <https://w3id.org/peh/terms/translated_value>,
         <https://w3id.org/peh/terms/translations>,
+        <https://w3id.org/peh/terms/ui_label>,
         <https://w3id.org/peh/terms/unique_name>,
         <https://w3id.org/peh/terms/unit>,
         <https://w3id.org/peh/terms/units>,
@@ -318,8 +320,8 @@
         <https://w3id.org/peh/terms/varname>,
         <https://w3id.org/peh/terms/web_uri> ;
     linkml:source_file "peh.yaml" ;
-    linkml:source_file_date "2025-07-15T12:32:17"^^xsd:dateTime ;
-    linkml:source_file_size 36465 ;
+    linkml:source_file_date "2025-07-15T13:51:23"^^xsd:dateTime ;
+    linkml:source_file_size 36405 ;
     linkml:types <https://w3id.org/peh/terms/boolean>,
         <https://w3id.org/peh/terms/curie>,
         <https://w3id.org/peh/terms/date>,
@@ -704,6 +706,8 @@
         <https://w3id.org/peh/terms/name>,
         <https://w3id.org/peh/terms/physical_entity_links>,
         <https://w3id.org/peh/terms/remark>,
+        <https://w3id.org/peh/terms/short_name>,
+        <https://w3id.org/peh/terms/ui_label>,
         <https://w3id.org/peh/terms/unique_name> .
 
 <https://w3id.org/peh/terms/IndicatorType> skos:inScheme <https://w3id.org/peh/peh-model> ;
@@ -858,7 +862,9 @@
         <https://w3id.org/peh/terms/name>,
         <https://w3id.org/peh/terms/physical_entity>,
         <https://w3id.org/peh/terms/remark>,
+        <https://w3id.org/peh/terms/short_name>,
         <https://w3id.org/peh/terms/study_entity_links>,
+        <https://w3id.org/peh/terms/ui_label>,
         <https://w3id.org/peh/terms/unique_name> .
 
 <https://w3id.org/peh/terms/StudySubjectGroup> a linkml:ClassDefinition ;
@@ -874,7 +880,9 @@
         <https://w3id.org/peh/terms/name>,
         <https://w3id.org/peh/terms/physical_entity>,
         <https://w3id.org/peh/terms/remark>,
+        <https://w3id.org/peh/terms/short_name>,
         <https://w3id.org/peh/terms/study_entity_links>,
+        <https://w3id.org/peh/terms/ui_label>,
         <https://w3id.org/peh/terms/unique_name> .
 
 <https://w3id.org/peh/terms/ValidationCommand> skos:inScheme <https://w3id.org/peh/peh-model> ;
@@ -915,6 +923,8 @@
         <https://w3id.org/peh/terms/name>,
         <https://w3id.org/peh/terms/physical_entity_links>,
         <https://w3id.org/peh/terms/remark>,
+        <https://w3id.org/peh/terms/short_name>,
+        <https://w3id.org/peh/terms/ui_label>,
         <https://w3id.org/peh/terms/unique_name> .
 
 <https://w3id.org/peh/terms/integer> a linkml:TypeDefinition ;
@@ -990,6 +1000,8 @@
         <https://w3id.org/peh/terms/label>,
         <https://w3id.org/peh/terms/name>,
         <https://w3id.org/peh/terms/remark>,
+        <https://w3id.org/peh/terms/short_name>,
+        <https://w3id.org/peh/terms/ui_label>,
         <https://w3id.org/peh/terms/unique_name> .
 
 <https://w3id.org/peh/terms/ValidationStatus> skos:inScheme <https://w3id.org/peh/peh-model> ;
@@ -2298,6 +2310,8 @@
         <https://w3id.org/peh/terms/name>,
         <https://w3id.org/peh/terms/physical_entity_links>,
         <https://w3id.org/peh/terms/remark>,
+        <https://w3id.org/peh/terms/short_name>,
+        <https://w3id.org/peh/terms/ui_label>,
         <https://w3id.org/peh/terms/unique_name> .
 
 <https://w3id.org/peh/terms/Geolocation> a linkml:ClassDefinition ;
@@ -2314,6 +2328,8 @@
         <https://w3id.org/peh/terms/name>,
         <https://w3id.org/peh/terms/physical_entity_links>,
         <https://w3id.org/peh/terms/remark>,
+        <https://w3id.org/peh/terms/short_name>,
+        <https://w3id.org/peh/terms/ui_label>,
         <https://w3id.org/peh/terms/unique_name> .
 
 <https://w3id.org/peh/terms/ObservableEntityType> skos:inScheme <https://w3id.org/peh/peh-model> ;
@@ -2355,6 +2371,8 @@
         <https://w3id.org/peh/terms/physical_entity_links>,
         <https://w3id.org/peh/terms/recruited_in_project>,
         <https://w3id.org/peh/terms/remark>,
+        <https://w3id.org/peh/terms/short_name>,
+        <https://w3id.org/peh/terms/ui_label>,
         <https://w3id.org/peh/terms/unique_name> .
 
 <https://w3id.org/peh/terms/biochementity_links> a linkml:SlotDefinition ;
@@ -2500,6 +2518,8 @@
         <https://w3id.org/peh/terms/label>,
         <https://w3id.org/peh/terms/name>,
         <https://w3id.org/peh/terms/remark>,
+        <https://w3id.org/peh/terms/short_name>,
+        <https://w3id.org/peh/terms/ui_label>,
         <https://w3id.org/peh/terms/unique_name>,
         <https://w3id.org/peh/terms/web_uri> .
 
@@ -2516,6 +2536,8 @@
         <https://w3id.org/peh/terms/name>,
         <https://w3id.org/peh/terms/remark>,
         <https://w3id.org/peh/terms/sections>,
+        <https://w3id.org/peh/terms/short_name>,
+        <https://w3id.org/peh/terms/ui_label>,
         <https://w3id.org/peh/terms/unique_name> .
 
 <https://w3id.org/peh/terms/ObservablePropertyMetadataField> a linkml:ClassDefinition ;
@@ -2530,6 +2552,8 @@
         <https://w3id.org/peh/terms/label>,
         <https://w3id.org/peh/terms/name>,
         <https://w3id.org/peh/terms/remark>,
+        <https://w3id.org/peh/terms/short_name>,
+        <https://w3id.org/peh/terms/ui_label>,
         <https://w3id.org/peh/terms/unique_name>,
         <https://w3id.org/peh/terms/value_type> .
 
@@ -2690,7 +2714,9 @@
         <https://w3id.org/peh/terms/physical_entity>,
         <https://w3id.org/peh/terms/remark>,
         <https://w3id.org/peh/terms/research_population_type>,
+        <https://w3id.org/peh/terms/short_name>,
         <https://w3id.org/peh/terms/study_entity_links>,
+        <https://w3id.org/peh/terms/ui_label>,
         <https://w3id.org/peh/terms/unique_name> .
 
 <https://w3id.org/peh/terms/contacts> a linkml:SlotDefinition ;
@@ -2815,7 +2841,9 @@
         <https://w3id.org/peh/terms/label>,
         <https://w3id.org/peh/terms/name>,
         <https://w3id.org/peh/terms/remark>,
+        <https://w3id.org/peh/terms/short_name>,
         <https://w3id.org/peh/terms/start_date>,
+        <https://w3id.org/peh/terms/ui_label>,
         <https://w3id.org/peh/terms/unique_name> .
 
 <https://w3id.org/peh/terms/ProjectStakeholder> a linkml:ClassDefinition ;
@@ -2862,6 +2890,8 @@
         <https://w3id.org/peh/terms/name>,
         <https://w3id.org/peh/terms/objective_type>,
         <https://w3id.org/peh/terms/remark>,
+        <https://w3id.org/peh/terms/short_name>,
+        <https://w3id.org/peh/terms/ui_label>,
         <https://w3id.org/peh/terms/unique_name> .
 
 <https://w3id.org/peh/terms/StudyEntityLink> a linkml:ClassDefinition ;
@@ -2904,7 +2934,9 @@
         <https://w3id.org/peh/terms/quantity_kind>,
         <https://w3id.org/peh/terms/remark>,
         <https://w3id.org/peh/terms/same_unit_as>,
+        <https://w3id.org/peh/terms/short_name>,
         <https://w3id.org/peh/terms/translations>,
+        <https://w3id.org/peh/terms/ui_label>,
         <https://w3id.org/peh/terms/unique_name>,
         <https://w3id.org/peh/terms/validation_history> .
 
@@ -2958,7 +2990,9 @@
         <https://w3id.org/peh/terms/physical_entity>,
         <https://w3id.org/peh/terms/remark>,
         <https://w3id.org/peh/terms/sample_id_list>,
+        <https://w3id.org/peh/terms/short_name>,
         <https://w3id.org/peh/terms/study_entity_links>,
+        <https://w3id.org/peh/terms/ui_label>,
         <https://w3id.org/peh/terms/unique_name> .
 
 <https://w3id.org/peh/terms/Stakeholder> a linkml:ClassDefinition ;
@@ -2976,7 +3010,9 @@
         <https://w3id.org/peh/terms/name>,
         <https://w3id.org/peh/terms/remark>,
         <https://w3id.org/peh/terms/rorid>,
+        <https://w3id.org/peh/terms/short_name>,
         <https://w3id.org/peh/terms/translations>,
+        <https://w3id.org/peh/terms/ui_label>,
         <https://w3id.org/peh/terms/unique_name> .
 
 <https://w3id.org/peh/terms/BioChemEntity> a linkml:ClassDefinition ;
@@ -3003,7 +3039,9 @@
         <https://w3id.org/peh/terms/molweight_grampermol>,
         <https://w3id.org/peh/terms/name>,
         <https://w3id.org/peh/terms/remark>,
+        <https://w3id.org/peh/terms/short_name>,
         <https://w3id.org/peh/terms/translations>,
+        <https://w3id.org/peh/terms/ui_label>,
         <https://w3id.org/peh/terms/unique_name>,
         <https://w3id.org/peh/terms/validation_history> .
 
@@ -3090,8 +3128,10 @@
         <https://w3id.org/peh/terms/name>,
         <https://w3id.org/peh/terms/parent_grouping_id_list>,
         <https://w3id.org/peh/terms/remark>,
+        <https://w3id.org/peh/terms/short_name>,
         <https://w3id.org/peh/terms/sort_order>,
         <https://w3id.org/peh/terms/translations>,
+        <https://w3id.org/peh/terms/ui_label>,
         <https://w3id.org/peh/terms/unique_name> .
 
 <https://w3id.org/peh/terms/Observation> a linkml:ClassDefinition ;
@@ -3110,6 +3150,8 @@
         <https://w3id.org/peh/terms/observation_result_id_list>,
         <https://w3id.org/peh/terms/observation_type>,
         <https://w3id.org/peh/terms/remark>,
+        <https://w3id.org/peh/terms/short_name>,
+        <https://w3id.org/peh/terms/ui_label>,
         <https://w3id.org/peh/terms/unique_name> .
 
 <https://w3id.org/peh/terms/PhysicalEntity> a linkml:ClassDefinition ;
@@ -3126,6 +3168,8 @@
         <https://w3id.org/peh/terms/name>,
         <https://w3id.org/peh/terms/physical_entity_links>,
         <https://w3id.org/peh/terms/remark>,
+        <https://w3id.org/peh/terms/short_name>,
+        <https://w3id.org/peh/terms/ui_label>,
         <https://w3id.org/peh/terms/unique_name> .
 
 <https://w3id.org/peh/terms/study_entity_links> a linkml:SlotDefinition ;
@@ -3166,6 +3210,8 @@
         <https://w3id.org/peh/terms/observable_entity_types>,
         <https://w3id.org/peh/terms/remark>,
         <https://w3id.org/peh/terms/section_type>,
+        <https://w3id.org/peh/terms/short_name>,
+        <https://w3id.org/peh/terms/ui_label>,
         <https://w3id.org/peh/terms/unique_name> .
 
 <https://w3id.org/peh/terms/DataStakeholder> a linkml:ClassDefinition ;
@@ -3183,7 +3229,9 @@
         <https://w3id.org/peh/terms/name>,
         <https://w3id.org/peh/terms/processing_description>,
         <https://w3id.org/peh/terms/remark>,
+        <https://w3id.org/peh/terms/short_name>,
         <https://w3id.org/peh/terms/stakeholder>,
+        <https://w3id.org/peh/terms/ui_label>,
         <https://w3id.org/peh/terms/unique_name> .
 
 <https://w3id.org/peh/terms/ObservationGroup> a linkml:ClassDefinition ;
@@ -3201,9 +3249,11 @@
         <https://w3id.org/peh/terms/observation_id_list>,
         <https://w3id.org/peh/terms/physical_entity>,
         <https://w3id.org/peh/terms/remark>,
+        <https://w3id.org/peh/terms/short_name>,
         <https://w3id.org/peh/terms/sort_order>,
         <https://w3id.org/peh/terms/start_date>,
         <https://w3id.org/peh/terms/study_entity_links>,
+        <https://w3id.org/peh/terms/ui_label>,
         <https://w3id.org/peh/terms/unique_name> .
 
 <https://w3id.org/peh/terms/ObservationResult> a linkml:ClassDefinition ;
@@ -3223,6 +3273,8 @@
         <https://w3id.org/peh/terms/observation_start_date>,
         <https://w3id.org/peh/terms/observed_values>,
         <https://w3id.org/peh/terms/remark>,
+        <https://w3id.org/peh/terms/short_name>,
+        <https://w3id.org/peh/terms/ui_label>,
         <https://w3id.org/peh/terms/unique_name> .
 
 <https://w3id.org/peh/terms/Sample> a linkml:ClassDefinition ;
@@ -3243,6 +3295,8 @@
         <https://w3id.org/peh/terms/physical_label>,
         <https://w3id.org/peh/terms/remark>,
         <https://w3id.org/peh/terms/sampled_in_project>,
+        <https://w3id.org/peh/terms/short_name>,
+        <https://w3id.org/peh/terms/ui_label>,
         <https://w3id.org/peh/terms/unique_name> .
 
 <https://w3id.org/peh/terms/physical_entity> a linkml:SlotDefinition ;
@@ -3300,8 +3354,10 @@
         <https://w3id.org/peh/terms/parent_matrix>,
         <https://w3id.org/peh/terms/remark>,
         <https://w3id.org/peh/terms/secondary_parent_matrix_id_list>,
+        <https://w3id.org/peh/terms/short_name>,
         <https://w3id.org/peh/terms/sort_order>,
         <https://w3id.org/peh/terms/translations>,
+        <https://w3id.org/peh/terms/ui_label>,
         <https://w3id.org/peh/terms/unique_name> .
 
 <https://w3id.org/peh/terms/Project> a linkml:ClassDefinition ;
@@ -3323,10 +3379,12 @@
         <https://w3id.org/peh/terms/physical_entity>,
         <https://w3id.org/peh/terms/project_stakeholders>,
         <https://w3id.org/peh/terms/remark>,
+        <https://w3id.org/peh/terms/short_name>,
         <https://w3id.org/peh/terms/start_date>,
         <https://w3id.org/peh/terms/study_entity_links>,
         <https://w3id.org/peh/terms/study_id_list>,
         <https://w3id.org/peh/terms/translations>,
+        <https://w3id.org/peh/terms/ui_label>,
         <https://w3id.org/peh/terms/unique_name> .
 
 <https://w3id.org/peh/terms/ValidationDesign> a linkml:ClassDefinition ;
@@ -3457,7 +3515,9 @@
         <https://w3id.org/peh/terms/quantity_kind>,
         <https://w3id.org/peh/terms/relevant_observable_entity_types>,
         <https://w3id.org/peh/terms/remark>,
+        <https://w3id.org/peh/terms/short_name>,
         <https://w3id.org/peh/terms/translations>,
+        <https://w3id.org/peh/terms/ui_label>,
         <https://w3id.org/peh/terms/unique_name>,
         <https://w3id.org/peh/terms/varname> .
 
@@ -3481,11 +3541,13 @@
         <https://w3id.org/peh/terms/physical_entity>,
         <https://w3id.org/peh/terms/project_id_list>,
         <https://w3id.org/peh/terms/remark>,
+        <https://w3id.org/peh/terms/short_name>,
         <https://w3id.org/peh/terms/start_date>,
         <https://w3id.org/peh/terms/study_entity_id_list>,
         <https://w3id.org/peh/terms/study_entity_links>,
         <https://w3id.org/peh/terms/study_stakeholders>,
         <https://w3id.org/peh/terms/translations>,
+        <https://w3id.org/peh/terms/ui_label>,
         <https://w3id.org/peh/terms/unique_name> .
 
 <https://w3id.org/peh/terms/ValidationExpression> a linkml:ClassDefinition ;
@@ -3515,7 +3577,9 @@
         <https://w3id.org/peh/terms/name>,
         <https://w3id.org/peh/terms/physical_entity>,
         <https://w3id.org/peh/terms/remark>,
+        <https://w3id.org/peh/terms/short_name>,
         <https://w3id.org/peh/terms/study_entity_links>,
+        <https://w3id.org/peh/terms/ui_label>,
         <https://w3id.org/peh/terms/unique_name> .
 
 <https://w3id.org/peh/terms/DataRequest> a linkml:ClassDefinition ;
@@ -3540,6 +3604,8 @@
         <https://w3id.org/peh/terms/remark_on_methodology>,
         <https://w3id.org/peh/terms/request_properties>,
         <https://w3id.org/peh/terms/research_objectives>,
+        <https://w3id.org/peh/terms/short_name>,
+        <https://w3id.org/peh/terms/ui_label>,
         <https://w3id.org/peh/terms/unique_name> .
 
 <https://w3id.org/peh/terms/ObservedValue> a linkml:ClassDefinition ;
@@ -3562,21 +3628,6 @@
         <https://w3id.org/peh/terms/unit>,
         <https://w3id.org/peh/terms/value>,
         <https://w3id.org/peh/terms/value_as_string> .
-
-<https://w3id.org/peh/terms/NamedThing> a linkml:ClassDefinition ;
-    skos:closeMatch schema1:Thing ;
-    skos:definition "An abstract model for any of the identifiable entities" ;
-    skos:inScheme <https://w3id.org/peh/peh-model> ;
-    linkml:abstract true ;
-    linkml:class_uri <https://w3id.org/peh/terms/NamedThing> ;
-    linkml:definition_uri <https://w3id.org/peh/terms/NamedThing> ;
-    linkml:slot_usage [ ] ;
-    linkml:slots <https://w3id.org/peh/terms/description>,
-        <https://w3id.org/peh/terms/id>,
-        <https://w3id.org/peh/terms/label>,
-        <https://w3id.org/peh/terms/name>,
-        <https://w3id.org/peh/terms/remark>,
-        <https://w3id.org/peh/terms/unique_name> .
 
 <https://w3id.org/peh/terms/description> a linkml:SlotDefinition ;
     skos:exactMatch skos:definition ;
@@ -3611,14 +3662,13 @@
 
 <https://w3id.org/peh/terms/unique_name> a linkml:SlotDefinition ;
     skos:closeMatch schema1:identifier ;
-    skos:exactMatch skos:altLabel ;
     skos:inScheme <https://w3id.org/peh/peh-model> ;
-    skos:mappingRelation schema1:alternateName ;
+    skos:mappingRelation skos:prefLabel ;
     linkml:definition_uri <https://w3id.org/peh/terms/unique_name> ;
     linkml:domain_of <https://w3id.org/peh/terms/NamedThing> ;
     linkml:owner <https://w3id.org/peh/terms/NamedThing> ;
     linkml:range <https://w3id.org/peh/terms/string> ;
-    linkml:slot_uri schema1:alternateName .
+    linkml:slot_uri skos:prefLabel .
 
 <https://w3id.org/peh/terms/name> a linkml:SlotDefinition ;
     skos:exactMatch skos:altLabel ;
@@ -3630,6 +3680,22 @@
     linkml:owner <https://w3id.org/peh/terms/Contact> ;
     linkml:range <https://w3id.org/peh/terms/string> ;
     linkml:slot_uri schema1:name .
+
+<https://w3id.org/peh/terms/short_name> a linkml:SlotDefinition ;
+    skos:inScheme <https://w3id.org/peh/peh-model> ;
+    linkml:definition_uri <https://w3id.org/peh/terms/short_name> ;
+    linkml:domain_of <https://w3id.org/peh/terms/NamedThing> ;
+    linkml:owner <https://w3id.org/peh/terms/NamedThing> ;
+    linkml:range <https://w3id.org/peh/terms/string> ;
+    linkml:slot_uri <https://w3id.org/peh/terms/short_name> .
+
+<https://w3id.org/peh/terms/ui_label> a linkml:SlotDefinition ;
+    skos:inScheme <https://w3id.org/peh/peh-model> ;
+    linkml:definition_uri <https://w3id.org/peh/terms/ui_label> ;
+    linkml:domain_of <https://w3id.org/peh/terms/NamedThing> ;
+    linkml:owner <https://w3id.org/peh/terms/NamedThing> ;
+    linkml:range <https://w3id.org/peh/terms/string> ;
+    linkml:slot_uri <https://w3id.org/peh/terms/ui_label> .
 
 <https://w3id.org/peh/terms/EntityList> a linkml:ClassDefinition ;
     skos:definition "A generic top level object for collecting named entities under one root entity" ;
@@ -3657,17 +3723,32 @@
         <https://w3id.org/peh/terms/units> ;
     linkml:tree_root true .
 
-<https://w3id.org/peh/terms/label> a linkml:SlotDefinition ;
-    skos:exactMatch schema1:alternateName ;
+<https://w3id.org/peh/terms/NamedThing> a linkml:ClassDefinition ;
+    skos:closeMatch schema1:Thing ;
+    skos:definition "An abstract model for any of the identifiable entities" ;
     skos:inScheme <https://w3id.org/peh/peh-model> ;
-    skos:mappingRelation skos:prefLabel ;
+    linkml:abstract true ;
+    linkml:class_uri <https://w3id.org/peh/terms/NamedThing> ;
+    linkml:definition_uri <https://w3id.org/peh/terms/NamedThing> ;
+    linkml:slot_usage [ ] ;
+    linkml:slots <https://w3id.org/peh/terms/description>,
+        <https://w3id.org/peh/terms/id>,
+        <https://w3id.org/peh/terms/label>,
+        <https://w3id.org/peh/terms/name>,
+        <https://w3id.org/peh/terms/remark>,
+        <https://w3id.org/peh/terms/short_name>,
+        <https://w3id.org/peh/terms/ui_label>,
+        <https://w3id.org/peh/terms/unique_name> .
+
+<https://w3id.org/peh/terms/label> a linkml:SlotDefinition ;
+    skos:inScheme <https://w3id.org/peh/peh-model> ;
     linkml:definition_uri <https://w3id.org/peh/terms/label> ;
     linkml:domain_of <https://w3id.org/peh/terms/DataLayoutElement>,
         <https://w3id.org/peh/terms/NamedThing>,
         <https://w3id.org/peh/terms/ObservablePropertyValueOption> ;
     linkml:owner <https://w3id.org/peh/terms/DataLayoutElement> ;
     linkml:range <https://w3id.org/peh/terms/string> ;
-    linkml:slot_uri skos:prefLabel .
+    linkml:slot_uri <https://w3id.org/peh/terms/label> .
 
 <https://w3id.org/peh/terms/ObservableProperty> a linkml:ClassDefinition ;
     skos:definition "A fully defined variable that allows registering an observation about any of the entities relevant to Personal Exposure and Health research" ;
@@ -3699,7 +3780,9 @@
         <https://w3id.org/peh/terms/relevant_observable_entity_types>,
         <https://w3id.org/peh/terms/relevant_observation_types>,
         <https://w3id.org/peh/terms/remark>,
+        <https://w3id.org/peh/terms/short_name>,
         <https://w3id.org/peh/terms/translations>,
+        <https://w3id.org/peh/terms/ui_label>,
         <https://w3id.org/peh/terms/unique_name>,
         <https://w3id.org/peh/terms/validation_designs>,
         <https://w3id.org/peh/terms/value_metadata>,

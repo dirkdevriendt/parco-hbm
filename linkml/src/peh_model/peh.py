@@ -1,5 +1,5 @@
 # Auto generated from peh.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-07-15T12:32:45
+# Generation date: 2025-07-15T13:51:48
 # Schema: PEH-Model
 #
 # id: https://w3id.org/peh/peh-model
@@ -431,9 +431,11 @@ class NamedThing(YAMLRoot):
 
     id: Union[str, NamedThingId] = None
     unique_name: Optional[str] = None
+    short_name: Optional[str] = None
     name: Optional[str] = None
     description: Optional[str] = None
     label: Optional[str] = None
+    ui_label: Optional[str] = None
     remark: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -445,6 +447,9 @@ class NamedThing(YAMLRoot):
         if self.unique_name is not None and not isinstance(self.unique_name, str):
             self.unique_name = str(self.unique_name)
 
+        if self.short_name is not None and not isinstance(self.short_name, str):
+            self.short_name = str(self.short_name)
+
         if self.name is not None and not isinstance(self.name, str):
             self.name = str(self.name)
 
@@ -453,6 +458,9 @@ class NamedThing(YAMLRoot):
 
         if self.label is not None and not isinstance(self.label, str):
             self.label = str(self.label)
+
+        if self.ui_label is not None and not isinstance(self.ui_label, str):
+            self.ui_label = str(self.ui_label)
 
         if self.remark is not None and not isinstance(self.remark, str):
             self.remark = str(self.remark)
@@ -4371,10 +4379,19 @@ slots.id = Slot(
 )
 
 slots.unique_name = Slot(
-    uri=SCHEMA.alternateName,
+    uri=SKOS.prefLabel,
     name="unique_name",
-    curie=SCHEMA.curie("alternateName"),
+    curie=SKOS.curie("prefLabel"),
     model_uri=PEHTERMS.unique_name,
+    domain=None,
+    range=Optional[str],
+)
+
+slots.short_name = Slot(
+    uri=PEHTERMS.short_name,
+    name="short_name",
+    curie=PEHTERMS.curie("short_name"),
+    model_uri=PEHTERMS.short_name,
     domain=None,
     range=Optional[str],
 )
@@ -4398,10 +4415,19 @@ slots.description = Slot(
 )
 
 slots.label = Slot(
-    uri=SKOS.prefLabel,
+    uri=PEHTERMS.label,
     name="label",
-    curie=SKOS.curie("prefLabel"),
+    curie=PEHTERMS.curie("label"),
     model_uri=PEHTERMS.label,
+    domain=None,
+    range=Optional[str],
+)
+
+slots.ui_label = Slot(
+    uri=PEHTERMS.ui_label,
+    name="ui_label",
+    curie=PEHTERMS.curie("ui_label"),
+    model_uri=PEHTERMS.ui_label,
     domain=None,
     range=Optional[str],
 )

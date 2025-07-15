@@ -1183,15 +1183,24 @@
       "definition_uri": "https://w3id.org/peh/terms/unique_name",
       "from_schema": "https://w3id.org/peh/peh-model",
       "mappings": [
-        "http://schema.org/alternateName"
-      ],
-      "exact_mappings": [
-        "http://www.w3.org/2004/02/skos/core#altLabel"
+        "http://www.w3.org/2004/02/skos/core#prefLabel"
       ],
       "close_mappings": [
         "http://schema.org/identifier"
       ],
-      "slot_uri": "http://schema.org/alternateName",
+      "slot_uri": "http://www.w3.org/2004/02/skos/core#prefLabel",
+      "owner": "NamedThing",
+      "domain_of": [
+        "NamedThing"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "short_name",
+      "definition_uri": "https://w3id.org/peh/terms/short_name",
+      "from_schema": "https://w3id.org/peh/peh-model",
+      "slot_uri": "https://w3id.org/peh/terms/short_name",
       "owner": "NamedThing",
       "domain_of": [
         "NamedThing"
@@ -1240,18 +1249,24 @@
       "name": "label",
       "definition_uri": "https://w3id.org/peh/terms/label",
       "from_schema": "https://w3id.org/peh/peh-model",
-      "mappings": [
-        "http://www.w3.org/2004/02/skos/core#prefLabel"
-      ],
-      "exact_mappings": [
-        "http://schema.org/alternateName"
-      ],
-      "slot_uri": "http://www.w3.org/2004/02/skos/core#prefLabel",
+      "slot_uri": "https://w3id.org/peh/terms/label",
       "owner": "DataLayoutElement",
       "domain_of": [
         "NamedThing",
         "ObservablePropertyValueOption",
         "DataLayoutElement"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ui_label",
+      "definition_uri": "https://w3id.org/peh/terms/ui_label",
+      "from_schema": "https://w3id.org/peh/peh-model",
+      "slot_uri": "https://w3id.org/peh/terms/ui_label",
+      "owner": "NamedThing",
+      "domain_of": [
+        "NamedThing"
       ],
       "range": "string",
       "@type": "SlotDefinition"
@@ -3743,9 +3758,11 @@
       "slots": [
         "id",
         "unique_name",
+        "short_name",
         "name",
         "description",
         "label",
+        "ui_label",
         "remark"
       ],
       "slot_usage": {},
@@ -3765,9 +3782,11 @@
       "slots": [
         "id",
         "unique_name",
+        "short_name",
         "name",
         "description",
         "label",
+        "ui_label",
         "remark",
         "sort_order",
         "abstract",
@@ -3891,9 +3910,11 @@
       "slots": [
         "id",
         "unique_name",
+        "short_name",
         "name",
         "description",
         "label",
+        "ui_label",
         "remark",
         "same_unit_as",
         "quantity_kind",
@@ -3925,9 +3946,11 @@
       "slots": [
         "id",
         "unique_name",
+        "short_name",
         "name",
         "description",
         "label",
+        "ui_label",
         "remark",
         "grouping_id_list",
         "molweight_grampermol",
@@ -3970,9 +3993,11 @@
       "slots": [
         "id",
         "unique_name",
+        "short_name",
         "name",
         "description",
         "label",
+        "ui_label",
         "remark",
         "web_uri"
       ],
@@ -3993,9 +4018,11 @@
       "slots": [
         "id",
         "unique_name",
+        "short_name",
         "name",
         "description",
         "label",
+        "ui_label",
         "remark",
         "sort_order",
         "aggregation_target",
@@ -4024,9 +4051,11 @@
       "slots": [
         "id",
         "unique_name",
+        "short_name",
         "name",
         "description",
         "label",
+        "ui_label",
         "remark",
         "indicator_type",
         "varname",
@@ -4067,9 +4096,11 @@
       "slots": [
         "id",
         "unique_name",
+        "short_name",
         "name",
         "description",
         "label",
+        "ui_label",
         "remark",
         "physical_entity_links"
       ],
@@ -4099,9 +4130,11 @@
       "slots": [
         "id",
         "unique_name",
+        "short_name",
         "name",
         "description",
         "label",
+        "ui_label",
         "remark",
         "physical_entity_links",
         "matrix",
@@ -4123,9 +4156,11 @@
       "slots": [
         "id",
         "unique_name",
+        "short_name",
         "name",
         "description",
         "label",
+        "ui_label",
         "remark",
         "physical_entity_links",
         "recruited_in_project"
@@ -4143,9 +4178,11 @@
       "slots": [
         "id",
         "unique_name",
+        "short_name",
         "name",
         "description",
         "label",
+        "ui_label",
         "remark",
         "physical_entity_links",
         "location"
@@ -4163,9 +4200,11 @@
       "slots": [
         "id",
         "unique_name",
+        "short_name",
         "name",
         "description",
         "label",
+        "ui_label",
         "remark",
         "physical_entity_links"
       ],
@@ -4182,9 +4221,11 @@
       "slots": [
         "id",
         "unique_name",
+        "short_name",
         "name",
         "description",
         "label",
+        "ui_label",
         "remark",
         "physical_entity_links"
       ],
@@ -4201,9 +4242,11 @@
       "slots": [
         "id",
         "unique_name",
+        "short_name",
         "name",
         "description",
         "label",
+        "ui_label",
         "remark",
         "physical_entity_links"
       ],
@@ -4224,9 +4267,11 @@
       "slots": [
         "id",
         "unique_name",
+        "short_name",
         "name",
         "description",
         "label",
+        "ui_label",
         "remark",
         "value_type",
         "categorical",
@@ -4295,9 +4340,11 @@
       "slots": [
         "id",
         "unique_name",
+        "short_name",
         "name",
         "description",
         "label",
+        "ui_label",
         "remark",
         "value_type"
       ],
@@ -4452,9 +4499,11 @@
       "slots": [
         "id",
         "unique_name",
+        "short_name",
         "name",
         "description",
         "label",
+        "ui_label",
         "remark",
         "rorid",
         "geographic_scope",
@@ -4477,9 +4526,11 @@
       "slots": [
         "id",
         "unique_name",
+        "short_name",
         "name",
         "description",
         "label",
+        "ui_label",
         "remark",
         "physical_entity",
         "study_entity_links",
@@ -4523,9 +4574,11 @@
       "slots": [
         "id",
         "unique_name",
+        "short_name",
         "name",
         "description",
         "label",
+        "ui_label",
         "remark",
         "physical_entity",
         "study_entity_links"
@@ -4560,9 +4613,11 @@
       "slots": [
         "id",
         "unique_name",
+        "short_name",
         "name",
         "description",
         "label",
+        "ui_label",
         "remark",
         "physical_entity",
         "study_entity_links",
@@ -4603,9 +4658,11 @@
       "slots": [
         "id",
         "unique_name",
+        "short_name",
         "name",
         "description",
         "label",
+        "ui_label",
         "remark",
         "physical_entity",
         "study_entity_links",
@@ -4627,9 +4684,11 @@
       "slots": [
         "id",
         "unique_name",
+        "short_name",
         "name",
         "description",
         "label",
+        "ui_label",
         "remark",
         "physical_entity",
         "study_entity_links",
@@ -4649,9 +4708,11 @@
       "slots": [
         "id",
         "unique_name",
+        "short_name",
         "name",
         "description",
         "label",
+        "ui_label",
         "remark",
         "physical_entity",
         "study_entity_links",
@@ -4672,9 +4733,11 @@
       "slots": [
         "id",
         "unique_name",
+        "short_name",
         "name",
         "description",
         "label",
+        "ui_label",
         "remark",
         "physical_entity",
         "study_entity_links"
@@ -4692,9 +4755,11 @@
       "slots": [
         "id",
         "unique_name",
+        "short_name",
         "name",
         "description",
         "label",
+        "ui_label",
         "remark",
         "physical_entity",
         "study_entity_links"
@@ -4713,9 +4778,11 @@
       "slots": [
         "id",
         "unique_name",
+        "short_name",
         "name",
         "description",
         "label",
+        "ui_label",
         "remark",
         "observation_type",
         "observation_design",
@@ -4764,9 +4831,11 @@
       "slots": [
         "id",
         "unique_name",
+        "short_name",
         "name",
         "description",
         "label",
+        "ui_label",
         "remark",
         "observation_result_type",
         "observation_start_date",
@@ -4837,9 +4906,11 @@
       "slots": [
         "id",
         "unique_name",
+        "short_name",
         "name",
         "description",
         "label",
+        "ui_label",
         "remark",
         "sections"
       ],
@@ -4856,9 +4927,11 @@
       "slots": [
         "id",
         "unique_name",
+        "short_name",
         "name",
         "description",
         "label",
+        "ui_label",
         "remark",
         "section_type",
         "observable_entity_types",
@@ -4896,9 +4969,11 @@
       "slots": [
         "id",
         "unique_name",
+        "short_name",
         "name",
         "description",
         "label",
+        "ui_label",
         "remark",
         "contacts",
         "request_properties",
@@ -4937,9 +5012,11 @@
       "slots": [
         "id",
         "unique_name",
+        "short_name",
         "name",
         "description",
         "label",
+        "ui_label",
         "remark",
         "stakeholder",
         "data_roles",
@@ -4959,9 +5036,11 @@
       "slots": [
         "id",
         "unique_name",
+        "short_name",
         "name",
         "description",
         "label",
+        "ui_label",
         "remark",
         "objective_type",
         "authors"
@@ -4979,9 +5058,11 @@
       "slots": [
         "id",
         "unique_name",
+        "short_name",
         "name",
         "description",
         "label",
+        "ui_label",
         "remark"
       ],
       "slot_usage": {},
@@ -4997,9 +5078,11 @@
       "slots": [
         "id",
         "unique_name",
+        "short_name",
         "name",
         "description",
         "label",
+        "ui_label",
         "remark",
         "start_date",
         "delivery_date"
@@ -5023,9 +5106,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "peh.yaml",
-  "source_file_date": "2025-07-15T12:32:17",
-  "source_file_size": 36465,
-  "generation_date": "2025-07-15T12:32:44",
+  "source_file_date": "2025-07-15T13:51:23",
+  "source_file_size": 36405,
+  "generation_date": "2025-07-15T13:51:48",
   "@type": "SchemaDefinition",
   "@context": [
     "_temp/jsonld/peh.context.jsonld",
