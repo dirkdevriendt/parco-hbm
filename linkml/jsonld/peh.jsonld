@@ -929,8 +929,16 @@
           "meaning": "qudtunit:MicroMOL-PER-L"
         },
         {
+          "text": "M",
+          "meaning": "qudtunit:M"
+        },
+        {
           "text": "CentiM",
           "meaning": "qudtunit:CentiM"
+        },
+        {
+          "text": "MilliM",
+          "meaning": "qudtunit:MilliM"
         },
         {
           "text": "MicroGM-PER-GM",
@@ -1015,6 +1023,26 @@
         {
           "text": "MilliM_HG",
           "meaning": "qudtunit:MilliM_HG"
+        },
+        {
+          "text": "PER-KiloM",
+          "meaning": "qudtunit:PER-KiloM"
+        },
+        {
+          "text": "NUM-PER-KiloM2___",
+          "meaning": "qudtunit:NUM-PER-KiloM2"
+        },
+        {
+          "text": "M2",
+          "meaning": "qudtunit:M2"
+        },
+        {
+          "text": "M-PER-SEC",
+          "meaning": "qudtunit:M-PER-SEC"
+        },
+        {
+          "text": "GM-PER-HA",
+          "meaning": "qudtunit:GM-PER-HA"
         }
       ],
       "include": [
@@ -1061,12 +1089,24 @@
           "meaning": "qudtqk:Time"
         },
         {
+          "text": "Speed",
+          "meaning": "qudtqk:Speed"
+        },
+        {
           "text": "Frequency",
           "meaning": "qudtqk:Frequency"
         },
         {
           "text": "Length",
           "meaning": "qudtqk:Length"
+        },
+        {
+          "text": "InverseLength",
+          "meaning": "qudtqk:InverseLength"
+        },
+        {
+          "text": "Area",
+          "meaning": "qudtqk:Area"
         },
         {
           "text": "Mass",
@@ -4983,9 +5023,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "peh.yaml",
-  "source_file_date": "2025-06-26T10:25:50",
-  "source_file_size": 35974,
-  "generation_date": "2025-06-26T10:26:14",
+  "source_file_date": "2025-07-15T12:32:17",
+  "source_file_size": 36465,
+  "generation_date": "2025-07-15T12:32:44",
   "@type": "SchemaDefinition",
   "@context": [
     "_temp/jsonld/peh.context.jsonld",

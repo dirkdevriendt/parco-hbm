@@ -1,5 +1,5 @@
 # Auto generated from peh.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-06-26T10:26:14
+# Generation date: 2025-07-15T12:32:45
 # Schema: PEH-Model
 #
 # id: https://w3id.org/peh/peh-model
@@ -4106,11 +4106,14 @@ class QudtUnit(EnumDefinitionImpl):
     PicoGM = PermissibleValue(text="PicoGM", meaning=QUDTUNIT["PicoGM"])
     NUM = PermissibleValue(text="NUM", meaning=QUDTUNIT["NUM"])
     KiloGM = PermissibleValue(text="KiloGM", meaning=QUDTUNIT["KiloGM"])
+    M = PermissibleValue(text="M", meaning=QUDTUNIT["M"])
     CentiM = PermissibleValue(text="CentiM", meaning=QUDTUNIT["CentiM"])
+    MilliM = PermissibleValue(text="MilliM", meaning=QUDTUNIT["MilliM"])
     WK = PermissibleValue(text="WK", meaning=QUDTUNIT["WK"])
     L = PermissibleValue(text="L", meaning=QUDTUNIT["L"])
     YR = PermissibleValue(text="YR", meaning=QUDTUNIT["YR"])
     MilliM_HG = PermissibleValue(text="MilliM_HG", meaning=QUDTUNIT["MilliM_HG"])
+    M2 = PermissibleValue(text="M2", meaning=QUDTUNIT["M2"])
 
     _defn = EnumDefinition(
         name="QudtUnit",
@@ -4286,6 +4289,28 @@ class QudtUnit(EnumDefinitionImpl):
                 text="MilliGM-PER-DeciL", meaning=QUDTUNIT["MilliGM-PER-DeciL"]
             ),
         )
+        setattr(
+            cls,
+            "PER-KiloM",
+            PermissibleValue(text="PER-KiloM", meaning=QUDTUNIT["PER-KiloM"]),
+        )
+        setattr(
+            cls,
+            "NUM-PER-KiloM2___",
+            PermissibleValue(
+                text="NUM-PER-KiloM2___", meaning=QUDTUNIT["NUM-PER-KiloM2"]
+            ),
+        )
+        setattr(
+            cls,
+            "M-PER-SEC",
+            PermissibleValue(text="M-PER-SEC", meaning=QUDTUNIT["M-PER-SEC"]),
+        )
+        setattr(
+            cls,
+            "GM-PER-HA",
+            PermissibleValue(text="GM-PER-HA", meaning=QUDTUNIT["GM-PER-HA"]),
+        )
 
 
 class QudtQuantityKind(EnumDefinitionImpl):
@@ -4305,8 +4330,13 @@ class QudtQuantityKind(EnumDefinitionImpl):
         text="DimensionlessRatio", meaning=QUDTQK["DimensionlessRatio"]
     )
     Time = PermissibleValue(text="Time", meaning=QUDTQK["Time"])
+    Speed = PermissibleValue(text="Speed", meaning=QUDTQK["Speed"])
     Frequency = PermissibleValue(text="Frequency", meaning=QUDTQK["Frequency"])
     Length = PermissibleValue(text="Length", meaning=QUDTQK["Length"])
+    InverseLength = PermissibleValue(
+        text="InverseLength", meaning=QUDTQK["InverseLength"]
+    )
+    Area = PermissibleValue(text="Area", meaning=QUDTQK["Area"])
     Mass = PermissibleValue(text="Mass", meaning=QUDTQK["Mass"])
     MassPerArea = PermissibleValue(text="MassPerArea", meaning=QUDTQK["MassPerArea"])
     MassConcentration = PermissibleValue(

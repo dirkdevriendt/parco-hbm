@@ -236,7 +236,9 @@ class QudtUnit(str, Enum):
     KiloGM = "KiloGM"
     NanoGM_PER_L = "NanoGM-PER-L"
     MicroMOL_PER_L = "MicroMOL-PER-L"
+    M = "M"
     CentiM = "CentiM"
+    MilliM = "MilliM"
     MicroGM_PER_GM = "MicroGM-PER-GM"
     WK = "WK"
     NanoGM_PER_DeciL = "NanoGM-PER-DeciL"
@@ -258,6 +260,11 @@ class QudtUnit(str, Enum):
     KiloGM_PER_M2 = "KiloGM-PER-M2"
     MilliGM_PER_DeciL = "MilliGM-PER-DeciL"
     MilliM_HG = "MilliM_HG"
+    PER_KiloM = "PER-KiloM"
+    NUM_PER_KiloM2___ = "NUM-PER-KiloM2___"
+    M2 = "M2"
+    M_PER_SEC = "M-PER-SEC"
+    GM_PER_HA = "GM-PER-HA"
 
 
 class QudtQuantityKind(str, Enum):
@@ -267,8 +274,11 @@ class QudtQuantityKind(str, Enum):
     Dimensionless = "Dimensionless"
     DimensionlessRatio = "DimensionlessRatio"
     Time = "Time"
+    Speed = "Speed"
     Frequency = "Frequency"
     Length = "Length"
+    InverseLength = "InverseLength"
+    Area = "Area"
     Mass = "Mass"
     MassPerArea = "MassPerArea"
     MassConcentration = "MassConcentration"

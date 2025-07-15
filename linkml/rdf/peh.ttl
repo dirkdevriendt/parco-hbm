@@ -14,28 +14,28 @@
     dcterms:license "https://creativecommons.org/publicdomain/zero/1.0/" ;
     pav:version "0.0.1a2" ;
     skos:definition "Entity and relation ontology and datamodel for Personal Exposure and Health data" ;
-    sh:declare [ sh:namespace skos: ;
-            sh:prefix "skos" ],
-        [ sh:namespace <http://qudt.org/2.1/schema/qudt> ;
-            sh:prefix "qudt" ],
-        [ sh:namespace schema1: ;
-            sh:prefix "schema" ],
-        [ sh:namespace <http://qudt.org/2.1/vocab/quantitykind> ;
-            sh:prefix "qudtqk" ],
-        [ sh:namespace <https://qudt.org/vocab/unit/> ;
-            sh:prefix "qudtunit" ],
-        [ sh:namespace <https://w3id.org/peh/> ;
-            sh:prefix "peh" ],
-        [ sh:namespace <https://w3id.org/peh/terms/> ;
-            sh:prefix "pehterms" ],
-        [ sh:namespace linkml: ;
+    sh:declare [ sh:namespace linkml: ;
             sh:prefix "linkml" ],
-        [ sh:namespace prov: ;
-            sh:prefix "prov" ],
         [ sh:namespace rdfs: ;
             sh:prefix "rdfs" ],
+        [ sh:namespace <https://w3id.org/peh/> ;
+            sh:prefix "peh" ],
+        [ sh:namespace schema1: ;
+            sh:prefix "schema" ],
         [ sh:namespace <https://w3id.org/iadopt/ont/> ;
-            sh:prefix "iop" ] ;
+            sh:prefix "iop" ],
+        [ sh:namespace <http://qudt.org/2.1/vocab/quantitykind> ;
+            sh:prefix "qudtqk" ],
+        [ sh:namespace <http://qudt.org/2.1/schema/qudt> ;
+            sh:prefix "qudt" ],
+        [ sh:namespace skos: ;
+            sh:prefix "skos" ],
+        [ sh:namespace <https://w3id.org/peh/terms/> ;
+            sh:prefix "pehterms" ],
+        [ sh:namespace prov: ;
+            sh:prefix "prov" ],
+        [ sh:namespace <https://qudt.org/vocab/unit/> ;
+            sh:prefix "qudtunit" ] ;
     linkml:classes <https://w3id.org/peh/terms/BioChemEntity>,
         <https://w3id.org/peh/terms/BioChemEntityLink>,
         <https://w3id.org/peh/terms/BioChemIdentifier>,
@@ -124,7 +124,7 @@
         <https://w3id.org/peh/terms/ValidationCommand>,
         <https://w3id.org/peh/terms/ValidationErrorLevel>,
         <https://w3id.org/peh/terms/ValidationStatus> ;
-    linkml:generation_date "2025-06-26T10:26:18"^^xsd:dateTime ;
+    linkml:generation_date "2025-07-15T12:32:48"^^xsd:dateTime ;
     linkml:id <https://w3id.org/peh/peh-model> ;
     linkml:imports linkml:types ;
     linkml:metamodel_version "1.7.0" ;
@@ -318,8 +318,8 @@
         <https://w3id.org/peh/terms/varname>,
         <https://w3id.org/peh/terms/web_uri> ;
     linkml:source_file "peh.yaml" ;
-    linkml:source_file_date "2025-06-26T10:25:50"^^xsd:dateTime ;
-    linkml:source_file_size 35974 ;
+    linkml:source_file_date "2025-07-15T12:32:17"^^xsd:dateTime ;
+    linkml:source_file_size 36465 ;
     linkml:types <https://w3id.org/peh/terms/boolean>,
         <https://w3id.org/peh/terms/curie>,
         <https://w3id.org/peh/terms/date>,
@@ -344,6 +344,8 @@
 
 <https://w3id.org/peh/terms/AmountOfSubstancePerMass> linkml:meaning <qudtqk:AmountOfSubstancePerMass> .
 
+<https://w3id.org/peh/terms/Area> linkml:meaning <qudtqk:Area> .
+
 <https://w3id.org/peh/terms/CentiM> linkml:meaning <qudtunit:CentiM> .
 
 <https://w3id.org/peh/terms/Count> linkml:meaning <qudtqk:Count> .
@@ -362,6 +364,8 @@
 
 <https://w3id.org/peh/terms/GM-PER-DeciL> linkml:meaning <qudtunit:GM-PER-DeciL> .
 
+<https://w3id.org/peh/terms/GM-PER-HA> linkml:meaning <qudtunit:GM-PER-HA> .
+
 <https://w3id.org/peh/terms/GM-PER-L> linkml:meaning <qudtunit:GM-PER-L> .
 
 <https://w3id.org/peh/terms/GM-PER-MOL> linkml:meaning <qudtunit:GM-PER-MOL> .
@@ -372,6 +376,8 @@
 
 <https://w3id.org/peh/terms/IU-PER-MilliL> linkml:meaning <qudtunit:IU-PER-MilliL> .
 
+<https://w3id.org/peh/terms/InverseLength> linkml:meaning <qudtqk:InverseLength> .
+
 <https://w3id.org/peh/terms/KiloGM> linkml:meaning <qudtunit:KiloGM> .
 
 <https://w3id.org/peh/terms/KiloGM-PER-M2> linkml:meaning <qudtunit:KiloGM-PER-M2> .
@@ -381,6 +387,12 @@
 <https://w3id.org/peh/terms/L> linkml:meaning <qudtunit:L> .
 
 <https://w3id.org/peh/terms/Length> linkml:meaning <qudtqk:Length> .
+
+<https://w3id.org/peh/terms/M> linkml:meaning <qudtunit:M> .
+
+<https://w3id.org/peh/terms/M-PER-SEC> linkml:meaning <qudtunit:M-PER-SEC> .
+
+<https://w3id.org/peh/terms/M2> linkml:meaning <qudtunit:M2> .
 
 <https://w3id.org/peh/terms/MIN> linkml:meaning <qudtunit:MIN> .
 
@@ -414,6 +426,8 @@
 
 <https://w3id.org/peh/terms/MilliL> linkml:meaning <qudtunit:MilliL> .
 
+<https://w3id.org/peh/terms/MilliM> linkml:meaning <qudtunit:MilliM> .
+
 <https://w3id.org/peh/terms/MilliMOL-PER-MOL> linkml:meaning <qudtunit:MilliMOL-PER-MOL> .
 
 <https://w3id.org/peh/terms/MilliM_HG> linkml:meaning <qudtunit:MilliM_HG> .
@@ -423,6 +437,8 @@
 <https://w3id.org/peh/terms/MolarRatio> linkml:meaning <qudtqk:MolarRatio> .
 
 <https://w3id.org/peh/terms/NUM> linkml:meaning <qudtunit:NUM> .
+
+<https://w3id.org/peh/terms/NUM-PER-KiloM2___> linkml:meaning <qudtunit:NUM-PER-KiloM2> .
 
 <https://w3id.org/peh/terms/NUM-PER-MilliL> linkml:meaning <qudtunit:NUM-PER-MilliL> .
 
@@ -444,6 +460,8 @@
 
 <https://w3id.org/peh/terms/PER-DAY> linkml:meaning <qudtunit:PER-DAY> .
 
+<https://w3id.org/peh/terms/PER-KiloM> linkml:meaning <qudtunit:PER-KiloM> .
+
 <https://w3id.org/peh/terms/PER-WK> linkml:meaning <qudtunit:PER-WK> .
 
 <https://w3id.org/peh/terms/PERCENT> linkml:meaning <qudtunit:PERCENT> .
@@ -459,6 +477,8 @@
 <https://w3id.org/peh/terms/PicoGM-PER-MilliL> linkml:meaning <qudtunit:PicoGM-PER-MilliL> .
 
 <https://w3id.org/peh/terms/Pressure> linkml:meaning <qudtqk:Pressure> .
+
+<https://w3id.org/peh/terms/Speed> linkml:meaning <qudtqk:Speed> .
 
 <https://w3id.org/peh/terms/Time> linkml:meaning <qudtqk:Time> .
 
@@ -725,10 +745,12 @@
                     linkml:source_ontology <https://w3id.org/peh/terms/qudtqk> ] ] ;
     linkml:permissible_values <https://w3id.org/peh/terms/AmountOfSubstanceConcentration>,
         <https://w3id.org/peh/terms/AmountOfSubstancePerMass>,
+        <https://w3id.org/peh/terms/Area>,
         <https://w3id.org/peh/terms/Count>,
         <https://w3id.org/peh/terms/Dimensionless>,
         <https://w3id.org/peh/terms/DimensionlessRatio>,
         <https://w3id.org/peh/terms/Frequency>,
+        <https://w3id.org/peh/terms/InverseLength>,
         <https://w3id.org/peh/terms/Length>,
         <https://w3id.org/peh/terms/Mass>,
         <https://w3id.org/peh/terms/MassConcentration>,
@@ -738,6 +760,7 @@
         <https://w3id.org/peh/terms/MolarRatio>,
         <https://w3id.org/peh/terms/NumberDensity>,
         <https://w3id.org/peh/terms/Pressure>,
+        <https://w3id.org/peh/terms/Speed>,
         <https://w3id.org/peh/terms/Time>,
         <https://w3id.org/peh/terms/Volume> .
 
@@ -751,6 +774,7 @@
         <https://w3id.org/peh/terms/FemtoMOL-PER-KiloGM>,
         <https://w3id.org/peh/terms/GM>,
         <https://w3id.org/peh/terms/GM-PER-DeciL>,
+        <https://w3id.org/peh/terms/GM-PER-HA>,
         <https://w3id.org/peh/terms/GM-PER-L>,
         <https://w3id.org/peh/terms/GM-PER-MOL>,
         <https://w3id.org/peh/terms/HR>,
@@ -760,6 +784,9 @@
         <https://w3id.org/peh/terms/KiloGM-PER-M2>,
         <https://w3id.org/peh/terms/KiloGM-PER-M3>,
         <https://w3id.org/peh/terms/L>,
+        <https://w3id.org/peh/terms/M>,
+        <https://w3id.org/peh/terms/M-PER-SEC>,
+        <https://w3id.org/peh/terms/M2>,
         <https://w3id.org/peh/terms/MIN>,
         <https://w3id.org/peh/terms/MO>,
         <https://w3id.org/peh/terms/MicroGM-PER-GM>,
@@ -772,9 +799,11 @@
         <https://w3id.org/peh/terms/MilliGM-PER-KiloGM>,
         <https://w3id.org/peh/terms/MilliGM-PER-L>,
         <https://w3id.org/peh/terms/MilliL>,
+        <https://w3id.org/peh/terms/MilliM>,
         <https://w3id.org/peh/terms/MilliMOL-PER-MOL>,
         <https://w3id.org/peh/terms/MilliM_HG>,
         <https://w3id.org/peh/terms/NUM>,
+        <https://w3id.org/peh/terms/NUM-PER-KiloM2___>,
         <https://w3id.org/peh/terms/NUM-PER-MilliL>,
         <https://w3id.org/peh/terms/NanoGM>,
         <https://w3id.org/peh/terms/NanoGM-PER-DeciL>,
@@ -784,6 +813,7 @@
         <https://w3id.org/peh/terms/NanoGM-PER-MilliL>,
         <https://w3id.org/peh/terms/NanoMOL-PER-L>,
         <https://w3id.org/peh/terms/PER-DAY>,
+        <https://w3id.org/peh/terms/PER-KiloM>,
         <https://w3id.org/peh/terms/PER-WK>,
         <https://w3id.org/peh/terms/PERCENT>,
         <https://w3id.org/peh/terms/PPTH>,
