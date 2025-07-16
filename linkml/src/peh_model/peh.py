@@ -1,5 +1,5 @@
 # Auto generated from peh.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-07-15T13:51:48
+# Generation date: 2025-07-16T07:34:22
 # Schema: PEH-Model
 #
 # id: https://w3id.org/peh/peh-model
@@ -433,9 +433,8 @@ class NamedThing(YAMLRoot):
     unique_name: Optional[str] = None
     short_name: Optional[str] = None
     name: Optional[str] = None
-    description: Optional[str] = None
-    label: Optional[str] = None
     ui_label: Optional[str] = None
+    description: Optional[str] = None
     remark: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -453,14 +452,11 @@ class NamedThing(YAMLRoot):
         if self.name is not None and not isinstance(self.name, str):
             self.name = str(self.name)
 
-        if self.description is not None and not isinstance(self.description, str):
-            self.description = str(self.description)
-
-        if self.label is not None and not isinstance(self.label, str):
-            self.label = str(self.label)
-
         if self.ui_label is not None and not isinstance(self.ui_label, str):
             self.ui_label = str(self.ui_label)
+
+        if self.description is not None and not isinstance(self.description, str):
+            self.description = str(self.description)
 
         if self.remark is not None and not isinstance(self.remark, str):
             self.remark = str(self.remark)
@@ -1174,7 +1170,6 @@ class Indicator(NamedThing):
 
     id: Union[str, IndicatorId] = None
     indicator_type: Optional[Union[str, "IndicatorType"]] = None
-    varname: Optional[str] = None
     property: Optional[str] = None
     quantity_kind: Optional[Union[str, "QudtQuantityKind"]] = None
     matrix: Optional[Union[str, MatrixId]] = None
@@ -1207,9 +1202,6 @@ class Indicator(NamedThing):
             self.indicator_type, IndicatorType
         ):
             self.indicator_type = IndicatorType(self.indicator_type)
-
-        if self.varname is not None and not isinstance(self.varname, str):
-            self.varname = str(self.varname)
 
         if self.property is not None and not isinstance(self.property, str):
             self.property = str(self.property)
@@ -1612,7 +1604,6 @@ class ObservableProperty(NamedThing):
         Union[Union[str, "ObservationType"], list[Union[str, "ObservationType"]]]
     ] = empty_list()
     indicator: Optional[Union[str, IndicatorId]] = None
-    varname: Optional[str] = None
     calculation_designs: Optional[
         Union[Union[dict, "CalculationDesign"], list[Union[dict, "CalculationDesign"]]]
     ] = empty_list()
@@ -1740,9 +1731,6 @@ class ObservableProperty(NamedThing):
 
         if self.indicator is not None and not isinstance(self.indicator, IndicatorId):
             self.indicator = IndicatorId(self.indicator)
-
-        if self.varname is not None and not isinstance(self.varname, str):
-            self.varname = str(self.varname)
 
         if not isinstance(self.calculation_designs, list):
             self.calculation_designs = (

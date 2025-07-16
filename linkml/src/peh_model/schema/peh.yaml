@@ -63,9 +63,8 @@ classes:
       - unique_name
       - short_name
       - name
-      - description
-      - label
       - ui_label
+      - description
       - remark
     close_mappings:
      - schema:Thing
@@ -198,7 +197,6 @@ classes:
       - HasTranslations
     slots:
       - indicator_type
-      - varname
       - property
       - quantity_kind
       - matrix
@@ -286,7 +284,6 @@ classes:
       - relevant_observable_entity_types
       - relevant_observation_types
       - indicator
-      - varname
       - calculation_designs
       - validation_designs
   ObservablePropertyValueOption:
