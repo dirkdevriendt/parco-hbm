@@ -633,25 +633,39 @@ slots:
   id:
     identifier: true
     slot_uri: schema:identifier
+    description: >-
+      Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).
   unique_name:
     slot_uri: skos:prefLabel
     close_mappings:
     - schema:identifier
+    description: >-
+      Human readable name, unique across the context the entity is defined in.
   short_name:
+    description: >-
+      Shortened name or code, preferrable unique across the context the entity is defined in.
   name:
     slot_uri: schema:name
     exact_mappings:
     - skos:altLabel
+    description: >-
+      Common human readable name
   description:
     slot_uri: schema:description
     exact_mappings:
     - skos:definition
+    description: >-
+      Long form description or definition for the entity.
   label:
   ui_label:
+    description: >-
+      Human readable label, to be used in user facing interfaces in the most common use cases.
   remark:
     slot_uri: schema:comment
     exact_mappings:
     - skos:note
+    description: >-
+      Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.
 
   orcid:
     slot_uri: schema:identifier
