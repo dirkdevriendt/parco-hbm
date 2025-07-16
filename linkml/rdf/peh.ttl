@@ -14,28 +14,28 @@
     dcterms:license "https://creativecommons.org/publicdomain/zero/1.0/" ;
     pav:version "0.0.1a2" ;
     skos:definition "Entity and relation ontology and datamodel for Personal Exposure and Health data" ;
-    sh:declare [ sh:namespace <https://w3id.org/peh/> ;
-            sh:prefix "peh" ],
-        [ sh:namespace <https://qudt.org/vocab/unit/> ;
-            sh:prefix "qudtunit" ],
-        [ sh:namespace <https://w3id.org/peh/terms/> ;
-            sh:prefix "pehterms" ],
-        [ sh:namespace <http://qudt.org/2.1/schema/qudt> ;
-            sh:prefix "qudt" ],
+    sh:declare [ sh:namespace linkml: ;
+            sh:prefix "linkml" ],
         [ sh:namespace rdfs: ;
             sh:prefix "rdfs" ],
-        [ sh:namespace <http://qudt.org/2.1/vocab/quantitykind> ;
-            sh:prefix "qudtqk" ],
         [ sh:namespace prov: ;
             sh:prefix "prov" ],
-        [ sh:namespace schema1: ;
-            sh:prefix "schema" ],
+        [ sh:namespace <https://w3id.org/peh/> ;
+            sh:prefix "peh" ],
+        [ sh:namespace <https://w3id.org/peh/terms/> ;
+            sh:prefix "pehterms" ],
+        [ sh:namespace <http://qudt.org/2.1/vocab/quantitykind> ;
+            sh:prefix "qudtqk" ],
+        [ sh:namespace <http://qudt.org/2.1/schema/qudt> ;
+            sh:prefix "qudt" ],
         [ sh:namespace <https://w3id.org/iadopt/ont/> ;
             sh:prefix "iop" ],
-        [ sh:namespace linkml: ;
-            sh:prefix "linkml" ],
         [ sh:namespace skos: ;
-            sh:prefix "skos" ] ;
+            sh:prefix "skos" ],
+        [ sh:namespace schema1: ;
+            sh:prefix "schema" ],
+        [ sh:namespace <https://qudt.org/vocab/unit/> ;
+            sh:prefix "qudtunit" ] ;
     linkml:classes <https://w3id.org/peh/terms/BioChemEntity>,
         <https://w3id.org/peh/terms/BioChemEntityLink>,
         <https://w3id.org/peh/terms/BioChemIdentifier>,
@@ -124,7 +124,7 @@
         <https://w3id.org/peh/terms/ValidationCommand>,
         <https://w3id.org/peh/terms/ValidationErrorLevel>,
         <https://w3id.org/peh/terms/ValidationStatus> ;
-    linkml:generation_date "2025-07-16T07:34:26"^^xsd:dateTime ;
+    linkml:generation_date "2025-07-16T13:35:34"^^xsd:dateTime ;
     linkml:id <https://w3id.org/peh/peh-model> ;
     linkml:imports linkml:types ;
     linkml:metamodel_version "1.7.0" ;
@@ -320,8 +320,8 @@
         <https://w3id.org/peh/terms/varname>,
         <https://w3id.org/peh/terms/web_uri> ;
     linkml:source_file "peh.yaml" ;
-    linkml:source_file_date "2025-07-16T07:34:03"^^xsd:dateTime ;
-    linkml:source_file_size 36359 ;
+    linkml:source_file_date "2025-07-16T13:35:11"^^xsd:dateTime ;
+    linkml:source_file_size 37099 ;
     linkml:types <https://w3id.org/peh/terms/boolean>,
         <https://w3id.org/peh/terms/curie>,
         <https://w3id.org/peh/terms/date>,
@@ -3604,6 +3604,7 @@
         <https://w3id.org/peh/terms/value_as_string> .
 
 <https://w3id.org/peh/terms/description> a linkml:SlotDefinition ;
+    skos:definition "Long form description or definition for the entity." ;
     skos:exactMatch skos:definition ;
     skos:inScheme <https://w3id.org/peh/peh-model> ;
     skos:mappingRelation schema1:description ;
@@ -3614,6 +3615,7 @@
     linkml:slot_uri schema1:description .
 
 <https://w3id.org/peh/terms/id> a linkml:SlotDefinition ;
+    skos:definition "Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier)." ;
     skos:inScheme <https://w3id.org/peh/peh-model> ;
     skos:mappingRelation schema1:identifier ;
     linkml:definition_uri <https://w3id.org/peh/terms/id> ;
@@ -3625,6 +3627,7 @@
     linkml:slot_uri schema1:identifier .
 
 <https://w3id.org/peh/terms/remark> a linkml:SlotDefinition ;
+    skos:definition "Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties." ;
     skos:exactMatch skos:note ;
     skos:inScheme <https://w3id.org/peh/peh-model> ;
     skos:mappingRelation schema1:comment ;
@@ -3636,6 +3639,7 @@
 
 <https://w3id.org/peh/terms/unique_name> a linkml:SlotDefinition ;
     skos:closeMatch schema1:identifier ;
+    skos:definition "Human readable name, unique across the context the entity is defined in." ;
     skos:inScheme <https://w3id.org/peh/peh-model> ;
     skos:mappingRelation skos:prefLabel ;
     linkml:definition_uri <https://w3id.org/peh/terms/unique_name> ;
@@ -3661,6 +3665,7 @@
         <https://w3id.org/peh/terms/unique_name> .
 
 <https://w3id.org/peh/terms/name> a linkml:SlotDefinition ;
+    skos:definition "Common human readable name" ;
     skos:exactMatch skos:altLabel ;
     skos:inScheme <https://w3id.org/peh/peh-model> ;
     skos:mappingRelation schema1:name ;
@@ -3672,6 +3677,7 @@
     linkml:slot_uri schema1:name .
 
 <https://w3id.org/peh/terms/short_name> a linkml:SlotDefinition ;
+    skos:definition "Shortened name or code, preferrable unique across the context the entity is defined in." ;
     skos:inScheme <https://w3id.org/peh/peh-model> ;
     linkml:definition_uri <https://w3id.org/peh/terms/short_name> ;
     linkml:domain_of <https://w3id.org/peh/terms/NamedThing> ;
@@ -3680,6 +3686,7 @@
     linkml:slot_uri <https://w3id.org/peh/terms/short_name> .
 
 <https://w3id.org/peh/terms/ui_label> a linkml:SlotDefinition ;
+    skos:definition "Human readable label, to be used in user facing interfaces in the most common use cases." ;
     skos:inScheme <https://w3id.org/peh/peh-model> ;
     linkml:definition_uri <https://w3id.org/peh/terms/ui_label> ;
     linkml:domain_of <https://w3id.org/peh/terms/NamedThing> ;

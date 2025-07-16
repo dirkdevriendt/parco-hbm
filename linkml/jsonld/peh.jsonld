@@ -1164,6 +1164,7 @@
     {
       "name": "id",
       "definition_uri": "https://w3id.org/peh/terms/id",
+      "description": "Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).",
       "from_schema": "https://w3id.org/peh/peh-model",
       "mappings": [
         "http://schema.org/identifier"
@@ -1181,6 +1182,7 @@
     {
       "name": "unique_name",
       "definition_uri": "https://w3id.org/peh/terms/unique_name",
+      "description": "Human readable name, unique across the context the entity is defined in.",
       "from_schema": "https://w3id.org/peh/peh-model",
       "mappings": [
         "http://www.w3.org/2004/02/skos/core#prefLabel"
@@ -1199,6 +1201,7 @@
     {
       "name": "short_name",
       "definition_uri": "https://w3id.org/peh/terms/short_name",
+      "description": "Shortened name or code, preferrable unique across the context the entity is defined in.",
       "from_schema": "https://w3id.org/peh/peh-model",
       "slot_uri": "https://w3id.org/peh/terms/short_name",
       "owner": "NamedThing",
@@ -1211,6 +1214,7 @@
     {
       "name": "name",
       "definition_uri": "https://w3id.org/peh/terms/name",
+      "description": "Common human readable name",
       "from_schema": "https://w3id.org/peh/peh-model",
       "mappings": [
         "http://schema.org/name"
@@ -1230,6 +1234,7 @@
     {
       "name": "description",
       "definition_uri": "https://w3id.org/peh/terms/description",
+      "description": "Long form description or definition for the entity.",
       "from_schema": "https://w3id.org/peh/peh-model",
       "mappings": [
         "http://schema.org/description"
@@ -1261,6 +1266,7 @@
     {
       "name": "ui_label",
       "definition_uri": "https://w3id.org/peh/terms/ui_label",
+      "description": "Human readable label, to be used in user facing interfaces in the most common use cases.",
       "from_schema": "https://w3id.org/peh/peh-model",
       "slot_uri": "https://w3id.org/peh/terms/ui_label",
       "owner": "NamedThing",
@@ -1273,6 +1279,7 @@
     {
       "name": "remark",
       "definition_uri": "https://w3id.org/peh/terms/remark",
+      "description": "Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.",
       "from_schema": "https://w3id.org/peh/peh-model",
       "mappings": [
         "http://schema.org/comment"
@@ -5067,9 +5074,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "peh.yaml",
-  "source_file_date": "2025-07-16T07:34:03",
-  "source_file_size": 36359,
-  "generation_date": "2025-07-16T07:34:22",
+  "source_file_date": "2025-07-16T13:35:11",
+  "source_file_size": 37099,
+  "generation_date": "2025-07-16T13:35:30",
   "@type": "SchemaDefinition",
   "@context": [
     "_temp/jsonld/peh.context.jsonld",
