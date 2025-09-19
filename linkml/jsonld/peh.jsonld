@@ -2,7 +2,7 @@
   "name": "PEH-Model",
   "description": "Entity and relation ontology and datamodel for Personal Exposure and Health data",
   "id": "https://w3id.org/peh/peh-model",
-  "version": "0.0.1a2",
+  "version": "0.1.1",
   "imports": [
     "linkml:types"
   ],
@@ -2933,16 +2933,15 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "observable_entity_property_sets",
-      "definition_uri": "https://w3id.org/peh/terms/observable_entity_property_sets",
+      "name": "observation_designs",
+      "definition_uri": "https://w3id.org/peh/terms/observation_designs",
       "from_schema": "https://w3id.org/peh/peh-model",
-      "slot_uri": "https://w3id.org/peh/terms/observable_entity_property_sets",
+      "slot_uri": "https://w3id.org/peh/terms/observation_designs",
       "owner": "DataRequest",
       "domain_of": [
-        "ObservationDesign",
         "DataRequest"
       ],
-      "range": "ObservableEntityPropertySet",
+      "range": "ObservationDesign",
       "multivalued": true,
       "inlined": true,
       "@type": "SlotDefinition"
@@ -2954,7 +2953,7 @@
       "slot_uri": "https://w3id.org/peh/terms/observation_result_type",
       "owner": "ObservationResult",
       "domain_of": [
-        "ObservableEntityPropertySet",
+        "ObservationDesign",
         "ObservationResult"
       ],
       "range": "ObservationResultType",
@@ -2993,9 +2992,9 @@
       "definition_uri": "https://w3id.org/peh/terms/observable_entity_type",
       "from_schema": "https://w3id.org/peh/peh-model",
       "slot_uri": "https://w3id.org/peh/terms/observable_entity_type",
-      "owner": "ObservableEntityPropertySet",
+      "owner": "ObservationDesign",
       "domain_of": [
-        "ObservableEntityPropertySet"
+        "ObservationDesign"
       ],
       "range": "ObservableEntityType",
       "@type": "SlotDefinition"
@@ -3018,9 +3017,9 @@
       "definition_uri": "https://w3id.org/peh/terms/observable_entity_id_list",
       "from_schema": "https://w3id.org/peh/peh-model",
       "slot_uri": "https://w3id.org/peh/terms/observable_entity_id_list",
-      "owner": "ObservableEntityPropertySet",
+      "owner": "ObservationDesign",
       "domain_of": [
-        "ObservableEntityPropertySet"
+        "ObservationDesign"
       ],
       "range": "StudyEntity",
       "multivalued": true,
@@ -3044,9 +3043,9 @@
       "definition_uri": "https://w3id.org/peh/terms/identifying_observable_property_id_list",
       "from_schema": "https://w3id.org/peh/peh-model",
       "slot_uri": "https://w3id.org/peh/terms/identifying_observable_property_id_list",
-      "owner": "ObservableEntityPropertySet",
+      "owner": "ObservationDesign",
       "domain_of": [
-        "ObservableEntityPropertySet"
+        "ObservationDesign"
       ],
       "range": "ObservableProperty",
       "multivalued": true,
@@ -3057,9 +3056,9 @@
       "definition_uri": "https://w3id.org/peh/terms/required_observable_property_id_list",
       "from_schema": "https://w3id.org/peh/peh-model",
       "slot_uri": "https://w3id.org/peh/terms/required_observable_property_id_list",
-      "owner": "ObservableEntityPropertySet",
+      "owner": "ObservationDesign",
       "domain_of": [
-        "ObservableEntityPropertySet"
+        "ObservationDesign"
       ],
       "range": "ObservableProperty",
       "multivalued": true,
@@ -3070,9 +3069,9 @@
       "definition_uri": "https://w3id.org/peh/terms/optional_observable_property_id_list",
       "from_schema": "https://w3id.org/peh/peh-model",
       "slot_uri": "https://w3id.org/peh/terms/optional_observable_property_id_list",
-      "owner": "ObservableEntityPropertySet",
+      "owner": "ObservationDesign",
       "domain_of": [
-        "ObservableEntityPropertySet"
+        "ObservationDesign"
       ],
       "range": "ObservableProperty",
       "multivalued": true,
@@ -4771,19 +4770,7 @@
     {
       "name": "ObservationDesign",
       "definition_uri": "https://w3id.org/peh/terms/ObservationDesign",
-      "description": "The registration of the intent to perform a number of observations",
-      "from_schema": "https://w3id.org/peh/peh-model",
-      "slots": [
-        "observable_entity_property_sets"
-      ],
-      "slot_usage": {},
-      "class_uri": "https://w3id.org/peh/terms/ObservationDesign",
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "ObservableEntityPropertySet",
-      "definition_uri": "https://w3id.org/peh/terms/ObservableEntityPropertySet",
-      "description": "The list of properties being observed and the study entities they will be observed for (or, alternatively, the entity type all observed entities belong to)",
+      "description": "The list of properties being observed and the study entities they are observed for (or, alternatively, the entity type all observed entities belong to)",
       "from_schema": "https://w3id.org/peh/peh-model",
       "slots": [
         "observation_result_type",
@@ -4794,7 +4781,7 @@
         "optional_observable_property_id_list"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/peh/terms/ObservableEntityPropertySet",
+      "class_uri": "https://w3id.org/peh/terms/ObservationDesign",
       "@type": "ClassDefinition"
     },
     {
@@ -4956,7 +4943,7 @@
         "remark_on_content",
         "remark_on_methodology",
         "observed_entity_properties",
-        "observable_entity_property_sets"
+        "observation_designs"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/peh/terms/DataRequest",
@@ -5074,9 +5061,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "peh.yaml",
-  "source_file_date": "2025-07-16T13:35:11",
-  "source_file_size": 37099,
-  "generation_date": "2025-07-16T13:35:30",
+  "source_file_date": "2025-09-19T13:01:12",
+  "source_file_size": 36884,
+  "generation_date": "2025-09-19T13:01:39",
   "@type": "SchemaDefinition",
   "@context": [
     "_temp/jsonld/peh.context.jsonld",

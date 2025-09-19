@@ -11,7 +11,7 @@ from pydantic import BaseModel, ConfigDict, Field, RootModel, field_validator
 
 
 metamodel_version = "None"
-version = "0.0.1a2"
+version = "0.1.1"
 
 
 class ConfiguredBaseModel(BaseModel):
@@ -1588,17 +1588,7 @@ class Observation(NamedThing):
 
 class ObservationDesign(ConfiguredBaseModel):
     """
-    The registration of the intent to perform a number of observations
-    """
-
-    observable_entity_property_sets: Optional[list[ObservableEntityPropertySet]] = (
-        Field(default=None)
-    )
-
-
-class ObservableEntityPropertySet(ConfiguredBaseModel):
-    """
-    The list of properties being observed and the study entities they will be observed for (or, alternatively, the entity type all observed entities belong to)
+    The list of properties being observed and the study entities they are observed for (or, alternatively, the entity type all observed entities belong to)
     """
 
     observation_result_type: Optional[ObservationResultType] = Field(default=None)
@@ -1789,9 +1779,7 @@ class DataRequest(NamedThing):
     observed_entity_properties: Optional[list[ObservedEntityProperty]] = Field(
         default=None
     )
-    observable_entity_property_sets: Optional[list[ObservableEntityPropertySet]] = (
-        Field(default=None)
-    )
+    observation_designs: Optional[list[ObservationDesign]] = Field(default=None)
     id: str = Field(
         default=...,
         description="""Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).""",
@@ -2035,7 +2023,6 @@ StudySubject.model_rebuild()
 StudySubjectGroup.model_rebuild()
 Observation.model_rebuild()
 ObservationDesign.model_rebuild()
-ObservableEntityPropertySet.model_rebuild()
 ObservationResult.model_rebuild()
 ObservedValue.model_rebuild()
 QualityData.model_rebuild()

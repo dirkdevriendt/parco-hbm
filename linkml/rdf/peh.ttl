@@ -12,30 +12,30 @@
 
 <https://w3id.org/peh/terms/PEH-Model> a linkml:SchemaDefinition ;
     dcterms:license "https://creativecommons.org/publicdomain/zero/1.0/" ;
-    pav:version "0.0.1a2" ;
+    pav:version "0.1.1" ;
     skos:definition "Entity and relation ontology and datamodel for Personal Exposure and Health data" ;
-    sh:declare [ sh:namespace linkml: ;
-            sh:prefix "linkml" ],
-        [ sh:namespace rdfs: ;
-            sh:prefix "rdfs" ],
-        [ sh:namespace prov: ;
-            sh:prefix "prov" ],
-        [ sh:namespace <https://w3id.org/peh/> ;
-            sh:prefix "peh" ],
-        [ sh:namespace <https://w3id.org/peh/terms/> ;
-            sh:prefix "pehterms" ],
-        [ sh:namespace <http://qudt.org/2.1/vocab/quantitykind> ;
-            sh:prefix "qudtqk" ],
-        [ sh:namespace <http://qudt.org/2.1/schema/qudt> ;
+    sh:declare [ sh:namespace <http://qudt.org/2.1/schema/qudt> ;
             sh:prefix "qudt" ],
         [ sh:namespace <https://w3id.org/iadopt/ont/> ;
             sh:prefix "iop" ],
+        [ sh:namespace rdfs: ;
+            sh:prefix "rdfs" ],
         [ sh:namespace skos: ;
             sh:prefix "skos" ],
-        [ sh:namespace schema1: ;
-            sh:prefix "schema" ],
+        [ sh:namespace <https://w3id.org/peh/> ;
+            sh:prefix "peh" ],
         [ sh:namespace <https://qudt.org/vocab/unit/> ;
-            sh:prefix "qudtunit" ] ;
+            sh:prefix "qudtunit" ],
+        [ sh:namespace prov: ;
+            sh:prefix "prov" ],
+        [ sh:namespace <http://qudt.org/2.1/vocab/quantitykind> ;
+            sh:prefix "qudtqk" ],
+        [ sh:namespace linkml: ;
+            sh:prefix "linkml" ],
+        [ sh:namespace <https://w3id.org/peh/terms/> ;
+            sh:prefix "pehterms" ],
+        [ sh:namespace schema1: ;
+            sh:prefix "schema" ] ;
     linkml:classes <https://w3id.org/peh/terms/BioChemEntity>,
         <https://w3id.org/peh/terms/BioChemEntityLink>,
         <https://w3id.org/peh/terms/BioChemIdentifier>,
@@ -65,7 +65,6 @@
         <https://w3id.org/peh/terms/Indicator>,
         <https://w3id.org/peh/terms/Matrix>,
         <https://w3id.org/peh/terms/NamedThing>,
-        <https://w3id.org/peh/terms/ObservableEntityPropertySet>,
         <https://w3id.org/peh/terms/ObservableProperty>,
         <https://w3id.org/peh/terms/ObservablePropertyMetadataElement>,
         <https://w3id.org/peh/terms/ObservablePropertyMetadataField>,
@@ -124,7 +123,7 @@
         <https://w3id.org/peh/terms/ValidationCommand>,
         <https://w3id.org/peh/terms/ValidationErrorLevel>,
         <https://w3id.org/peh/terms/ValidationStatus> ;
-    linkml:generation_date "2025-07-16T13:35:34"^^xsd:dateTime ;
+    linkml:generation_date "2025-09-19T13:01:43"^^xsd:dateTime ;
     linkml:id <https://w3id.org/peh/peh-model> ;
     linkml:imports linkml:types ;
     linkml:metamodel_version "1.7.0" ;
@@ -211,12 +210,12 @@
         <https://w3id.org/peh/terms/observable_entity>,
         <https://w3id.org/peh/terms/observable_entity_grouping_id_list>,
         <https://w3id.org/peh/terms/observable_entity_id_list>,
-        <https://w3id.org/peh/terms/observable_entity_property_sets>,
         <https://w3id.org/peh/terms/observable_entity_type>,
         <https://w3id.org/peh/terms/observable_entity_types>,
         <https://w3id.org/peh/terms/observable_properties>,
         <https://w3id.org/peh/terms/observable_property>,
         <https://w3id.org/peh/terms/observation_design>,
+        <https://w3id.org/peh/terms/observation_designs>,
         <https://w3id.org/peh/terms/observation_end_date>,
         <https://w3id.org/peh/terms/observation_group_id_list>,
         <https://w3id.org/peh/terms/observation_groups>,
@@ -320,8 +319,8 @@
         <https://w3id.org/peh/terms/varname>,
         <https://w3id.org/peh/terms/web_uri> ;
     linkml:source_file "peh.yaml" ;
-    linkml:source_file_date "2025-07-16T13:35:11"^^xsd:dateTime ;
-    linkml:source_file_size 37099 ;
+    linkml:source_file_date "2025-09-19T13:01:12"^^xsd:dateTime ;
+    linkml:source_file_size 36884 ;
     linkml:types <https://w3id.org/peh/terms/boolean>,
         <https://w3id.org/peh/terms/curie>,
         <https://w3id.org/peh/terms/date>,
@@ -1379,9 +1378,9 @@
 <https://w3id.org/peh/terms/identifying_observable_property_id_list> a linkml:SlotDefinition ;
     skos:inScheme <https://w3id.org/peh/peh-model> ;
     linkml:definition_uri <https://w3id.org/peh/terms/identifying_observable_property_id_list> ;
-    linkml:domain_of <https://w3id.org/peh/terms/ObservableEntityPropertySet> ;
+    linkml:domain_of <https://w3id.org/peh/terms/ObservationDesign> ;
     linkml:multivalued true ;
-    linkml:owner <https://w3id.org/peh/terms/ObservableEntityPropertySet> ;
+    linkml:owner <https://w3id.org/peh/terms/ObservationDesign> ;
     linkml:range <https://w3id.org/peh/terms/ObservableProperty> ;
     linkml:slot_uri <https://w3id.org/peh/terms/identifying_observable_property_id_list> .
 
@@ -1554,17 +1553,17 @@
 <https://w3id.org/peh/terms/observable_entity_id_list> a linkml:SlotDefinition ;
     skos:inScheme <https://w3id.org/peh/peh-model> ;
     linkml:definition_uri <https://w3id.org/peh/terms/observable_entity_id_list> ;
-    linkml:domain_of <https://w3id.org/peh/terms/ObservableEntityPropertySet> ;
+    linkml:domain_of <https://w3id.org/peh/terms/ObservationDesign> ;
     linkml:multivalued true ;
-    linkml:owner <https://w3id.org/peh/terms/ObservableEntityPropertySet> ;
+    linkml:owner <https://w3id.org/peh/terms/ObservationDesign> ;
     linkml:range <https://w3id.org/peh/terms/StudyEntity> ;
     linkml:slot_uri <https://w3id.org/peh/terms/observable_entity_id_list> .
 
 <https://w3id.org/peh/terms/observable_entity_type> a linkml:SlotDefinition ;
     skos:inScheme <https://w3id.org/peh/peh-model> ;
     linkml:definition_uri <https://w3id.org/peh/terms/observable_entity_type> ;
-    linkml:domain_of <https://w3id.org/peh/terms/ObservableEntityPropertySet> ;
-    linkml:owner <https://w3id.org/peh/terms/ObservableEntityPropertySet> ;
+    linkml:domain_of <https://w3id.org/peh/terms/ObservationDesign> ;
+    linkml:owner <https://w3id.org/peh/terms/ObservationDesign> ;
     linkml:range <https://w3id.org/peh/terms/ObservableEntityType> ;
     linkml:slot_uri <https://w3id.org/peh/terms/observable_entity_type> .
 
@@ -1596,6 +1595,16 @@
     linkml:owner <https://w3id.org/peh/terms/Observation> ;
     linkml:range <https://w3id.org/peh/terms/ObservationDesign> ;
     linkml:slot_uri <https://w3id.org/peh/terms/observation_design> .
+
+<https://w3id.org/peh/terms/observation_designs> a linkml:SlotDefinition ;
+    skos:inScheme <https://w3id.org/peh/peh-model> ;
+    linkml:definition_uri <https://w3id.org/peh/terms/observation_designs> ;
+    linkml:domain_of <https://w3id.org/peh/terms/DataRequest> ;
+    linkml:inlined true ;
+    linkml:multivalued true ;
+    linkml:owner <https://w3id.org/peh/terms/DataRequest> ;
+    linkml:range <https://w3id.org/peh/terms/ObservationDesign> ;
+    linkml:slot_uri <https://w3id.org/peh/terms/observation_designs> .
 
 <https://w3id.org/peh/terms/observation_end_date> a linkml:SlotDefinition ;
     skos:inScheme <https://w3id.org/peh/peh-model> ;
@@ -1694,9 +1703,9 @@
 <https://w3id.org/peh/terms/optional_observable_property_id_list> a linkml:SlotDefinition ;
     skos:inScheme <https://w3id.org/peh/peh-model> ;
     linkml:definition_uri <https://w3id.org/peh/terms/optional_observable_property_id_list> ;
-    linkml:domain_of <https://w3id.org/peh/terms/ObservableEntityPropertySet> ;
+    linkml:domain_of <https://w3id.org/peh/terms/ObservationDesign> ;
     linkml:multivalued true ;
-    linkml:owner <https://w3id.org/peh/terms/ObservableEntityPropertySet> ;
+    linkml:owner <https://w3id.org/peh/terms/ObservationDesign> ;
     linkml:range <https://w3id.org/peh/terms/ObservableProperty> ;
     linkml:slot_uri <https://w3id.org/peh/terms/optional_observable_property_id_list> .
 
@@ -1917,9 +1926,9 @@
 <https://w3id.org/peh/terms/required_observable_property_id_list> a linkml:SlotDefinition ;
     skos:inScheme <https://w3id.org/peh/peh-model> ;
     linkml:definition_uri <https://w3id.org/peh/terms/required_observable_property_id_list> ;
-    linkml:domain_of <https://w3id.org/peh/terms/ObservableEntityPropertySet> ;
+    linkml:domain_of <https://w3id.org/peh/terms/ObservationDesign> ;
     linkml:multivalued true ;
-    linkml:owner <https://w3id.org/peh/terms/ObservableEntityPropertySet> ;
+    linkml:owner <https://w3id.org/peh/terms/ObservationDesign> ;
     linkml:range <https://w3id.org/peh/terms/ObservableProperty> ;
     linkml:slot_uri <https://w3id.org/peh/terms/required_observable_property_id_list> .
 
@@ -2342,14 +2351,6 @@
         <https://w3id.org/peh/terms/samplegroup>,
         <https://w3id.org/peh/terms/study> .
 
-<https://w3id.org/peh/terms/ObservationDesign> a linkml:ClassDefinition ;
-    skos:definition "The registration of the intent to perform a number of observations" ;
-    skos:inScheme <https://w3id.org/peh/peh-model> ;
-    linkml:class_uri <https://w3id.org/peh/terms/ObservationDesign> ;
-    linkml:definition_uri <https://w3id.org/peh/terms/ObservationDesign> ;
-    linkml:slot_usage [ ] ;
-    linkml:slots <https://w3id.org/peh/terms/observable_entity_property_sets> .
-
 <https://w3id.org/peh/terms/Person> a linkml:ClassDefinition ;
     skos:definition "A human subject or stakeholder in Personal Exposure and Health research" ;
     skos:inScheme <https://w3id.org/peh/peh-model> ;
@@ -2459,21 +2460,10 @@
     linkml:range <https://w3id.org/peh/terms/StudyEntity> ;
     linkml:slot_uri <https://w3id.org/peh/terms/observable_entity> .
 
-<https://w3id.org/peh/terms/observable_entity_property_sets> a linkml:SlotDefinition ;
-    skos:inScheme <https://w3id.org/peh/peh-model> ;
-    linkml:definition_uri <https://w3id.org/peh/terms/observable_entity_property_sets> ;
-    linkml:domain_of <https://w3id.org/peh/terms/DataRequest>,
-        <https://w3id.org/peh/terms/ObservationDesign> ;
-    linkml:inlined true ;
-    linkml:multivalued true ;
-    linkml:owner <https://w3id.org/peh/terms/DataRequest> ;
-    linkml:range <https://w3id.org/peh/terms/ObservableEntityPropertySet> ;
-    linkml:slot_uri <https://w3id.org/peh/terms/observable_entity_property_sets> .
-
 <https://w3id.org/peh/terms/observation_result_type> a linkml:SlotDefinition ;
     skos:inScheme <https://w3id.org/peh/peh-model> ;
     linkml:definition_uri <https://w3id.org/peh/terms/observation_result_type> ;
-    linkml:domain_of <https://w3id.org/peh/terms/ObservableEntityPropertySet>,
+    linkml:domain_of <https://w3id.org/peh/terms/ObservationDesign>,
         <https://w3id.org/peh/terms/ObservationResult> ;
     linkml:owner <https://w3id.org/peh/terms/ObservationResult> ;
     linkml:range <https://w3id.org/peh/terms/ObservationResultType> ;
@@ -3443,19 +3433,6 @@
     linkml:slot_usage [ ] ;
     linkml:slots <https://w3id.org/peh/terms/translations> .
 
-<https://w3id.org/peh/terms/ObservableEntityPropertySet> a linkml:ClassDefinition ;
-    skos:definition "The list of properties being observed and the study entities they will be observed for (or, alternatively, the entity type all observed entities belong to)" ;
-    skos:inScheme <https://w3id.org/peh/peh-model> ;
-    linkml:class_uri <https://w3id.org/peh/terms/ObservableEntityPropertySet> ;
-    linkml:definition_uri <https://w3id.org/peh/terms/ObservableEntityPropertySet> ;
-    linkml:slot_usage [ ] ;
-    linkml:slots <https://w3id.org/peh/terms/identifying_observable_property_id_list>,
-        <https://w3id.org/peh/terms/observable_entity_id_list>,
-        <https://w3id.org/peh/terms/observable_entity_type>,
-        <https://w3id.org/peh/terms/observation_result_type>,
-        <https://w3id.org/peh/terms/optional_observable_property_id_list>,
-        <https://w3id.org/peh/terms/required_observable_property_id_list> .
-
 <https://w3id.org/peh/terms/Indicator> a linkml:ClassDefinition ;
     skos:closeMatch <iop:Variable> ;
     skos:definition "Any measurable or observable variable that can describe data or context in the Personal Exposure and Health domain" ;
@@ -3483,6 +3460,19 @@
         <https://w3id.org/peh/terms/translations>,
         <https://w3id.org/peh/terms/ui_label>,
         <https://w3id.org/peh/terms/unique_name> .
+
+<https://w3id.org/peh/terms/ObservationDesign> a linkml:ClassDefinition ;
+    skos:definition "The list of properties being observed and the study entities they are observed for (or, alternatively, the entity type all observed entities belong to)" ;
+    skos:inScheme <https://w3id.org/peh/peh-model> ;
+    linkml:class_uri <https://w3id.org/peh/terms/ObservationDesign> ;
+    linkml:definition_uri <https://w3id.org/peh/terms/ObservationDesign> ;
+    linkml:slot_usage [ ] ;
+    linkml:slots <https://w3id.org/peh/terms/identifying_observable_property_id_list>,
+        <https://w3id.org/peh/terms/observable_entity_id_list>,
+        <https://w3id.org/peh/terms/observable_entity_type>,
+        <https://w3id.org/peh/terms/observation_result_type>,
+        <https://w3id.org/peh/terms/optional_observable_property_id_list>,
+        <https://w3id.org/peh/terms/required_observable_property_id_list> .
 
 <https://w3id.org/peh/terms/DataLayoutElement> a linkml:ClassDefinition ;
     skos:definition "Definition for an individual layout or data element, as part of a layout section" ;
@@ -3569,7 +3559,7 @@
         <https://w3id.org/peh/terms/description>,
         <https://w3id.org/peh/terms/id>,
         <https://w3id.org/peh/terms/name>,
-        <https://w3id.org/peh/terms/observable_entity_property_sets>,
+        <https://w3id.org/peh/terms/observation_designs>,
         <https://w3id.org/peh/terms/observed_entity_properties>,
         <https://w3id.org/peh/terms/processing_actions>,
         <https://w3id.org/peh/terms/processing_steps>,
@@ -3767,5 +3757,4 @@
     linkml:definition_uri linkml:String ;
     linkml:imported_from "linkml:types" ;
     linkml:uri xsd:string .
-
 
