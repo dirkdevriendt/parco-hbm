@@ -11,7 +11,7 @@ from pydantic import BaseModel, ConfigDict, Field, RootModel, field_validator
 
 
 metamodel_version = "None"
-version = "0.1.1"
+version = "0.2.0"
 
 
 class ConfiguredBaseModel(BaseModel):
@@ -1713,13 +1713,12 @@ class DataLayout(NamedThing):
 
 class DataLayoutSection(NamedThing):
     """
-    Definition for an individual layout or data section, as part of a full layout
+    Definition for an individual layout or data section, as part of a full layout. Each section contains the information on a single observation.
     """
 
     section_type: Optional[DataLayoutSectionType] = Field(default=None)
-    observable_entity_types: Optional[list[ObservableEntityType]] = Field(default=None)
-    observable_entity_grouping_id_list: Optional[list[str]] = Field(default=None)
     elements: Optional[list[DataLayoutElement]] = Field(default=None)
+    observation: Optional[str] = Field(default=None)
     id: str = Field(
         default=...,
         description="""Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).""",

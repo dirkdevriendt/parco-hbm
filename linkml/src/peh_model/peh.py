@@ -1,5 +1,5 @@
 # Auto generated from peh.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-09-19T13:01:39
+# Generation date: 2025-09-30T09:18:25
 # Schema: PEH-Model
 #
 # id: https://w3id.org/peh/peh-model
@@ -42,7 +42,7 @@ from linkml_runtime.linkml_model.types import (
 from linkml_runtime.utils.metamodelcore import Bool, Decimal, XSDDate, XSDDateTime
 
 metamodel_version = "1.7.0"
-version = "0.1.1"
+version = "0.2.0"
 
 # Namespaces
 IOP = CurieNamespace("iop", "https://w3id.org/iadopt/ont/")
@@ -3317,7 +3317,8 @@ class DataLayout(NamedThing):
 @dataclass(repr=False)
 class DataLayoutSection(NamedThing):
     """
-    Definition for an individual layout or data section, as part of a full layout
+    Definition for an individual layout or data section, as part of a full layout. Each section contains the
+    information on a single observation.
     """
 
     _inherited_slots: ClassVar[list[str]] = []
@@ -3329,17 +3330,10 @@ class DataLayoutSection(NamedThing):
 
     id: Union[str, DataLayoutSectionId] = None
     section_type: Optional[Union[str, "DataLayoutSectionType"]] = None
-    observable_entity_types: Optional[
-        Union[
-            Union[str, "ObservableEntityType"], list[Union[str, "ObservableEntityType"]]
-        ]
-    ] = empty_list()
-    observable_entity_grouping_id_list: Optional[
-        Union[Union[str, StudyEntityId], list[Union[str, StudyEntityId]]]
-    ] = empty_list()
     elements: Optional[
         Union[Union[dict, "DataLayoutElement"], list[Union[dict, "DataLayoutElement"]]]
     ] = empty_list()
+    observation: Optional[Union[str, ObservationId]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
@@ -3352,34 +3346,17 @@ class DataLayoutSection(NamedThing):
         ):
             self.section_type = DataLayoutSectionType(self.section_type)
 
-        if not isinstance(self.observable_entity_types, list):
-            self.observable_entity_types = (
-                [self.observable_entity_types]
-                if self.observable_entity_types is not None
-                else []
-            )
-        self.observable_entity_types = [
-            v if isinstance(v, ObservableEntityType) else ObservableEntityType(v)
-            for v in self.observable_entity_types
-        ]
-
-        if not isinstance(self.observable_entity_grouping_id_list, list):
-            self.observable_entity_grouping_id_list = (
-                [self.observable_entity_grouping_id_list]
-                if self.observable_entity_grouping_id_list is not None
-                else []
-            )
-        self.observable_entity_grouping_id_list = [
-            v if isinstance(v, StudyEntityId) else StudyEntityId(v)
-            for v in self.observable_entity_grouping_id_list
-        ]
-
         if not isinstance(self.elements, list):
             self.elements = [self.elements] if self.elements is not None else []
         self.elements = [
             v if isinstance(v, DataLayoutElement) else DataLayoutElement(**as_dict(v))
             for v in self.elements
         ]
+
+        if self.observation is not None and not isinstance(
+            self.observation, ObservationId
+        ):
+            self.observation = ObservationId(self.observation)
 
         super().__post_init__(**kwargs)
 
@@ -5585,6 +5562,15 @@ slots.location = Slot(
     range=Optional[str],
 )
 
+slots.observation = Slot(
+    uri=PEHTERMS.observation,
+    name="observation",
+    curie=PEHTERMS.curie("observation"),
+    model_uri=PEHTERMS.observation,
+    domain=None,
+    range=Optional[Union[str, ObservationId]],
+)
+
 slots.observation_type = Slot(
     uri=PEHTERMS.observation_type,
     name="observation_type",
@@ -5655,19 +5641,6 @@ slots.observable_entity_type = Slot(
     model_uri=PEHTERMS.observable_entity_type,
     domain=None,
     range=Optional[Union[str, "ObservableEntityType"]],
-)
-
-slots.observable_entity_types = Slot(
-    uri=PEHTERMS.observable_entity_types,
-    name="observable_entity_types",
-    curie=PEHTERMS.curie("observable_entity_types"),
-    model_uri=PEHTERMS.observable_entity_types,
-    domain=None,
-    range=Optional[
-        Union[
-            Union[str, "ObservableEntityType"], list[Union[str, "ObservableEntityType"]]
-        ]
-    ],
 )
 
 slots.observable_entity_id_list = Slot(
@@ -5930,15 +5903,6 @@ slots.section_type = Slot(
     model_uri=PEHTERMS.section_type,
     domain=None,
     range=Optional[Union[str, "DataLayoutSectionType"]],
-)
-
-slots.observable_entity_grouping_id_list = Slot(
-    uri=PEHTERMS.observable_entity_grouping_id_list,
-    name="observable_entity_grouping_id_list",
-    curie=PEHTERMS.curie("observable_entity_grouping_id_list"),
-    model_uri=PEHTERMS.observable_entity_grouping_id_list,
-    domain=None,
-    range=Optional[Union[Union[str, StudyEntityId], list[Union[str, StudyEntityId]]]],
 )
 
 slots.elements = Slot(

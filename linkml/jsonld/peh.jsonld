@@ -2,7 +2,7 @@
   "name": "PEH-Model",
   "description": "Entity and relation ontology and datamodel for Personal Exposure and Health data",
   "id": "https://w3id.org/peh/peh-model",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "imports": [
     "linkml:types"
   ],
@@ -2908,6 +2908,18 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "observation",
+      "definition_uri": "https://w3id.org/peh/terms/observation",
+      "from_schema": "https://w3id.org/peh/peh-model",
+      "slot_uri": "https://w3id.org/peh/terms/observation",
+      "owner": "DataLayoutSection",
+      "domain_of": [
+        "DataLayoutSection"
+      ],
+      "range": "Observation",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "observation_type",
       "definition_uri": "https://w3id.org/peh/terms/observation_type",
       "from_schema": "https://w3id.org/peh/peh-model",
@@ -2997,19 +3009,6 @@
         "ObservationDesign"
       ],
       "range": "ObservableEntityType",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "observable_entity_types",
-      "definition_uri": "https://w3id.org/peh/terms/observable_entity_types",
-      "from_schema": "https://w3id.org/peh/peh-model",
-      "slot_uri": "https://w3id.org/peh/terms/observable_entity_types",
-      "owner": "DataLayoutSection",
-      "domain_of": [
-        "DataLayoutSection"
-      ],
-      "range": "ObservableEntityType",
-      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -3355,19 +3354,6 @@
         "DataLayoutSection"
       ],
       "range": "DataLayoutSectionType",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "observable_entity_grouping_id_list",
-      "definition_uri": "https://w3id.org/peh/terms/observable_entity_grouping_id_list",
-      "from_schema": "https://w3id.org/peh/peh-model",
-      "slot_uri": "https://w3id.org/peh/terms/observable_entity_grouping_id_list",
-      "owner": "DataLayoutSection",
-      "domain_of": [
-        "DataLayoutSection"
-      ],
-      "range": "StudyEntity",
-      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -4882,7 +4868,7 @@
     {
       "name": "DataLayoutSection",
       "definition_uri": "https://w3id.org/peh/terms/DataLayoutSection",
-      "description": "Definition for an individual layout or data section, as part of a full layout",
+      "description": "Definition for an individual layout or data section, as part of a full layout. Each section contains the information on a single observation.",
       "from_schema": "https://w3id.org/peh/peh-model",
       "is_a": "NamedThing",
       "slots": [
@@ -4894,9 +4880,8 @@
         "description",
         "remark",
         "section_type",
-        "observable_entity_types",
-        "observable_entity_grouping_id_list",
-        "elements"
+        "elements",
+        "observation"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/peh/terms/DataLayoutSection",
@@ -5061,9 +5046,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "peh.yaml",
-  "source_file_date": "2025-09-19T13:01:12",
-  "source_file_size": 36884,
-  "generation_date": "2025-09-19T13:01:39",
+  "source_file_date": "2025-09-30T09:18:02",
+  "source_file_size": 36786,
+  "generation_date": "2025-09-30T09:18:25",
   "@type": "SchemaDefinition",
   "@context": [
     "_temp/jsonld/peh.context.jsonld",
