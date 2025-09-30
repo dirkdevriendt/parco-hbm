@@ -3,7 +3,7 @@ name: PEH-Model
 description: |-
   Entity and relation ontology and datamodel for Personal Exposure and Health data
 
-version: 0.1.1
+version: 0.2.0
 
 imports:
   - linkml:types
@@ -551,13 +551,12 @@ classes:
       - sections
   DataLayoutSection:
     description: >-
-      Definition for an individual layout or data section, as part of a full layout
+      Definition for an individual layout or data section, as part of a full layout. Each section contains the information on a single observation.
     is_a: NamedThing
     slots:
       - section_type
-      - observable_entity_types
-      - observable_entity_grouping_id_list
       - elements
+      - observation
   DataLayoutElement:
     description: >-
       Definition for an individual layout or data element, as part of a layout section
@@ -970,6 +969,9 @@ slots:
     inlined: false
   physical_label:
   location:
+  observation:
+    range: Observation
+    inlined: false
   observation_type:
     range: ObservationType
   observation_design:
@@ -987,9 +989,6 @@ slots:
     multivalued: true
     range: ObservationResult
   observable_entity_type:
-    range: ObservableEntityType
-  observable_entity_types:
-    multivalued: true
     range: ObservableEntityType
   observable_entity_id_list:
     multivalued: true
@@ -1055,9 +1054,6 @@ slots:
     range: DataLayoutSection
   section_type:
     range: DataLayoutSectionType
-  observable_entity_grouping_id_list:
-    multivalued: true
-    range: StudyEntity
   elements:
     multivalued: true
     inlined_as_list: true
