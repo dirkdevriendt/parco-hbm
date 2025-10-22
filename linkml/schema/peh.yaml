@@ -52,6 +52,7 @@ classes:
       - observation_results
       - observed_values
       - layouts
+      - import_configs
       - data_requests
 
   NamedThing:
@@ -553,8 +554,8 @@ classes:
     is_a: NamedThing
     slots:
       - section_type
+      - observable_entity_type
       - elements
-      - observation
   DataLayoutElement:
     description: >-
       Definition for an individual layout or data element, as part of a layout section
@@ -564,7 +565,32 @@ classes:
       - element_style
       - observable_property
       - is_observable_entity_key
-      - is_foreign_key
+      - foreign_key_link
+  DataLayoutElementLink:
+    description: >-
+      Configuration that refers to an element in a layout section
+    slots:
+      - section
+      - label
+
+  DataImportConfig:
+    description: >-
+      Configuration for incoming data, defining the expected DataLayout and the Observation(s) the data will be added to
+    is_a: NamedThing
+    slots:
+      - layout
+      - section_mapping
+  DataImportSectionMapping:
+    description: >-
+      Configuration for mapping structured data from a known layout to one or more study observations
+    slots:
+      - section_mapping_links
+  DataImportSectionMappingLink:
+    description: >-
+      Configuration that links a data layout section to one or more observations
+    slots:
+      - section
+      - observation_id_list
 
   DataRequest:
     description: >-
@@ -1036,14 +1062,16 @@ slots:
   provenance_context_key:
   provenance_value:
   
-  data_requests:
-    multivalued: true
-    inlined_as_list: true
-    range: DataRequest
+  layout:
+    range: DataLayout
+    inlined: false
   layouts:
     multivalued: true
     inlined_as_list: true
     range: DataLayout
+  section:
+    range: DataLayoutSection
+    inlined: false
   sections:
     multivalued: true
     inlined_as_list: true
@@ -1060,8 +1088,23 @@ slots:
     range: DataLayoutElementStyle
   is_observable_entity_key:
     range: boolean
-  is_foreign_key:
-    range: boolean
+  foreign_key_link:
+    range: DataLayoutElementLink
+  import_configs:
+    multivalued: true
+    inlined_as_list: true
+    range: DataImportConfig
+  section_mapping:
+    range: DataImportSectionMapping
+  section_mapping_links:
+    multivalued: true
+    inlined_as_list: true
+    range: DataImportSectionMappingLink
+
+  data_requests:
+    multivalued: true
+    inlined_as_list: true
+    range: DataRequest
 
   data_roles:
     multivalued: true
