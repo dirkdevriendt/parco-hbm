@@ -1,5 +1,5 @@
 # Auto generated from peh.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-09-30T09:18:25
+# Generation date: 2025-10-22T19:24:21
 # Schema: PEH-Model
 #
 # id: https://w3id.org/peh/peh-model
@@ -42,7 +42,7 @@ from linkml_runtime.linkml_model.types import (
 from linkml_runtime.utils.metamodelcore import Bool, Decimal, XSDDate, XSDDateTime
 
 metamodel_version = "1.7.0"
-version = "0.2.0"
+version = "0.3.0"
 
 # Namespaces
 IOP = CurieNamespace("iop", "https://w3id.org/iadopt/ont/")
@@ -179,6 +179,10 @@ class DataLayoutSectionId(NamedThingId):
     pass
 
 
+class DataImportConfigId(NamedThingId):
+    pass
+
+
 class DataRequestId(NamedThingId):
     pass
 
@@ -310,6 +314,12 @@ class EntityList(YAMLRoot):
             list[Union[dict, "DataLayout"]],
         ]
     ] = empty_dict()
+    import_configs: Optional[
+        Union[
+            dict[Union[str, DataImportConfigId], Union[dict, "DataImportConfig"]],
+            list[Union[dict, "DataImportConfig"]],
+        ]
+    ] = empty_dict()
     data_requests: Optional[
         Union[
             dict[Union[str, DataRequestId], Union[dict, "DataRequest"]],
@@ -407,6 +417,13 @@ class EntityList(YAMLRoot):
 
         self._normalize_inlined_as_list(
             slot_name="layouts", slot_type=DataLayout, key_name="id", keyed=True
+        )
+
+        self._normalize_inlined_as_list(
+            slot_name="import_configs",
+            slot_type=DataImportConfig,
+            key_name="id",
+            keyed=True,
         )
 
         self._normalize_inlined_as_list(
@@ -2003,7 +2020,6 @@ class CalculationArgument(YAMLRoot):
     class_model_uri: ClassVar[URIRef] = PEHTERMS.CalculationArgument
 
     source_path: Optional[str] = None
-    varname: Optional[str] = None
     process_state: Optional[str] = None
     imputation_state: Optional[str] = None
     value_type: Optional[str] = None
@@ -2012,9 +2028,6 @@ class CalculationArgument(YAMLRoot):
     def __post_init__(self, *_: str, **kwargs: Any):
         if self.source_path is not None and not isinstance(self.source_path, str):
             self.source_path = str(self.source_path)
-
-        if self.varname is not None and not isinstance(self.varname, str):
-            self.varname = str(self.varname)
 
         if self.process_state is not None and not isinstance(self.process_state, str):
             self.process_state = str(self.process_state)
@@ -2049,7 +2062,6 @@ class CalculationKeywordArgument(YAMLRoot):
 
     mapping_name: Optional[str] = None
     source_path: Optional[str] = None
-    varname: Optional[str] = None
     process_state: Optional[str] = None
     imputation_state: Optional[str] = None
     value_type: Optional[str] = None
@@ -2061,9 +2073,6 @@ class CalculationKeywordArgument(YAMLRoot):
 
         if self.source_path is not None and not isinstance(self.source_path, str):
             self.source_path = str(self.source_path)
-
-        if self.varname is not None and not isinstance(self.varname, str):
-            self.varname = str(self.varname)
 
         if self.process_state is not None and not isinstance(self.process_state, str):
             self.process_state = str(self.process_state)
@@ -3330,10 +3339,10 @@ class DataLayoutSection(NamedThing):
 
     id: Union[str, DataLayoutSectionId] = None
     section_type: Optional[Union[str, "DataLayoutSectionType"]] = None
+    observable_entity_type: Optional[Union[str, "ObservableEntityType"]] = None
     elements: Optional[
         Union[Union[dict, "DataLayoutElement"], list[Union[dict, "DataLayoutElement"]]]
     ] = empty_list()
-    observation: Optional[Union[str, ObservationId]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
@@ -3346,17 +3355,19 @@ class DataLayoutSection(NamedThing):
         ):
             self.section_type = DataLayoutSectionType(self.section_type)
 
+        if self.observable_entity_type is not None and not isinstance(
+            self.observable_entity_type, ObservableEntityType
+        ):
+            self.observable_entity_type = ObservableEntityType(
+                self.observable_entity_type
+            )
+
         if not isinstance(self.elements, list):
             self.elements = [self.elements] if self.elements is not None else []
         self.elements = [
             v if isinstance(v, DataLayoutElement) else DataLayoutElement(**as_dict(v))
             for v in self.elements
         ]
-
-        if self.observation is not None and not isinstance(
-            self.observation, ObservationId
-        ):
-            self.observation = ObservationId(self.observation)
 
         super().__post_init__(**kwargs)
 
@@ -3377,10 +3388,9 @@ class DataLayoutElement(YAMLRoot):
     label: Optional[str] = None
     element_type: Optional[Union[str, "DataLayoutElementType"]] = None
     element_style: Optional[Union[str, "DataLayoutElementStyle"]] = None
-    varname: Optional[str] = None
     observable_property: Optional[Union[str, ObservablePropertyId]] = None
     is_observable_entity_key: Optional[Union[bool, Bool]] = None
-    is_foreign_key: Optional[Union[bool, Bool]] = None
+    foreign_key_link: Optional[Union[dict, "DataLayoutElementLink"]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self.label is not None and not isinstance(self.label, str):
@@ -3396,9 +3406,6 @@ class DataLayoutElement(YAMLRoot):
         ):
             self.element_style = DataLayoutElementStyle(self.element_style)
 
-        if self.varname is not None and not isinstance(self.varname, str):
-            self.varname = str(self.varname)
-
         if self.observable_property is not None and not isinstance(
             self.observable_property, ObservablePropertyId
         ):
@@ -3409,10 +3416,153 @@ class DataLayoutElement(YAMLRoot):
         ):
             self.is_observable_entity_key = Bool(self.is_observable_entity_key)
 
-        if self.is_foreign_key is not None and not isinstance(
-            self.is_foreign_key, Bool
+        if self.foreign_key_link is not None and not isinstance(
+            self.foreign_key_link, DataLayoutElementLink
         ):
-            self.is_foreign_key = Bool(self.is_foreign_key)
+            self.foreign_key_link = DataLayoutElementLink(
+                **as_dict(self.foreign_key_link)
+            )
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class DataLayoutElementLink(YAMLRoot):
+    """
+    Configuration that refers to an element in a layout section
+    """
+
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = PEHTERMS["DataLayoutElementLink"]
+    class_class_curie: ClassVar[str] = "pehterms:DataLayoutElementLink"
+    class_name: ClassVar[str] = "DataLayoutElementLink"
+    class_model_uri: ClassVar[URIRef] = PEHTERMS.DataLayoutElementLink
+
+    section: Optional[Union[str, DataLayoutSectionId]] = None
+    label: Optional[str] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self.section is not None and not isinstance(
+            self.section, DataLayoutSectionId
+        ):
+            self.section = DataLayoutSectionId(self.section)
+
+        if self.label is not None and not isinstance(self.label, str):
+            self.label = str(self.label)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class DataImportConfig(NamedThing):
+    """
+    Configuration for incoming data, defining the expected DataLayout and the Observation(s) the data will be added to
+    """
+
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = PEHTERMS["DataImportConfig"]
+    class_class_curie: ClassVar[str] = "pehterms:DataImportConfig"
+    class_name: ClassVar[str] = "DataImportConfig"
+    class_model_uri: ClassVar[URIRef] = PEHTERMS.DataImportConfig
+
+    id: Union[str, DataImportConfigId] = None
+    layout: Optional[Union[str, DataLayoutId]] = None
+    section_mapping: Optional[Union[dict, "DataImportSectionMapping"]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, DataImportConfigId):
+            self.id = DataImportConfigId(self.id)
+
+        if self.layout is not None and not isinstance(self.layout, DataLayoutId):
+            self.layout = DataLayoutId(self.layout)
+
+        if self.section_mapping is not None and not isinstance(
+            self.section_mapping, DataImportSectionMapping
+        ):
+            self.section_mapping = DataImportSectionMapping(
+                **as_dict(self.section_mapping)
+            )
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class DataImportSectionMapping(YAMLRoot):
+    """
+    Configuration for mapping structured data from a known layout to one or more study observations
+    """
+
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = PEHTERMS["DataImportSectionMapping"]
+    class_class_curie: ClassVar[str] = "pehterms:DataImportSectionMapping"
+    class_name: ClassVar[str] = "DataImportSectionMapping"
+    class_model_uri: ClassVar[URIRef] = PEHTERMS.DataImportSectionMapping
+
+    section_mapping_links: Optional[
+        Union[
+            Union[dict, "DataImportSectionMappingLink"],
+            list[Union[dict, "DataImportSectionMappingLink"]],
+        ]
+    ] = empty_list()
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if not isinstance(self.section_mapping_links, list):
+            self.section_mapping_links = (
+                [self.section_mapping_links]
+                if self.section_mapping_links is not None
+                else []
+            )
+        self.section_mapping_links = [
+            (
+                v
+                if isinstance(v, DataImportSectionMappingLink)
+                else DataImportSectionMappingLink(**as_dict(v))
+            )
+            for v in self.section_mapping_links
+        ]
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class DataImportSectionMappingLink(YAMLRoot):
+    """
+    Configuration that links a data layout section to one or more observations
+    """
+
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = PEHTERMS["DataImportSectionMappingLink"]
+    class_class_curie: ClassVar[str] = "pehterms:DataImportSectionMappingLink"
+    class_name: ClassVar[str] = "DataImportSectionMappingLink"
+    class_model_uri: ClassVar[URIRef] = PEHTERMS.DataImportSectionMappingLink
+
+    section: Optional[Union[str, DataLayoutSectionId]] = None
+    observation_id_list: Optional[
+        Union[Union[str, ObservationId], list[Union[str, ObservationId]]]
+    ] = empty_list()
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self.section is not None and not isinstance(
+            self.section, DataLayoutSectionId
+        ):
+            self.section = DataLayoutSectionId(self.section)
+
+        if not isinstance(self.observation_id_list, list):
+            self.observation_id_list = (
+                [self.observation_id_list]
+                if self.observation_id_list is not None
+                else []
+            )
+        self.observation_id_list = [
+            v if isinstance(v, ObservationId) else ObservationId(v)
+            for v in self.observation_id_list
+        ]
 
         super().__post_init__(**kwargs)
 
@@ -4690,15 +4840,6 @@ slots.indicator_type = Slot(
     range=Optional[Union[str, "IndicatorType"]],
 )
 
-slots.varname = Slot(
-    uri=PEHTERMS.varname,
-    name="varname",
-    curie=PEHTERMS.curie("varname"),
-    model_uri=PEHTERMS.varname,
-    domain=None,
-    range=Optional[str],
-)
-
 slots.property = Slot(
     uri=PEHTERMS.property,
     name="property",
@@ -5854,18 +5995,13 @@ slots.provenance_value = Slot(
     range=Optional[str],
 )
 
-slots.data_requests = Slot(
-    uri=PEHTERMS.data_requests,
-    name="data_requests",
-    curie=PEHTERMS.curie("data_requests"),
-    model_uri=PEHTERMS.data_requests,
+slots.layout = Slot(
+    uri=PEHTERMS.layout,
+    name="layout",
+    curie=PEHTERMS.curie("layout"),
+    model_uri=PEHTERMS.layout,
     domain=None,
-    range=Optional[
-        Union[
-            dict[Union[str, DataRequestId], Union[dict, DataRequest]],
-            list[Union[dict, DataRequest]],
-        ]
-    ],
+    range=Optional[Union[str, DataLayoutId]],
 )
 
 slots.layouts = Slot(
@@ -5880,6 +6016,15 @@ slots.layouts = Slot(
             list[Union[dict, DataLayout]],
         ]
     ],
+)
+
+slots.section = Slot(
+    uri=PEHTERMS.section,
+    name="section",
+    curie=PEHTERMS.curie("section"),
+    model_uri=PEHTERMS.section,
+    domain=None,
+    range=Optional[Union[str, DataLayoutSectionId]],
 )
 
 slots.sections = Slot(
@@ -5943,13 +6088,64 @@ slots.is_observable_entity_key = Slot(
     range=Optional[Union[bool, Bool]],
 )
 
-slots.is_foreign_key = Slot(
-    uri=PEHTERMS.is_foreign_key,
-    name="is_foreign_key",
-    curie=PEHTERMS.curie("is_foreign_key"),
-    model_uri=PEHTERMS.is_foreign_key,
+slots.foreign_key_link = Slot(
+    uri=PEHTERMS.foreign_key_link,
+    name="foreign_key_link",
+    curie=PEHTERMS.curie("foreign_key_link"),
+    model_uri=PEHTERMS.foreign_key_link,
     domain=None,
-    range=Optional[Union[bool, Bool]],
+    range=Optional[Union[dict, DataLayoutElementLink]],
+)
+
+slots.import_configs = Slot(
+    uri=PEHTERMS.import_configs,
+    name="import_configs",
+    curie=PEHTERMS.curie("import_configs"),
+    model_uri=PEHTERMS.import_configs,
+    domain=None,
+    range=Optional[
+        Union[
+            dict[Union[str, DataImportConfigId], Union[dict, DataImportConfig]],
+            list[Union[dict, DataImportConfig]],
+        ]
+    ],
+)
+
+slots.section_mapping = Slot(
+    uri=PEHTERMS.section_mapping,
+    name="section_mapping",
+    curie=PEHTERMS.curie("section_mapping"),
+    model_uri=PEHTERMS.section_mapping,
+    domain=None,
+    range=Optional[Union[dict, DataImportSectionMapping]],
+)
+
+slots.section_mapping_links = Slot(
+    uri=PEHTERMS.section_mapping_links,
+    name="section_mapping_links",
+    curie=PEHTERMS.curie("section_mapping_links"),
+    model_uri=PEHTERMS.section_mapping_links,
+    domain=None,
+    range=Optional[
+        Union[
+            Union[dict, DataImportSectionMappingLink],
+            list[Union[dict, DataImportSectionMappingLink]],
+        ]
+    ],
+)
+
+slots.data_requests = Slot(
+    uri=PEHTERMS.data_requests,
+    name="data_requests",
+    curie=PEHTERMS.curie("data_requests"),
+    model_uri=PEHTERMS.data_requests,
+    domain=None,
+    range=Optional[
+        Union[
+            dict[Union[str, DataRequestId], Union[dict, DataRequest]],
+            list[Union[dict, DataRequest]],
+        ]
+    ],
 )
 
 slots.data_roles = Slot(

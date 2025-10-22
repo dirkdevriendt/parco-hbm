@@ -2,7 +2,7 @@
   "name": "PEH-Model",
   "description": "Entity and relation ontology and datamodel for Personal Exposure and Health data",
   "id": "https://w3id.org/peh/peh-model",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "imports": [
     "linkml:types"
   ],
@@ -1255,10 +1255,11 @@
       "definition_uri": "https://w3id.org/peh/terms/label",
       "from_schema": "https://w3id.org/peh/peh-model",
       "slot_uri": "https://w3id.org/peh/terms/label",
-      "owner": "DataLayoutElement",
+      "owner": "DataLayoutElementLink",
       "domain_of": [
         "ObservablePropertyValueOption",
-        "DataLayoutElement"
+        "DataLayoutElement",
+        "DataLayoutElementLink"
       ],
       "range": "string",
       "@type": "SlotDefinition"
@@ -1752,20 +1753,6 @@
         "Indicator"
       ],
       "range": "IndicatorType",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "varname",
-      "definition_uri": "https://w3id.org/peh/terms/varname",
-      "from_schema": "https://w3id.org/peh/peh-model",
-      "slot_uri": "https://w3id.org/peh/terms/varname",
-      "owner": "DataLayoutElement",
-      "domain_of": [
-        "CalculationArgument",
-        "CalculationKeywordArgument",
-        "DataLayoutElement"
-      ],
-      "range": "string",
       "@type": "SlotDefinition"
     },
     {
@@ -2547,9 +2534,10 @@
       "definition_uri": "https://w3id.org/peh/terms/observation_id_list",
       "from_schema": "https://w3id.org/peh/peh-model",
       "slot_uri": "https://w3id.org/peh/terms/observation_id_list",
-      "owner": "ObservationGroup",
+      "owner": "DataImportSectionMappingLink",
       "domain_of": [
-        "ObservationGroup"
+        "ObservationGroup",
+        "DataImportSectionMappingLink"
       ],
       "range": "Observation",
       "multivalued": true,
@@ -2912,10 +2900,6 @@
       "definition_uri": "https://w3id.org/peh/terms/observation",
       "from_schema": "https://w3id.org/peh/peh-model",
       "slot_uri": "https://w3id.org/peh/terms/observation",
-      "owner": "DataLayoutSection",
-      "domain_of": [
-        "DataLayoutSection"
-      ],
       "range": "Observation",
       "@type": "SlotDefinition"
     },
@@ -3004,9 +2988,10 @@
       "definition_uri": "https://w3id.org/peh/terms/observable_entity_type",
       "from_schema": "https://w3id.org/peh/peh-model",
       "slot_uri": "https://w3id.org/peh/terms/observable_entity_type",
-      "owner": "ObservationDesign",
+      "owner": "DataLayoutSection",
       "domain_of": [
-        "ObservationDesign"
+        "ObservationDesign",
+        "DataLayoutSection"
       ],
       "range": "ObservableEntityType",
       "@type": "SlotDefinition"
@@ -3300,18 +3285,15 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "data_requests",
-      "definition_uri": "https://w3id.org/peh/terms/data_requests",
+      "name": "layout",
+      "definition_uri": "https://w3id.org/peh/terms/layout",
       "from_schema": "https://w3id.org/peh/peh-model",
-      "slot_uri": "https://w3id.org/peh/terms/data_requests",
-      "owner": "EntityList",
+      "slot_uri": "https://w3id.org/peh/terms/layout",
+      "owner": "DataImportConfig",
       "domain_of": [
-        "EntityList"
+        "DataImportConfig"
       ],
-      "range": "DataRequest",
-      "multivalued": true,
-      "inlined": true,
-      "inlined_as_list": true,
+      "range": "DataLayout",
       "@type": "SlotDefinition"
     },
     {
@@ -3327,6 +3309,19 @@
       "multivalued": true,
       "inlined": true,
       "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "section",
+      "definition_uri": "https://w3id.org/peh/terms/section",
+      "from_schema": "https://w3id.org/peh/peh-model",
+      "slot_uri": "https://w3id.org/peh/terms/section",
+      "owner": "DataImportSectionMappingLink",
+      "domain_of": [
+        "DataLayoutElementLink",
+        "DataImportSectionMappingLink"
+      ],
+      "range": "DataLayoutSection",
       "@type": "SlotDefinition"
     },
     {
@@ -3408,15 +3403,74 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "is_foreign_key",
-      "definition_uri": "https://w3id.org/peh/terms/is_foreign_key",
+      "name": "foreign_key_link",
+      "definition_uri": "https://w3id.org/peh/terms/foreign_key_link",
       "from_schema": "https://w3id.org/peh/peh-model",
-      "slot_uri": "https://w3id.org/peh/terms/is_foreign_key",
+      "slot_uri": "https://w3id.org/peh/terms/foreign_key_link",
       "owner": "DataLayoutElement",
       "domain_of": [
         "DataLayoutElement"
       ],
-      "range": "boolean",
+      "range": "DataLayoutElementLink",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "import_configs",
+      "definition_uri": "https://w3id.org/peh/terms/import_configs",
+      "from_schema": "https://w3id.org/peh/peh-model",
+      "slot_uri": "https://w3id.org/peh/terms/import_configs",
+      "owner": "EntityList",
+      "domain_of": [
+        "EntityList"
+      ],
+      "range": "DataImportConfig",
+      "multivalued": true,
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "section_mapping",
+      "definition_uri": "https://w3id.org/peh/terms/section_mapping",
+      "from_schema": "https://w3id.org/peh/peh-model",
+      "slot_uri": "https://w3id.org/peh/terms/section_mapping",
+      "owner": "DataImportConfig",
+      "domain_of": [
+        "DataImportConfig"
+      ],
+      "range": "DataImportSectionMapping",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "section_mapping_links",
+      "definition_uri": "https://w3id.org/peh/terms/section_mapping_links",
+      "from_schema": "https://w3id.org/peh/peh-model",
+      "slot_uri": "https://w3id.org/peh/terms/section_mapping_links",
+      "owner": "DataImportSectionMapping",
+      "domain_of": [
+        "DataImportSectionMapping"
+      ],
+      "range": "DataImportSectionMappingLink",
+      "multivalued": true,
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "data_requests",
+      "definition_uri": "https://w3id.org/peh/terms/data_requests",
+      "from_schema": "https://w3id.org/peh/peh-model",
+      "slot_uri": "https://w3id.org/peh/terms/data_requests",
+      "owner": "EntityList",
+      "domain_of": [
+        "EntityList"
+      ],
+      "range": "DataRequest",
+      "multivalued": true,
+      "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -3728,6 +3782,7 @@
         "observation_results",
         "observed_values",
         "layouts",
+        "import_configs",
         "data_requests"
       ],
       "slot_usage": {},
@@ -4360,7 +4415,6 @@
       "from_schema": "https://w3id.org/peh/peh-model",
       "slots": [
         "source_path",
-        "varname",
         "process_state",
         "imputation_state",
         "value_type",
@@ -4378,7 +4432,6 @@
       "slots": [
         "mapping_name",
         "source_path",
-        "varname",
         "process_state",
         "imputation_state",
         "value_type",
@@ -4880,8 +4933,8 @@
         "description",
         "remark",
         "section_type",
-        "elements",
-        "observation"
+        "observable_entity_type",
+        "elements"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/peh/terms/DataLayoutSection",
@@ -4896,13 +4949,71 @@
         "label",
         "element_type",
         "element_style",
-        "varname",
         "observable_property",
         "is_observable_entity_key",
-        "is_foreign_key"
+        "foreign_key_link"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/peh/terms/DataLayoutElement",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "DataLayoutElementLink",
+      "definition_uri": "https://w3id.org/peh/terms/DataLayoutElementLink",
+      "description": "Configuration that refers to an element in a layout section",
+      "from_schema": "https://w3id.org/peh/peh-model",
+      "slots": [
+        "section",
+        "label"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/peh/terms/DataLayoutElementLink",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "DataImportConfig",
+      "definition_uri": "https://w3id.org/peh/terms/DataImportConfig",
+      "description": "Configuration for incoming data, defining the expected DataLayout and the Observation(s) the data will be added to",
+      "from_schema": "https://w3id.org/peh/peh-model",
+      "is_a": "NamedThing",
+      "slots": [
+        "id",
+        "unique_name",
+        "short_name",
+        "name",
+        "ui_label",
+        "description",
+        "remark",
+        "layout",
+        "section_mapping"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/peh/terms/DataImportConfig",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "DataImportSectionMapping",
+      "definition_uri": "https://w3id.org/peh/terms/DataImportSectionMapping",
+      "description": "Configuration for mapping structured data from a known layout to one or more study observations",
+      "from_schema": "https://w3id.org/peh/peh-model",
+      "slots": [
+        "section_mapping_links"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/peh/terms/DataImportSectionMapping",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "DataImportSectionMappingLink",
+      "definition_uri": "https://w3id.org/peh/terms/DataImportSectionMappingLink",
+      "description": "Configuration that links a data layout section to one or more observations",
+      "from_schema": "https://w3id.org/peh/peh-model",
+      "slots": [
+        "section",
+        "observation_id_list"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/peh/terms/DataImportSectionMappingLink",
       "@type": "ClassDefinition"
     },
     {
@@ -5046,9 +5157,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "peh.yaml",
-  "source_file_date": "2025-09-30T09:18:02",
-  "source_file_size": 36786,
-  "generation_date": "2025-09-30T09:18:25",
+  "source_file_date": "2025-10-22T19:24:01",
+  "source_file_size": 37916,
+  "generation_date": "2025-10-22T19:24:21",
   "@type": "SchemaDefinition",
   "@context": [
     "_temp/jsonld/peh.context.jsonld",

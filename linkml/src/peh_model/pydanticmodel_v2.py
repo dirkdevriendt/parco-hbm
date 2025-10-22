@@ -11,7 +11,7 @@ from pydantic import BaseModel, ConfigDict, Field, RootModel, field_validator
 
 
 metamodel_version = "None"
-version = "0.2.0"
+version = "0.3.0"
 
 
 class ConfiguredBaseModel(BaseModel):
@@ -314,6 +314,7 @@ class EntityList(ConfiguredBaseModel):
     observation_results: Optional[list[ObservationResult]] = Field(default=None)
     observed_values: Optional[list[ObservedValue]] = Field(default=None)
     layouts: Optional[list[DataLayout]] = Field(default=None)
+    import_configs: Optional[list[DataImportConfig]] = Field(default=None)
     data_requests: Optional[list[DataRequest]] = Field(default=None)
 
 
@@ -1091,7 +1092,6 @@ class CalculationArgument(ConfiguredBaseModel):
     """
 
     source_path: Optional[str] = Field(default=None)
-    varname: Optional[str] = Field(default=None)
     process_state: Optional[str] = Field(default=None)
     imputation_state: Optional[str] = Field(default=None)
     value_type: Optional[str] = Field(default=None)
@@ -1105,7 +1105,6 @@ class CalculationKeywordArgument(ConfiguredBaseModel):
 
     mapping_name: Optional[str] = Field(default=None)
     source_path: Optional[str] = Field(default=None)
-    varname: Optional[str] = Field(default=None)
     process_state: Optional[str] = Field(default=None)
     imputation_state: Optional[str] = Field(default=None)
     value_type: Optional[str] = Field(default=None)
@@ -1717,8 +1716,8 @@ class DataLayoutSection(NamedThing):
     """
 
     section_type: Optional[DataLayoutSectionType] = Field(default=None)
+    observable_entity_type: Optional[ObservableEntityType] = Field(default=None)
     elements: Optional[list[DataLayoutElement]] = Field(default=None)
-    observation: Optional[str] = Field(default=None)
     id: str = Field(
         default=...,
         description="""Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).""",
@@ -1756,10 +1755,73 @@ class DataLayoutElement(ConfiguredBaseModel):
     label: Optional[str] = Field(default=None)
     element_type: Optional[DataLayoutElementType] = Field(default=None)
     element_style: Optional[DataLayoutElementStyle] = Field(default=None)
-    varname: Optional[str] = Field(default=None)
     observable_property: Optional[str] = Field(default=None)
     is_observable_entity_key: Optional[bool] = Field(default=None)
-    is_foreign_key: Optional[bool] = Field(default=None)
+    foreign_key_link: Optional[DataLayoutElementLink] = Field(default=None)
+
+
+class DataLayoutElementLink(ConfiguredBaseModel):
+    """
+    Configuration that refers to an element in a layout section
+    """
+
+    section: Optional[str] = Field(default=None)
+    label: Optional[str] = Field(default=None)
+
+
+class DataImportConfig(NamedThing):
+    """
+    Configuration for incoming data, defining the expected DataLayout and the Observation(s) the data will be added to
+    """
+
+    layout: Optional[str] = Field(default=None)
+    section_mapping: Optional[DataImportSectionMapping] = Field(default=None)
+    id: str = Field(
+        default=...,
+        description="""Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).""",
+    )
+    unique_name: Optional[str] = Field(
+        default=None,
+        description="""Human readable name, unique across the context the entity is defined in.""",
+    )
+    short_name: Optional[str] = Field(
+        default=None,
+        description="""Shortened name or code, preferrable unique across the context the entity is defined in.""",
+    )
+    name: Optional[str] = Field(
+        default=None, description="""Common human readable name"""
+    )
+    ui_label: Optional[str] = Field(
+        default=None,
+        description="""Human readable label, to be used in user facing interfaces in the most common use cases.""",
+    )
+    description: Optional[str] = Field(
+        default=None,
+        description="""Long form description or definition for the entity.""",
+    )
+    remark: Optional[str] = Field(
+        default=None,
+        description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
+    )
+
+
+class DataImportSectionMapping(ConfiguredBaseModel):
+    """
+    Configuration for mapping structured data from a known layout to one or more study observations
+    """
+
+    section_mapping_links: Optional[list[DataImportSectionMappingLink]] = Field(
+        default=None
+    )
+
+
+class DataImportSectionMappingLink(ConfiguredBaseModel):
+    """
+    Configuration that links a data layout section to one or more observations
+    """
+
+    section: Optional[str] = Field(default=None)
+    observation_id_list: Optional[list[str]] = Field(default=None)
 
 
 class DataRequest(NamedThing):
@@ -2029,6 +2091,10 @@ ProvenanceData.model_rebuild()
 DataLayout.model_rebuild()
 DataLayoutSection.model_rebuild()
 DataLayoutElement.model_rebuild()
+DataLayoutElementLink.model_rebuild()
+DataImportConfig.model_rebuild()
+DataImportSectionMapping.model_rebuild()
+DataImportSectionMappingLink.model_rebuild()
 DataRequest.model_rebuild()
 ObservedEntityProperty.model_rebuild()
 DataStakeholder.model_rebuild()
