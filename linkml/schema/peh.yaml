@@ -328,7 +328,6 @@ classes:
       The definition of a positional argument used in the calculation, including the information needed to pick it from the project or study data structure
     slots:
       - source_path
-      - varname
       - process_state
       - imputation_state
       - value_type
@@ -339,7 +338,6 @@ classes:
     slots:
       - mapping_name
       - source_path
-      - varname
       - process_state
       - imputation_state
       - value_type
@@ -564,7 +562,6 @@ classes:
       - label
       - element_type
       - element_style
-      - varname
       - observable_property
       - is_observable_entity_key
       - is_foreign_key
@@ -749,7 +746,6 @@ slots:
     range: Matrix
   indicator_type:
     range: IndicatorType
-  varname:
   property:
   matrices:
     multivalued: true
