@@ -8,8 +8,6 @@ on:
         required: false
         default: true
         type: boolean
-  release:
-    types: [published]
 
 env:
   NANOPUB_INTRO_URI: "https://w3id.org/np/RACq6O6F4gSuC0A037LXUt2QOr_yYHJUwx3wAWDGv4Ryc"

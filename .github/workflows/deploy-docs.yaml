@@ -2,6 +2,8 @@
 name: Auto-deployment of PEH-model Documentation
 on:
   workflow_dispatch:
+  release:
+    types: [published]
 
 jobs:
   build-docs:
