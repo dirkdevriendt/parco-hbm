@@ -623,6 +623,9 @@
           "text": "questionnaire"
         },
         {
+          "text": "fieldwork"
+        },
+        {
           "text": "geospatial"
         },
         {
@@ -2132,6 +2135,7 @@
       ],
       "range": "CalculationImplementation",
       "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -2229,6 +2233,7 @@
       ],
       "range": "ValidationExpression",
       "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -2242,6 +2247,7 @@
       ],
       "range": "ValidationExpression",
       "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -2926,6 +2932,7 @@
       ],
       "range": "ObservationDesign",
       "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -2940,6 +2947,7 @@
       "range": "ObservationDesign",
       "multivalued": true,
       "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -3413,6 +3421,7 @@
       ],
       "range": "DataLayoutElementLink",
       "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -3441,6 +3450,7 @@
       ],
       "range": "DataImportSectionMapping",
       "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -3641,6 +3651,7 @@
       "range": "ObservedEntityProperty",
       "multivalued": true,
       "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -5157,9 +5168,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "peh.yaml",
-  "source_file_date": "2025-10-22T19:24:01",
-  "source_file_size": 37916,
-  "generation_date": "2025-10-22T19:24:21",
+  "source_file_date": "2025-11-04T10:45:04",
+  "source_file_size": 37933,
+  "generation_date": "2025-11-04T10:45:28",
   "@type": "SchemaDefinition",
   "@context": [
     "_temp/jsonld/peh.context.jsonld",

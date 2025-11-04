@@ -1,5 +1,5 @@
 # Auto generated from peh.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-10-22T19:24:21
+# Generation date: 2025-11-04T10:45:28
 # Schema: PEH-Model
 #
 # id: https://w3id.org/peh/peh-model
@@ -4046,6 +4046,7 @@ class ObservationType(EnumDefinitionImpl):
 
     sampling = PermissibleValue(text="sampling")
     questionnaire = PermissibleValue(text="questionnaire")
+    fieldwork = PermissibleValue(text="fieldwork")
     geospatial = PermissibleValue(text="geospatial")
     metadata = PermissibleValue(text="metadata")
 

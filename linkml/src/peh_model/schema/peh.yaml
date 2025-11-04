@@ -1239,6 +1239,7 @@ enums:
     permissible_values:
       sampling:
       questionnaire:
+      fieldwork:
       geospatial:
       metadata:
   ObservationResultType:

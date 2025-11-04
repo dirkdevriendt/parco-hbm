@@ -14,28 +14,28 @@
     dcterms:license "https://creativecommons.org/publicdomain/zero/1.0/" ;
     pav:version "0.3.0" ;
     skos:definition "Entity and relation ontology and datamodel for Personal Exposure and Health data" ;
-    sh:declare [ sh:namespace schema1: ;
-            sh:prefix "schema" ],
-        [ sh:namespace <https://w3id.org/peh/> ;
-            sh:prefix "peh" ],
-        [ sh:namespace <https://w3id.org/iadopt/ont/> ;
-            sh:prefix "iop" ],
-        [ sh:namespace <https://qudt.org/vocab/unit/> ;
-            sh:prefix "qudtunit" ],
-        [ sh:namespace <http://qudt.org/2.1/vocab/quantitykind> ;
-            sh:prefix "qudtqk" ],
+    sh:declare [ sh:namespace linkml: ;
+            sh:prefix "linkml" ],
         [ sh:namespace rdfs: ;
             sh:prefix "rdfs" ],
         [ sh:namespace skos: ;
             sh:prefix "skos" ],
-        [ sh:namespace <http://qudt.org/2.1/schema/qudt> ;
-            sh:prefix "qudt" ],
+        [ sh:namespace <https://w3id.org/peh/terms/> ;
+            sh:prefix "pehterms" ],
+        [ sh:namespace <https://w3id.org/iadopt/ont/> ;
+            sh:prefix "iop" ],
+        [ sh:namespace <https://qudt.org/vocab/unit/> ;
+            sh:prefix "qudtunit" ],
         [ sh:namespace prov: ;
             sh:prefix "prov" ],
-        [ sh:namespace linkml: ;
-            sh:prefix "linkml" ],
-        [ sh:namespace <https://w3id.org/peh/terms/> ;
-            sh:prefix "pehterms" ] ;
+        [ sh:namespace <http://qudt.org/2.1/schema/qudt> ;
+            sh:prefix "qudt" ],
+        [ sh:namespace <http://qudt.org/2.1/vocab/quantitykind> ;
+            sh:prefix "qudtqk" ],
+        [ sh:namespace schema1: ;
+            sh:prefix "schema" ],
+        [ sh:namespace <https://w3id.org/peh/> ;
+            sh:prefix "peh" ] ;
     linkml:classes <https://w3id.org/peh/terms/BioChemEntity>,
         <https://w3id.org/peh/terms/BioChemEntityLink>,
         <https://w3id.org/peh/terms/BioChemIdentifier>,
@@ -127,7 +127,7 @@
         <https://w3id.org/peh/terms/ValidationCommand>,
         <https://w3id.org/peh/terms/ValidationErrorLevel>,
         <https://w3id.org/peh/terms/ValidationStatus> ;
-    linkml:generation_date "2025-10-22T19:24:25"^^xsd:dateTime ;
+    linkml:generation_date "2025-11-04T10:45:32"^^xsd:dateTime ;
     linkml:id <https://w3id.org/peh/peh-model> ;
     linkml:imports linkml:types ;
     linkml:metamodel_version "1.7.0" ;
@@ -326,8 +326,8 @@
         <https://w3id.org/peh/terms/value_type>,
         <https://w3id.org/peh/terms/web_uri> ;
     linkml:source_file "peh.yaml" ;
-    linkml:source_file_date "2025-10-22T19:24:01"^^xsd:dateTime ;
-    linkml:source_file_size 37916 ;
+    linkml:source_file_date "2025-11-04T10:45:04"^^xsd:dateTime ;
+    linkml:source_file_size 37933 ;
     linkml:types <https://w3id.org/peh/terms/boolean>,
         <https://w3id.org/peh/terms/curie>,
         <https://w3id.org/peh/terms/date>,
@@ -1002,7 +1002,8 @@
 
 <https://w3id.org/peh/terms/ObservationType> skos:inScheme <https://w3id.org/peh/peh-model> ;
     linkml:definition_uri <https://w3id.org/peh/terms/ObservationType> ;
-    linkml:permissible_values <https://w3id.org/peh/terms/geospatial>,
+    linkml:permissible_values <https://w3id.org/peh/terms/fieldwork>,
+        <https://w3id.org/peh/terms/geospatial>,
         <https://w3id.org/peh/terms/metadata>,
         <https://w3id.org/peh/terms/questionnaire>,
         <https://w3id.org/peh/terms/sampling> .
@@ -1116,6 +1117,7 @@
     linkml:definition_uri <https://w3id.org/peh/terms/calculation_implementation> ;
     linkml:domain_of <https://w3id.org/peh/terms/CalculationDesign> ;
     linkml:inlined true ;
+    linkml:inlined_as_list true ;
     linkml:owner <https://w3id.org/peh/terms/CalculationDesign> ;
     linkml:range <https://w3id.org/peh/terms/CalculationImplementation> ;
     linkml:slot_uri <https://w3id.org/peh/terms/calculation_implementation> .
@@ -1328,6 +1330,7 @@
     linkml:definition_uri <https://w3id.org/peh/terms/foreign_key_link> ;
     linkml:domain_of <https://w3id.org/peh/terms/DataLayoutElement> ;
     linkml:inlined true ;
+    linkml:inlined_as_list true ;
     linkml:owner <https://w3id.org/peh/terms/DataLayoutElement> ;
     linkml:range <https://w3id.org/peh/terms/DataLayoutElementLink> ;
     linkml:slot_uri <https://w3id.org/peh/terms/foreign_key_link> .
@@ -1616,6 +1619,7 @@
     linkml:definition_uri <https://w3id.org/peh/terms/observation_design> ;
     linkml:domain_of <https://w3id.org/peh/terms/Observation> ;
     linkml:inlined true ;
+    linkml:inlined_as_list true ;
     linkml:owner <https://w3id.org/peh/terms/Observation> ;
     linkml:range <https://w3id.org/peh/terms/ObservationDesign> ;
     linkml:slot_uri <https://w3id.org/peh/terms/observation_design> .
@@ -1625,6 +1629,7 @@
     linkml:definition_uri <https://w3id.org/peh/terms/observation_designs> ;
     linkml:domain_of <https://w3id.org/peh/terms/DataRequest> ;
     linkml:inlined true ;
+    linkml:inlined_as_list true ;
     linkml:multivalued true ;
     linkml:owner <https://w3id.org/peh/terms/DataRequest> ;
     linkml:range <https://w3id.org/peh/terms/ObservationDesign> ;
@@ -1710,6 +1715,7 @@
     linkml:definition_uri <https://w3id.org/peh/terms/observed_entity_properties> ;
     linkml:domain_of <https://w3id.org/peh/terms/DataRequest> ;
     linkml:inlined true ;
+    linkml:inlined_as_list true ;
     linkml:multivalued true ;
     linkml:owner <https://w3id.org/peh/terms/DataRequest> ;
     linkml:range <https://w3id.org/peh/terms/ObservedEntityProperty> ;
@@ -2019,6 +2025,7 @@
     linkml:definition_uri <https://w3id.org/peh/terms/section_mapping> ;
     linkml:domain_of <https://w3id.org/peh/terms/DataImportConfig> ;
     linkml:inlined true ;
+    linkml:inlined_as_list true ;
     linkml:owner <https://w3id.org/peh/terms/DataImportConfig> ;
     linkml:range <https://w3id.org/peh/terms/DataImportSectionMapping> ;
     linkml:slot_uri <https://w3id.org/peh/terms/section_mapping> .
@@ -2201,6 +2208,7 @@
     linkml:definition_uri <https://w3id.org/peh/terms/validation_condition_expression> ;
     linkml:domain_of <https://w3id.org/peh/terms/ValidationExpression> ;
     linkml:inlined true ;
+    linkml:inlined_as_list true ;
     linkml:owner <https://w3id.org/peh/terms/ValidationExpression> ;
     linkml:range <https://w3id.org/peh/terms/ValidationExpression> ;
     linkml:slot_uri <https://w3id.org/peh/terms/validation_condition_expression> .
@@ -2245,6 +2253,7 @@
     linkml:definition_uri <https://w3id.org/peh/terms/validation_expression> ;
     linkml:domain_of <https://w3id.org/peh/terms/ValidationDesign> ;
     linkml:inlined true ;
+    linkml:inlined_as_list true ;
     linkml:owner <https://w3id.org/peh/terms/ValidationDesign> ;
     linkml:range <https://w3id.org/peh/terms/ValidationExpression> ;
     linkml:slot_uri <https://w3id.org/peh/terms/validation_expression> .

@@ -7,7 +7,16 @@ from decimal import Decimal
 from enum import Enum
 from typing import Any, ClassVar, Literal, Optional, Union
 
-from pydantic import BaseModel, ConfigDict, Field, RootModel, field_validator
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    RootModel,
+    SerializationInfo,
+    SerializerFunctionWrapHandler,
+    field_validator,
+    model_serializer,
+)
 
 
 metamodel_version = "None"
@@ -16,6 +25,8 @@ version = "0.3.0"
 
 class ConfiguredBaseModel(BaseModel):
     model_config = ConfigDict(
+        serialize_by_alias=True,
+        validate_by_name=True,
         validate_assignment=True,
         validate_default=True,
         extra="forbid",
@@ -23,7 +34,19 @@ class ConfiguredBaseModel(BaseModel):
         use_enum_values=True,
         strict=False,
     )
-    pass
+
+    @model_serializer(mode="wrap", when_used="unless-none")
+    def treat_empty_lists_as_none(
+        self, handler: SerializerFunctionWrapHandler, info: SerializationInfo
+    ) -> dict[str, Any]:
+        if info.exclude_none:
+            _instance = self.model_copy()
+            for field, field_info in type(_instance).model_fields.items():
+                if getattr(_instance, field) == [] and not (field_info.is_required()):
+                    setattr(_instance, field, None)
+        else:
+            _instance = self
+        return handler(_instance, info)
 
 
 class LinkMLMeta(RootModel):
@@ -136,6 +159,7 @@ class ObservableEntityType(str, Enum):
 class ObservationType(str, Enum):
     sampling = "sampling"
     questionnaire = "questionnaire"
+    fieldwork = "fieldwork"
     geospatial = "geospatial"
     metadata = "metadata"
 
@@ -295,27 +319,25 @@ class EntityList(ConfiguredBaseModel):
     A generic top level object for collecting named entities under one root entity
     """
 
-    matrices: Optional[list[Matrix]] = Field(default=None)
-    metadata_fields: Optional[list[ObservablePropertyMetadataField]] = Field(
-        default=None
-    )
-    biochementities: Optional[list[BioChemEntity]] = Field(default=None)
-    groupings: Optional[list[Grouping]] = Field(default=None)
-    indicators: Optional[list[Indicator]] = Field(default=None)
-    units: Optional[list[Unit]] = Field(default=None)
-    observable_properties: Optional[list[ObservableProperty]] = Field(default=None)
-    stakeholders: Optional[list[Stakeholder]] = Field(default=None)
-    projects: Optional[list[Project]] = Field(default=None)
-    studies: Optional[list[Study]] = Field(default=None)
-    study_entities: Optional[list[StudyEntity]] = Field(default=None)
-    physical_entities: Optional[list[PhysicalEntity]] = Field(default=None)
-    observation_groups: Optional[list[ObservationGroup]] = Field(default=None)
-    observations: Optional[list[Observation]] = Field(default=None)
-    observation_results: Optional[list[ObservationResult]] = Field(default=None)
-    observed_values: Optional[list[ObservedValue]] = Field(default=None)
-    layouts: Optional[list[DataLayout]] = Field(default=None)
-    import_configs: Optional[list[DataImportConfig]] = Field(default=None)
-    data_requests: Optional[list[DataRequest]] = Field(default=None)
+    matrices: Optional[list[Matrix]] = Field(default=[])
+    metadata_fields: Optional[list[ObservablePropertyMetadataField]] = Field(default=[])
+    biochementities: Optional[list[BioChemEntity]] = Field(default=[])
+    groupings: Optional[list[Grouping]] = Field(default=[])
+    indicators: Optional[list[Indicator]] = Field(default=[])
+    units: Optional[list[Unit]] = Field(default=[])
+    observable_properties: Optional[list[ObservableProperty]] = Field(default=[])
+    stakeholders: Optional[list[Stakeholder]] = Field(default=[])
+    projects: Optional[list[Project]] = Field(default=[])
+    studies: Optional[list[Study]] = Field(default=[])
+    study_entities: Optional[list[StudyEntity]] = Field(default=[])
+    physical_entities: Optional[list[PhysicalEntity]] = Field(default=[])
+    observation_groups: Optional[list[ObservationGroup]] = Field(default=[])
+    observations: Optional[list[Observation]] = Field(default=[])
+    observation_results: Optional[list[ObservationResult]] = Field(default=[])
+    observed_values: Optional[list[ObservedValue]] = Field(default=[])
+    layouts: Optional[list[DataLayout]] = Field(default=[])
+    import_configs: Optional[list[DataImportConfig]] = Field(default=[])
+    data_requests: Optional[list[DataRequest]] = Field(default=[])
 
 
 class NamedThing(ConfiguredBaseModel):
@@ -358,7 +380,7 @@ class HasValidationStatus(ConfiguredBaseModel):
     """
 
     current_validation_status: Optional[ValidationStatus] = Field(default=None)
-    validation_history: Optional[list[ValidationHistoryRecord]] = Field(default=None)
+    validation_history: Optional[list[ValidationHistoryRecord]] = Field(default=[])
 
 
 class ValidationHistoryRecord(ConfiguredBaseModel):
@@ -378,7 +400,7 @@ class HasAliases(ConfiguredBaseModel):
     The capacity of including one or more alternative naming terms (without qualifying the usage context)
     """
 
-    aliases: Optional[list[str]] = Field(default=None)
+    aliases: Optional[list[str]] = Field(default=[])
 
 
 class HasContextAliases(ConfiguredBaseModel):
@@ -386,7 +408,7 @@ class HasContextAliases(ConfiguredBaseModel):
     The capacity of including a list of terms being used in known scopes or contexts
     """
 
-    context_aliases: Optional[list[ContextAlias]] = Field(default=None)
+    context_aliases: Optional[list[ContextAlias]] = Field(default=[])
 
 
 class ContextAlias(ConfiguredBaseModel):
@@ -404,7 +426,7 @@ class HasTranslations(ConfiguredBaseModel):
     The capacity of including a list of translated terms for one or more entity properties and languages
     """
 
-    translations: Optional[list[Translation]] = Field(default=None)
+    translations: Optional[list[Translation]] = Field(default=[])
 
 
 class Grouping(HasTranslations, HasContextAliases, NamedThing):
@@ -414,9 +436,9 @@ class Grouping(HasTranslations, HasContextAliases, NamedThing):
 
     sort_order: Optional[Decimal] = Field(default=None)
     abstract: Optional[bool] = Field(default=None)
-    parent_grouping_id_list: Optional[list[str]] = Field(default=None)
-    context_aliases: Optional[list[ContextAlias]] = Field(default=None)
-    translations: Optional[list[Translation]] = Field(default=None)
+    parent_grouping_id_list: Optional[list[str]] = Field(default=[])
+    context_aliases: Optional[list[ContextAlias]] = Field(default=[])
+    translations: Optional[list[Translation]] = Field(default=[])
     id: str = Field(
         default=...,
         description="""Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).""",
@@ -465,11 +487,11 @@ class Unit(
 
     same_unit_as: Optional[QudtUnit] = Field(default=None)
     quantity_kind: Optional[QudtQuantityKind] = Field(default=None)
-    aliases: Optional[list[str]] = Field(default=None)
-    context_aliases: Optional[list[ContextAlias]] = Field(default=None)
-    translations: Optional[list[Translation]] = Field(default=None)
+    aliases: Optional[list[str]] = Field(default=[])
+    context_aliases: Optional[list[ContextAlias]] = Field(default=[])
+    translations: Optional[list[Translation]] = Field(default=[])
     current_validation_status: Optional[ValidationStatus] = Field(default=None)
-    validation_history: Optional[list[ValidationHistoryRecord]] = Field(default=None)
+    validation_history: Optional[list[ValidationHistoryRecord]] = Field(default=[])
     id: str = Field(
         default=...,
         description="""Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).""",
@@ -506,15 +528,15 @@ class BioChemEntity(
     A biological, chemical or biochemical entity that is relevant to the Personal Exposure and Health domain
     """
 
-    grouping_id_list: Optional[list[str]] = Field(default=None)
+    grouping_id_list: Optional[list[str]] = Field(default=[])
     molweight_grampermol: Optional[Decimal] = Field(default=None)
-    biochemidentifiers: Optional[list[BioChemIdentifier]] = Field(default=None)
-    biochementity_links: Optional[list[BioChemEntityLink]] = Field(default=None)
-    aliases: Optional[list[str]] = Field(default=None)
-    context_aliases: Optional[list[ContextAlias]] = Field(default=None)
-    translations: Optional[list[Translation]] = Field(default=None)
+    biochemidentifiers: Optional[list[BioChemIdentifier]] = Field(default=[])
+    biochementity_links: Optional[list[BioChemEntityLink]] = Field(default=[])
+    aliases: Optional[list[str]] = Field(default=[])
+    context_aliases: Optional[list[ContextAlias]] = Field(default=[])
+    translations: Optional[list[Translation]] = Field(default=[])
     current_validation_status: Optional[ValidationStatus] = Field(default=None)
-    validation_history: Optional[list[ValidationHistoryRecord]] = Field(default=None)
+    validation_history: Optional[list[ValidationHistoryRecord]] = Field(default=[])
     id: str = Field(
         default=...,
         description="""Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).""",
@@ -552,7 +574,7 @@ class BioChemIdentifier(HasValidationStatus):
     identifier_schema: Optional[str] = Field(default=None)
     identifier_code: Optional[str] = Field(default=None)
     current_validation_status: Optional[ValidationStatus] = Field(default=None)
-    validation_history: Optional[list[ValidationHistoryRecord]] = Field(default=None)
+    validation_history: Optional[list[ValidationHistoryRecord]] = Field(default=[])
 
 
 class BioChemIdentifierSchema(NamedThing):
@@ -598,9 +620,9 @@ class Matrix(HasTranslations, HasContextAliases, NamedThing):
     sort_order: Optional[Decimal] = Field(default=None)
     aggregation_target: Optional[bool] = Field(default=None)
     parent_matrix: Optional[str] = Field(default=None)
-    secondary_parent_matrix_id_list: Optional[list[str]] = Field(default=None)
-    context_aliases: Optional[list[ContextAlias]] = Field(default=None)
-    translations: Optional[list[Translation]] = Field(default=None)
+    secondary_parent_matrix_id_list: Optional[list[str]] = Field(default=[])
+    context_aliases: Optional[list[ContextAlias]] = Field(default=[])
+    translations: Optional[list[Translation]] = Field(default=[])
     id: str = Field(
         default=...,
         description="""Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).""",
@@ -639,14 +661,14 @@ class Indicator(HasTranslations, HasContextAliases, NamedThing):
     property: Optional[str] = Field(default=None)
     quantity_kind: Optional[QudtQuantityKind] = Field(default=None)
     matrix: Optional[str] = Field(default=None)
-    constraints: Optional[list[str]] = Field(default=None)
-    grouping_id_list: Optional[list[str]] = Field(default=None)
+    constraints: Optional[list[str]] = Field(default=[])
+    grouping_id_list: Optional[list[str]] = Field(default=[])
     relevant_observable_entity_types: Optional[list[ObservableEntityType]] = Field(
-        default=None
+        default=[]
     )
-    biochementity_links: Optional[list[BioChemEntityLink]] = Field(default=None)
-    context_aliases: Optional[list[ContextAlias]] = Field(default=None)
-    translations: Optional[list[Translation]] = Field(default=None)
+    biochementity_links: Optional[list[BioChemEntityLink]] = Field(default=[])
+    context_aliases: Optional[list[ContextAlias]] = Field(default=[])
+    translations: Optional[list[Translation]] = Field(default=[])
     id: str = Field(
         default=...,
         description="""Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).""",
@@ -690,7 +712,7 @@ class PhysicalEntity(NamedThing):
     A digital placeholder for a physical entity as it exists in the real world,
     """
 
-    physical_entity_links: Optional[list[PhysicalEntityLink]] = Field(default=None)
+    physical_entity_links: Optional[list[PhysicalEntityLink]] = Field(default=[])
     id: str = Field(
         default=...,
         description="""Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).""",
@@ -735,11 +757,11 @@ class Sample(PhysicalEntity):
     """
 
     matrix: Optional[str] = Field(default=None)
-    constraints: Optional[list[str]] = Field(default=None)
+    constraints: Optional[list[str]] = Field(default=[])
     sampled_in_project: Optional[str] = Field(default=None)
     physical_label: Optional[str] = Field(default=None)
     collection_date: Optional[date] = Field(default=None)
-    physical_entity_links: Optional[list[PhysicalEntityLink]] = Field(default=None)
+    physical_entity_links: Optional[list[PhysicalEntityLink]] = Field(default=[])
     id: str = Field(
         default=...,
         description="""Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).""",
@@ -775,7 +797,7 @@ class Person(PhysicalEntity):
     """
 
     recruited_in_project: Optional[str] = Field(default=None)
-    physical_entity_links: Optional[list[PhysicalEntityLink]] = Field(default=None)
+    physical_entity_links: Optional[list[PhysicalEntityLink]] = Field(default=[])
     id: str = Field(
         default=...,
         description="""Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).""",
@@ -811,7 +833,7 @@ class Geolocation(PhysicalEntity):
     """
 
     location: Optional[str] = Field(default=None)
-    physical_entity_links: Optional[list[PhysicalEntityLink]] = Field(default=None)
+    physical_entity_links: Optional[list[PhysicalEntityLink]] = Field(default=[])
     id: str = Field(
         default=...,
         description="""Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).""",
@@ -846,7 +868,7 @@ class Environment(PhysicalEntity):
     An environment relevant to the research, typically related to the exposure of a person
     """
 
-    physical_entity_links: Optional[list[PhysicalEntityLink]] = Field(default=None)
+    physical_entity_links: Optional[list[PhysicalEntityLink]] = Field(default=[])
     id: str = Field(
         default=...,
         description="""Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).""",
@@ -881,7 +903,7 @@ class HomeEnvironment(Environment):
     A home environment relevant to the research, typically related to the at-home exposure of a person
     """
 
-    physical_entity_links: Optional[list[PhysicalEntityLink]] = Field(default=None)
+    physical_entity_links: Optional[list[PhysicalEntityLink]] = Field(default=[])
     id: str = Field(
         default=...,
         description="""Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).""",
@@ -916,7 +938,7 @@ class WorkEnvironment(Environment):
     A work environment relevant to the research, typically related to the at-work or commute exposure of a person
     """
 
-    physical_entity_links: Optional[list[PhysicalEntityLink]] = Field(default=None)
+    physical_entity_links: Optional[list[PhysicalEntityLink]] = Field(default=[])
     id: str = Field(
         default=...,
         description="""Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).""",
@@ -954,9 +976,9 @@ class ObservableProperty(HasTranslations, HasContextAliases, NamedThing):
     value_type: Optional[str] = Field(default=None)
     categorical: Optional[bool] = Field(default=None)
     multivalued: Optional[bool] = Field(default=None)
-    value_options: Optional[list[ObservablePropertyValueOption]] = Field(default=None)
+    value_options: Optional[list[ObservablePropertyValueOption]] = Field(default=[])
     value_metadata: Optional[list[ObservablePropertyMetadataElement]] = Field(
-        default=None
+        default=[]
     )
     quantity_kind: Optional[QudtQuantityKind] = Field(default=None)
     default_unit: Optional[str] = Field(default=None)
@@ -965,19 +987,19 @@ class ObservableProperty(HasTranslations, HasContextAliases, NamedThing):
     default_zeroallowed: Optional[bool] = Field(default=None)
     default_significantdecimals: Optional[int] = Field(default=None)
     default_immutable: Optional[bool] = Field(default=None)
-    grouping_id_list: Optional[list[str]] = Field(default=None)
+    grouping_id_list: Optional[list[str]] = Field(default=[])
     default_observation_result_type: Optional[ObservationResultType] = Field(
         default=None
     )
     relevant_observable_entity_types: Optional[list[ObservableEntityType]] = Field(
-        default=None
+        default=[]
     )
-    relevant_observation_types: Optional[list[ObservationType]] = Field(default=None)
+    relevant_observation_types: Optional[list[ObservationType]] = Field(default=[])
     indicator: Optional[str] = Field(default=None)
-    calculation_designs: Optional[list[CalculationDesign]] = Field(default=None)
-    validation_designs: Optional[list[ValidationDesign]] = Field(default=None)
-    translations: Optional[list[Translation]] = Field(default=None)
-    context_aliases: Optional[list[ContextAlias]] = Field(default=None)
+    calculation_designs: Optional[list[CalculationDesign]] = Field(default=[])
+    validation_designs: Optional[list[ValidationDesign]] = Field(default=[])
+    translations: Optional[list[Translation]] = Field(default=[])
+    context_aliases: Optional[list[ContextAlias]] = Field(default=[])
     id: str = Field(
         default=...,
         description="""Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).""",
@@ -1015,7 +1037,7 @@ class ObservablePropertyValueOption(HasContextAliases):
     key: Optional[str] = Field(default=None)
     value: Optional[str] = Field(default=None)
     label: Optional[str] = Field(default=None)
-    context_aliases: Optional[list[ContextAlias]] = Field(default=None)
+    context_aliases: Optional[list[ContextAlias]] = Field(default=[])
 
 
 class ObservablePropertyMetadataElement(ConfiguredBaseModel):
@@ -1081,9 +1103,9 @@ class CalculationImplementation(ConfiguredBaseModel):
     """
 
     function_name: Optional[str] = Field(default=None)
-    function_args: Optional[list[CalculationArgument]] = Field(default=None)
-    function_kwargs: Optional[list[CalculationKeywordArgument]] = Field(default=None)
-    function_results: Optional[list[CalculationResult]] = Field(default=None)
+    function_args: Optional[list[CalculationArgument]] = Field(default=[])
+    function_kwargs: Optional[list[CalculationKeywordArgument]] = Field(default=[])
+    function_results: Optional[list[CalculationResult]] = Field(default=[])
 
 
 class CalculationArgument(ConfiguredBaseModel):
@@ -1141,16 +1163,14 @@ class ValidationExpression(ConfiguredBaseModel):
     A logical expression, allowing for combining arguments into more complex validation rules
     """
 
-    validation_subject_source_paths: Optional[list[str]] = Field(default=None)
+    validation_subject_source_paths: Optional[list[str]] = Field(default=[])
     validation_condition_expression: Optional[ValidationExpression] = Field(
         default=None
     )
     validation_command: Optional[ValidationCommand] = Field(default=None)
-    validation_arg_values: Optional[list[str]] = Field(default=None)
-    validation_arg_source_paths: Optional[list[str]] = Field(default=None)
-    validation_arg_expressions: Optional[list[ValidationExpression]] = Field(
-        default=None
-    )
+    validation_arg_values: Optional[list[str]] = Field(default=[])
+    validation_arg_source_paths: Optional[list[str]] = Field(default=[])
+    validation_arg_expressions: Optional[list[ValidationExpression]] = Field(default=[])
 
 
 class Contact(HasContextAliases):
@@ -1162,10 +1182,10 @@ class Contact(HasContextAliases):
         default=None, description="""Common human readable name"""
     )
     orcid: Optional[str] = Field(default=None)
-    contact_roles: Optional[list[ContactRole]] = Field(default=None)
+    contact_roles: Optional[list[ContactRole]] = Field(default=[])
     contact_email: Optional[str] = Field(default=None)
     contact_phone: Optional[str] = Field(default=None)
-    context_aliases: Optional[list[ContextAlias]] = Field(default=None)
+    context_aliases: Optional[list[ContextAlias]] = Field(default=[])
 
 
 class Stakeholder(HasTranslations, NamedThing):
@@ -1175,7 +1195,7 @@ class Stakeholder(HasTranslations, NamedThing):
 
     rorid: Optional[str] = Field(default=None)
     geographic_scope: Optional[str] = Field(default=None)
-    translations: Optional[list[Translation]] = Field(default=None)
+    translations: Optional[list[Translation]] = Field(default=[])
     id: str = Field(
         default=...,
         description="""Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).""",
@@ -1211,9 +1231,9 @@ class ProjectStakeholder(HasTranslations):
     """
 
     stakeholder: Optional[str] = Field(default=None)
-    project_roles: Optional[list[ProjectRole]] = Field(default=None)
-    contacts: Optional[list[Contact]] = Field(default=None)
-    translations: Optional[list[Translation]] = Field(default=None)
+    project_roles: Optional[list[ProjectRole]] = Field(default=[])
+    contacts: Optional[list[Contact]] = Field(default=[])
+    translations: Optional[list[Translation]] = Field(default=[])
 
 
 class StudyEntity(NamedThing):
@@ -1222,7 +1242,7 @@ class StudyEntity(NamedThing):
     """
 
     physical_entity: Optional[str] = Field(default=None)
-    study_entity_links: Optional[list[StudyEntityLink]] = Field(default=None)
+    study_entity_links: Optional[list[StudyEntityLink]] = Field(default=[])
     id: str = Field(
         default=...,
         description="""Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).""",
@@ -1258,14 +1278,14 @@ class Project(StudyEntity, HasTranslations, HasContextAliases):
     """
 
     default_language: Optional[str] = Field(default=None)
-    project_stakeholders: Optional[list[ProjectStakeholder]] = Field(default=None)
+    project_stakeholders: Optional[list[ProjectStakeholder]] = Field(default=[])
     start_date: Optional[date] = Field(default=None)
     end_date: Optional[date] = Field(default=None)
-    study_id_list: Optional[list[str]] = Field(default=None)
-    translations: Optional[list[Translation]] = Field(default=None)
-    context_aliases: Optional[list[ContextAlias]] = Field(default=None)
+    study_id_list: Optional[list[str]] = Field(default=[])
+    translations: Optional[list[Translation]] = Field(default=[])
+    context_aliases: Optional[list[ContextAlias]] = Field(default=[])
     physical_entity: Optional[str] = Field(default=None)
-    study_entity_links: Optional[list[StudyEntityLink]] = Field(default=None)
+    study_entity_links: Optional[list[StudyEntityLink]] = Field(default=[])
     id: str = Field(
         default=...,
         description="""Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).""",
@@ -1310,16 +1330,16 @@ class Study(StudyEntity, HasTranslations, HasContextAliases):
     """
 
     default_language: Optional[str] = Field(default=None)
-    study_stakeholders: Optional[list[StudyStakeholder]] = Field(default=None)
+    study_stakeholders: Optional[list[StudyStakeholder]] = Field(default=[])
     start_date: Optional[date] = Field(default=None)
     end_date: Optional[date] = Field(default=None)
-    observation_group_id_list: Optional[list[str]] = Field(default=None)
-    study_entity_id_list: Optional[list[str]] = Field(default=None)
-    project_id_list: Optional[list[str]] = Field(default=None)
-    translations: Optional[list[Translation]] = Field(default=None)
-    context_aliases: Optional[list[ContextAlias]] = Field(default=None)
+    observation_group_id_list: Optional[list[str]] = Field(default=[])
+    study_entity_id_list: Optional[list[str]] = Field(default=[])
+    project_id_list: Optional[list[str]] = Field(default=[])
+    translations: Optional[list[Translation]] = Field(default=[])
+    context_aliases: Optional[list[ContextAlias]] = Field(default=[])
     physical_entity: Optional[str] = Field(default=None)
-    study_entity_links: Optional[list[StudyEntityLink]] = Field(default=None)
+    study_entity_links: Optional[list[StudyEntityLink]] = Field(default=[])
     id: str = Field(
         default=...,
         description="""Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).""",
@@ -1355,8 +1375,8 @@ class StudyStakeholder(ConfiguredBaseModel):
     """
 
     stakeholder: Optional[str] = Field(default=None)
-    study_roles: Optional[list[StudyRole]] = Field(default=None)
-    contacts: Optional[list[Contact]] = Field(default=None)
+    study_roles: Optional[list[StudyRole]] = Field(default=[])
+    contacts: Optional[list[Contact]] = Field(default=[])
 
 
 class ObservationGroup(StudyEntity):
@@ -1367,9 +1387,9 @@ class ObservationGroup(StudyEntity):
     sort_order: Optional[Decimal] = Field(default=None)
     start_date: Optional[date] = Field(default=None)
     end_date: Optional[date] = Field(default=None)
-    observation_id_list: Optional[list[str]] = Field(default=None)
+    observation_id_list: Optional[list[str]] = Field(default=[])
     physical_entity: Optional[str] = Field(default=None)
-    study_entity_links: Optional[list[StudyEntityLink]] = Field(default=None)
+    study_entity_links: Optional[list[StudyEntityLink]] = Field(default=[])
     id: str = Field(
         default=...,
         description="""Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).""",
@@ -1405,9 +1425,9 @@ class StudyPopulation(StudyEntity):
     """
 
     research_population_type: Optional[ResearchPopulationType] = Field(default=None)
-    member_id_list: Optional[list[str]] = Field(default=None)
+    member_id_list: Optional[list[str]] = Field(default=[])
     physical_entity: Optional[str] = Field(default=None)
-    study_entity_links: Optional[list[StudyEntityLink]] = Field(default=None)
+    study_entity_links: Optional[list[StudyEntityLink]] = Field(default=[])
     id: str = Field(
         default=...,
         description="""Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).""",
@@ -1443,10 +1463,10 @@ class SampleCollection(StudyEntity):
     """
 
     matrix: Optional[str] = Field(default=None)
-    constraints: Optional[list[str]] = Field(default=None)
-    sample_id_list: Optional[list[str]] = Field(default=None)
+    constraints: Optional[list[str]] = Field(default=[])
+    sample_id_list: Optional[list[str]] = Field(default=[])
     physical_entity: Optional[str] = Field(default=None)
-    study_entity_links: Optional[list[StudyEntityLink]] = Field(default=None)
+    study_entity_links: Optional[list[StudyEntityLink]] = Field(default=[])
     id: str = Field(
         default=...,
         description="""Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).""",
@@ -1482,7 +1502,7 @@ class StudySubject(StudyEntity):
     """
 
     physical_entity: Optional[str] = Field(default=None)
-    study_entity_links: Optional[list[StudyEntityLink]] = Field(default=None)
+    study_entity_links: Optional[list[StudyEntityLink]] = Field(default=[])
     id: str = Field(
         default=...,
         description="""Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).""",
@@ -1518,7 +1538,7 @@ class StudySubjectGroup(StudyEntity):
     """
 
     physical_entity: Optional[str] = Field(default=None)
-    study_entity_links: Optional[list[StudyEntityLink]] = Field(default=None)
+    study_entity_links: Optional[list[StudyEntityLink]] = Field(default=[])
     id: str = Field(
         default=...,
         description="""Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).""",
@@ -1555,7 +1575,7 @@ class Observation(NamedThing):
 
     observation_type: Optional[ObservationType] = Field(default=None)
     observation_design: Optional[ObservationDesign] = Field(default=None)
-    observation_result_id_list: Optional[list[str]] = Field(default=None)
+    observation_result_id_list: Optional[list[str]] = Field(default=[])
     id: str = Field(
         default=...,
         description="""Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).""",
@@ -1592,10 +1612,10 @@ class ObservationDesign(ConfiguredBaseModel):
 
     observation_result_type: Optional[ObservationResultType] = Field(default=None)
     observable_entity_type: Optional[ObservableEntityType] = Field(default=None)
-    observable_entity_id_list: Optional[list[str]] = Field(default=None)
-    identifying_observable_property_id_list: Optional[list[str]] = Field(default=None)
-    required_observable_property_id_list: Optional[list[str]] = Field(default=None)
-    optional_observable_property_id_list: Optional[list[str]] = Field(default=None)
+    observable_entity_id_list: Optional[list[str]] = Field(default=[])
+    identifying_observable_property_id_list: Optional[list[str]] = Field(default=[])
+    required_observable_property_id_list: Optional[list[str]] = Field(default=[])
+    optional_observable_property_id_list: Optional[list[str]] = Field(default=[])
 
 
 class ObservationResult(NamedThing):
@@ -1606,7 +1626,7 @@ class ObservationResult(NamedThing):
     observation_result_type: Optional[ObservationResultType] = Field(default=None)
     observation_start_date: Optional[date] = Field(default=None)
     observation_end_date: Optional[date] = Field(default=None)
-    observed_values: Optional[list[ObservedValue]] = Field(default=None)
+    observed_values: Optional[list[ObservedValue]] = Field(default=[])
     id: str = Field(
         default=...,
         description="""Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).""",
@@ -1653,8 +1673,8 @@ class ObservedValue(ConfiguredBaseModel):
     value: Optional[str] = Field(default=None)
     unit: Optional[str] = Field(default=None)
     value_as_string: Optional[str] = Field(default=None)
-    quality_data: Optional[list[QualityData]] = Field(default=None)
-    provenance_data: Optional[list[ProvenanceData]] = Field(default=None)
+    quality_data: Optional[list[QualityData]] = Field(default=[])
+    provenance_data: Optional[list[ProvenanceData]] = Field(default=[])
 
 
 class QualityData(ConfiguredBaseModel):
@@ -1680,7 +1700,7 @@ class DataLayout(NamedThing):
     Layout, allowing the definition of templating sections for combining layout and data elements
     """
 
-    sections: Optional[list[DataLayoutSection]] = Field(default=None)
+    sections: Optional[list[DataLayoutSection]] = Field(default=[])
     id: str = Field(
         default=...,
         description="""Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).""",
@@ -1717,7 +1737,7 @@ class DataLayoutSection(NamedThing):
 
     section_type: Optional[DataLayoutSectionType] = Field(default=None)
     observable_entity_type: Optional[ObservableEntityType] = Field(default=None)
-    elements: Optional[list[DataLayoutElement]] = Field(default=None)
+    elements: Optional[list[DataLayoutElement]] = Field(default=[])
     id: str = Field(
         default=...,
         description="""Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).""",
@@ -1811,7 +1831,7 @@ class DataImportSectionMapping(ConfiguredBaseModel):
     """
 
     section_mapping_links: Optional[list[DataImportSectionMappingLink]] = Field(
-        default=None
+        default=[]
     )
 
 
@@ -1821,7 +1841,7 @@ class DataImportSectionMappingLink(ConfiguredBaseModel):
     """
 
     section: Optional[str] = Field(default=None)
-    observation_id_list: Optional[list[str]] = Field(default=None)
+    observation_id_list: Optional[list[str]] = Field(default=[])
 
 
 class DataRequest(NamedThing):
@@ -1829,18 +1849,18 @@ class DataRequest(NamedThing):
     Registration of a request for data by a data user
     """
 
-    contacts: Optional[list[Contact]] = Field(default=None)
+    contacts: Optional[list[Contact]] = Field(default=[])
     request_properties: Optional[str] = Field(default=None)
-    data_stakeholders: Optional[list[str]] = Field(default=None)
-    research_objectives: Optional[list[str]] = Field(default=None)
-    processing_actions: Optional[list[str]] = Field(default=None)
-    processing_steps: Optional[list[str]] = Field(default=None)
+    data_stakeholders: Optional[list[str]] = Field(default=[])
+    research_objectives: Optional[list[str]] = Field(default=[])
+    processing_actions: Optional[list[str]] = Field(default=[])
+    processing_steps: Optional[list[str]] = Field(default=[])
     remark_on_content: Optional[str] = Field(default=None)
     remark_on_methodology: Optional[str] = Field(default=None)
     observed_entity_properties: Optional[list[ObservedEntityProperty]] = Field(
-        default=None
+        default=[]
     )
-    observation_designs: Optional[list[ObservationDesign]] = Field(default=None)
+    observation_designs: Optional[list[ObservationDesign]] = Field(default=[])
     id: str = Field(
         default=...,
         description="""Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).""",
@@ -1885,8 +1905,8 @@ class DataStakeholder(NamedThing):
     """
 
     stakeholder: Optional[str] = Field(default=None)
-    data_roles: Optional[list[DataRole]] = Field(default=None)
-    contacts: Optional[list[Contact]] = Field(default=None)
+    data_roles: Optional[list[DataRole]] = Field(default=[])
+    contacts: Optional[list[Contact]] = Field(default=[])
     processing_description: Optional[str] = Field(default=None)
     id: str = Field(
         default=...,
@@ -1923,7 +1943,7 @@ class ResearchObjective(NamedThing):
     """
 
     objective_type: Optional[ObjectiveType] = Field(default=None)
-    authors: Optional[list[str]] = Field(default=None)
+    authors: Optional[list[str]] = Field(default=[])
     id: str = Field(
         default=...,
         description="""Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).""",
@@ -2028,7 +2048,7 @@ class DataExtract(ConfiguredBaseModel):
     A set of Observed Values, combined into a data extract
     """
 
-    observed_values: Optional[list[ObservedValue]] = Field(default=None)
+    observed_values: Optional[list[ObservedValue]] = Field(default=[])
 
 
 # Model rebuild
