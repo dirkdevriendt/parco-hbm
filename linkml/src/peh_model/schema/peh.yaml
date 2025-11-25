@@ -3,7 +3,7 @@ name: PEH-Model
 description: |-
   Entity and relation ontology and datamodel for Personal Exposure and Health data
 
-version: 0.3.0
+version: 0.3.1
 
 imports:
   - linkml:types
@@ -556,6 +556,7 @@ classes:
       - section_type
       - observable_entity_type
       - elements
+      - validation_designs
   DataLayoutElement:
     description: >-
       Definition for an individual layout or data element, as part of a layout section

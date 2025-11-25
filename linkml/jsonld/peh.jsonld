@@ -2,7 +2,7 @@
   "name": "PEH-Model",
   "description": "Entity and relation ontology and datamodel for Personal Exposure and Health data",
   "id": "https://w3id.org/peh/peh-model",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "imports": [
     "linkml:types"
   ],
@@ -2200,9 +2200,10 @@
       "definition_uri": "https://w3id.org/peh/terms/validation_designs",
       "from_schema": "https://w3id.org/peh/peh-model",
       "slot_uri": "https://w3id.org/peh/terms/validation_designs",
-      "owner": "ObservableProperty",
+      "owner": "DataLayoutSection",
       "domain_of": [
-        "ObservableProperty"
+        "ObservableProperty",
+        "DataLayoutSection"
       ],
       "range": "ValidationDesign",
       "multivalued": true,
@@ -4945,7 +4946,8 @@
         "remark",
         "section_type",
         "observable_entity_type",
-        "elements"
+        "elements",
+        "validation_designs"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/peh/terms/DataLayoutSection",
@@ -5168,9 +5170,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "peh.yaml",
-  "source_file_date": "2025-11-04T10:45:04",
-  "source_file_size": 37933,
-  "generation_date": "2025-11-04T10:45:28",
+  "source_file_date": "2025-11-25T14:36:00",
+  "source_file_size": 37960,
+  "generation_date": "2025-11-25T14:36:21",
   "@type": "SchemaDefinition",
   "@context": [
     "_temp/jsonld/peh.context.jsonld",

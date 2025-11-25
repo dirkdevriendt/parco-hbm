@@ -20,7 +20,7 @@ from pydantic import (
 
 
 metamodel_version = "None"
-version = "0.3.0"
+version = "0.3.1"
 
 
 class ConfiguredBaseModel(BaseModel):
@@ -1738,6 +1738,7 @@ class DataLayoutSection(NamedThing):
     section_type: Optional[DataLayoutSectionType] = Field(default=None)
     observable_entity_type: Optional[ObservableEntityType] = Field(default=None)
     elements: Optional[list[DataLayoutElement]] = Field(default=[])
+    validation_designs: Optional[list[ValidationDesign]] = Field(default=[])
     id: str = Field(
         default=...,
         description="""Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).""",

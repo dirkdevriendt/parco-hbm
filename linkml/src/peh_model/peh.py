@@ -1,5 +1,5 @@
 # Auto generated from peh.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-11-04T10:45:28
+# Generation date: 2025-11-25T14:36:21
 # Schema: PEH-Model
 #
 # id: https://w3id.org/peh/peh-model
@@ -42,7 +42,7 @@ from linkml_runtime.linkml_model.types import (
 from linkml_runtime.utils.metamodelcore import Bool, Decimal, XSDDate, XSDDateTime
 
 metamodel_version = "1.7.0"
-version = "0.3.0"
+version = "0.3.1"
 
 # Namespaces
 IOP = CurieNamespace("iop", "https://w3id.org/iadopt/ont/")
@@ -3343,6 +3343,9 @@ class DataLayoutSection(NamedThing):
     elements: Optional[
         Union[Union[dict, "DataLayoutElement"], list[Union[dict, "DataLayoutElement"]]]
     ] = empty_list()
+    validation_designs: Optional[
+        Union[Union[dict, ValidationDesign], list[Union[dict, ValidationDesign]]]
+    ] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
@@ -3367,6 +3370,15 @@ class DataLayoutSection(NamedThing):
         self.elements = [
             v if isinstance(v, DataLayoutElement) else DataLayoutElement(**as_dict(v))
             for v in self.elements
+        ]
+
+        if not isinstance(self.validation_designs, list):
+            self.validation_designs = (
+                [self.validation_designs] if self.validation_designs is not None else []
+            )
+        self.validation_designs = [
+            v if isinstance(v, ValidationDesign) else ValidationDesign(**as_dict(v))
+            for v in self.validation_designs
         ]
 
         super().__post_init__(**kwargs)
