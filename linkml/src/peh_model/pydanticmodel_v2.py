@@ -20,7 +20,7 @@ from pydantic import (
 
 
 metamodel_version = "None"
-version = "0.3.1"
+version = "0.3.2"
 
 
 class ConfiguredBaseModel(BaseModel):
@@ -1103,21 +1103,8 @@ class CalculationImplementation(ConfiguredBaseModel):
     """
 
     function_name: Optional[str] = Field(default=None)
-    function_args: Optional[list[CalculationArgument]] = Field(default=[])
     function_kwargs: Optional[list[CalculationKeywordArgument]] = Field(default=[])
     function_results: Optional[list[CalculationResult]] = Field(default=[])
-
-
-class CalculationArgument(ConfiguredBaseModel):
-    """
-    The definition of a positional argument used in the calculation, including the information needed to pick it from the project or study data structure
-    """
-
-    source_path: Optional[str] = Field(default=None)
-    process_state: Optional[str] = Field(default=None)
-    imputation_state: Optional[str] = Field(default=None)
-    value_type: Optional[str] = Field(default=None)
-    unit: Optional[str] = Field(default=None)
 
 
 class CalculationKeywordArgument(ConfiguredBaseModel):
@@ -1126,11 +1113,12 @@ class CalculationKeywordArgument(ConfiguredBaseModel):
     """
 
     mapping_name: Optional[str] = Field(default=None)
-    source_path: Optional[str] = Field(default=None)
     process_state: Optional[str] = Field(default=None)
     imputation_state: Optional[str] = Field(default=None)
     value_type: Optional[str] = Field(default=None)
     unit: Optional[str] = Field(default=None)
+    observable_property: Optional[str] = Field(default=None)
+    contextual_field_reference: Optional[ContextualFieldReference] = Field(default=None)
 
 
 class CalculationResult(ConfiguredBaseModel):
@@ -1143,7 +1131,8 @@ class CalculationResult(ConfiguredBaseModel):
     unit: Optional[str] = Field(default=None)
     round_decimals: Optional[int] = Field(default=None)
     scale_factor: Optional[Decimal] = Field(default=None)
-    destination_path: Optional[str] = Field(default=None)
+    observable_property: Optional[str] = Field(default=None)
+    contextual_field_reference: Optional[ContextualFieldReference] = Field(default=None)
 
 
 class ValidationDesign(ConfiguredBaseModel):
@@ -1163,14 +1152,27 @@ class ValidationExpression(ConfiguredBaseModel):
     A logical expression, allowing for combining arguments into more complex validation rules
     """
 
-    validation_subject_source_paths: Optional[list[str]] = Field(default=[])
+    validation_subject_contextual_field_references: Optional[
+        list[ContextualFieldReference]
+    ] = Field(default=[])
     validation_condition_expression: Optional[ValidationExpression] = Field(
         default=None
     )
     validation_command: Optional[ValidationCommand] = Field(default=None)
     validation_arg_values: Optional[list[str]] = Field(default=[])
-    validation_arg_source_paths: Optional[list[str]] = Field(default=[])
+    validation_arg_contextual_field_references: Optional[
+        list[ContextualFieldReference]
+    ] = Field(default=[])
     validation_arg_expressions: Optional[list[ValidationExpression]] = Field(default=[])
+
+
+class ContextualFieldReference(ConfiguredBaseModel):
+    """
+    A two-level reference, identifying a field or column in a named series of two-dimensional datasets
+    """
+
+    dataset_label: Optional[str] = Field(default=None)
+    field_label: Optional[str] = Field(default=None)
 
 
 class Contact(HasContextAliases):
@@ -2085,11 +2087,11 @@ ObservablePropertyMetadataElement.model_rebuild()
 ObservablePropertyMetadataField.model_rebuild()
 CalculationDesign.model_rebuild()
 CalculationImplementation.model_rebuild()
-CalculationArgument.model_rebuild()
 CalculationKeywordArgument.model_rebuild()
 CalculationResult.model_rebuild()
 ValidationDesign.model_rebuild()
 ValidationExpression.model_rebuild()
+ContextualFieldReference.model_rebuild()
 Contact.model_rebuild()
 Stakeholder.model_rebuild()
 ProjectStakeholder.model_rebuild()

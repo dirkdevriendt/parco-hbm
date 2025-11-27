@@ -1,5 +1,5 @@
 # Auto generated from peh.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-11-25T14:36:21
+# Generation date: 2025-11-27T08:25:55
 # Schema: PEH-Model
 #
 # id: https://w3id.org/peh/peh-model
@@ -42,7 +42,7 @@ from linkml_runtime.linkml_model.types import (
 from linkml_runtime.utils.metamodelcore import Bool, Decimal, XSDDate, XSDDateTime
 
 metamodel_version = "1.7.0"
-version = "0.3.1"
+version = "0.3.2"
 
 # Namespaces
 IOP = CurieNamespace("iop", "https://w3id.org/iadopt/ont/")
@@ -1948,11 +1948,6 @@ class CalculationImplementation(YAMLRoot):
     class_model_uri: ClassVar[URIRef] = PEHTERMS.CalculationImplementation
 
     function_name: Optional[str] = None
-    function_args: Optional[
-        Union[
-            Union[dict, "CalculationArgument"], list[Union[dict, "CalculationArgument"]]
-        ]
-    ] = empty_list()
     function_kwargs: Optional[
         Union[
             Union[dict, "CalculationKeywordArgument"],
@@ -1966,19 +1961,6 @@ class CalculationImplementation(YAMLRoot):
     def __post_init__(self, *_: str, **kwargs: Any):
         if self.function_name is not None and not isinstance(self.function_name, str):
             self.function_name = str(self.function_name)
-
-        if not isinstance(self.function_args, list):
-            self.function_args = (
-                [self.function_args] if self.function_args is not None else []
-            )
-        self.function_args = [
-            (
-                v
-                if isinstance(v, CalculationArgument)
-                else CalculationArgument(**as_dict(v))
-            )
-            for v in self.function_args
-        ]
 
         if not isinstance(self.function_kwargs, list):
             self.function_kwargs = (
@@ -2006,47 +1988,6 @@ class CalculationImplementation(YAMLRoot):
 
 
 @dataclass(repr=False)
-class CalculationArgument(YAMLRoot):
-    """
-    The definition of a positional argument used in the calculation, including the information needed to pick it from
-    the project or study data structure
-    """
-
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = PEHTERMS["CalculationArgument"]
-    class_class_curie: ClassVar[str] = "pehterms:CalculationArgument"
-    class_name: ClassVar[str] = "CalculationArgument"
-    class_model_uri: ClassVar[URIRef] = PEHTERMS.CalculationArgument
-
-    source_path: Optional[str] = None
-    process_state: Optional[str] = None
-    imputation_state: Optional[str] = None
-    value_type: Optional[str] = None
-    unit: Optional[Union[str, UnitId]] = None
-
-    def __post_init__(self, *_: str, **kwargs: Any):
-        if self.source_path is not None and not isinstance(self.source_path, str):
-            self.source_path = str(self.source_path)
-
-        if self.process_state is not None and not isinstance(self.process_state, str):
-            self.process_state = str(self.process_state)
-
-        if self.imputation_state is not None and not isinstance(
-            self.imputation_state, str
-        ):
-            self.imputation_state = str(self.imputation_state)
-
-        if self.value_type is not None and not isinstance(self.value_type, str):
-            self.value_type = str(self.value_type)
-
-        if self.unit is not None and not isinstance(self.unit, UnitId):
-            self.unit = UnitId(self.unit)
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass(repr=False)
 class CalculationKeywordArgument(YAMLRoot):
     """
     The definition of a named argument used in the calculation, including the information needed to pick it from the
@@ -2061,18 +2002,16 @@ class CalculationKeywordArgument(YAMLRoot):
     class_model_uri: ClassVar[URIRef] = PEHTERMS.CalculationKeywordArgument
 
     mapping_name: Optional[str] = None
-    source_path: Optional[str] = None
     process_state: Optional[str] = None
     imputation_state: Optional[str] = None
     value_type: Optional[str] = None
     unit: Optional[Union[str, UnitId]] = None
+    observable_property: Optional[Union[str, ObservablePropertyId]] = None
+    contextual_field_reference: Optional[Union[dict, "ContextualFieldReference"]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self.mapping_name is not None and not isinstance(self.mapping_name, str):
             self.mapping_name = str(self.mapping_name)
-
-        if self.source_path is not None and not isinstance(self.source_path, str):
-            self.source_path = str(self.source_path)
 
         if self.process_state is not None and not isinstance(self.process_state, str):
             self.process_state = str(self.process_state)
@@ -2087,6 +2026,18 @@ class CalculationKeywordArgument(YAMLRoot):
 
         if self.unit is not None and not isinstance(self.unit, UnitId):
             self.unit = UnitId(self.unit)
+
+        if self.observable_property is not None and not isinstance(
+            self.observable_property, ObservablePropertyId
+        ):
+            self.observable_property = ObservablePropertyId(self.observable_property)
+
+        if self.contextual_field_reference is not None and not isinstance(
+            self.contextual_field_reference, ContextualFieldReference
+        ):
+            self.contextual_field_reference = ContextualFieldReference(
+                **as_dict(self.contextual_field_reference)
+            )
 
         super().__post_init__(**kwargs)
 
@@ -2109,7 +2060,8 @@ class CalculationResult(YAMLRoot):
     unit: Optional[Union[str, UnitId]] = None
     round_decimals: Optional[int] = None
     scale_factor: Optional[Decimal] = None
-    destination_path: Optional[str] = None
+    observable_property: Optional[Union[str, ObservablePropertyId]] = None
+    contextual_field_reference: Optional[Union[dict, "ContextualFieldReference"]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self.mapping_name is not None and not isinstance(self.mapping_name, str):
@@ -2127,10 +2079,17 @@ class CalculationResult(YAMLRoot):
         if self.scale_factor is not None and not isinstance(self.scale_factor, Decimal):
             self.scale_factor = Decimal(self.scale_factor)
 
-        if self.destination_path is not None and not isinstance(
-            self.destination_path, str
+        if self.observable_property is not None and not isinstance(
+            self.observable_property, ObservablePropertyId
         ):
-            self.destination_path = str(self.destination_path)
+            self.observable_property = ObservablePropertyId(self.observable_property)
+
+        if self.contextual_field_reference is not None and not isinstance(
+            self.contextual_field_reference, ContextualFieldReference
+        ):
+            self.contextual_field_reference = ContextualFieldReference(
+                **as_dict(self.contextual_field_reference)
+            )
 
         super().__post_init__(**kwargs)
 
@@ -2200,13 +2159,23 @@ class ValidationExpression(YAMLRoot):
     class_name: ClassVar[str] = "ValidationExpression"
     class_model_uri: ClassVar[URIRef] = PEHTERMS.ValidationExpression
 
-    validation_subject_source_paths: Optional[Union[str, list[str]]] = empty_list()
+    validation_subject_contextual_field_references: Optional[
+        Union[
+            Union[dict, "ContextualFieldReference"],
+            list[Union[dict, "ContextualFieldReference"]],
+        ]
+    ] = empty_list()
     validation_condition_expression: Optional[Union[dict, "ValidationExpression"]] = (
         None
     )
     validation_command: Optional[Union[str, "ValidationCommand"]] = None
     validation_arg_values: Optional[Union[str, list[str]]] = empty_list()
-    validation_arg_source_paths: Optional[Union[str, list[str]]] = empty_list()
+    validation_arg_contextual_field_references: Optional[
+        Union[
+            Union[dict, "ContextualFieldReference"],
+            list[Union[dict, "ContextualFieldReference"]],
+        ]
+    ] = empty_list()
     validation_arg_expressions: Optional[
         Union[
             Union[dict, "ValidationExpression"],
@@ -2215,15 +2184,19 @@ class ValidationExpression(YAMLRoot):
     ] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if not isinstance(self.validation_subject_source_paths, list):
-            self.validation_subject_source_paths = (
-                [self.validation_subject_source_paths]
-                if self.validation_subject_source_paths is not None
+        if not isinstance(self.validation_subject_contextual_field_references, list):
+            self.validation_subject_contextual_field_references = (
+                [self.validation_subject_contextual_field_references]
+                if self.validation_subject_contextual_field_references is not None
                 else []
             )
-        self.validation_subject_source_paths = [
-            v if isinstance(v, str) else str(v)
-            for v in self.validation_subject_source_paths
+        self.validation_subject_contextual_field_references = [
+            (
+                v
+                if isinstance(v, ContextualFieldReference)
+                else ContextualFieldReference(**as_dict(v))
+            )
+            for v in self.validation_subject_contextual_field_references
         ]
 
         if self.validation_condition_expression is not None and not isinstance(
@@ -2248,15 +2221,19 @@ class ValidationExpression(YAMLRoot):
             v if isinstance(v, str) else str(v) for v in self.validation_arg_values
         ]
 
-        if not isinstance(self.validation_arg_source_paths, list):
-            self.validation_arg_source_paths = (
-                [self.validation_arg_source_paths]
-                if self.validation_arg_source_paths is not None
+        if not isinstance(self.validation_arg_contextual_field_references, list):
+            self.validation_arg_contextual_field_references = (
+                [self.validation_arg_contextual_field_references]
+                if self.validation_arg_contextual_field_references is not None
                 else []
             )
-        self.validation_arg_source_paths = [
-            v if isinstance(v, str) else str(v)
-            for v in self.validation_arg_source_paths
+        self.validation_arg_contextual_field_references = [
+            (
+                v
+                if isinstance(v, ContextualFieldReference)
+                else ContextualFieldReference(**as_dict(v))
+            )
+            for v in self.validation_arg_contextual_field_references
         ]
 
         if not isinstance(self.validation_arg_expressions, list):
@@ -2273,6 +2250,32 @@ class ValidationExpression(YAMLRoot):
             )
             for v in self.validation_arg_expressions
         ]
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class ContextualFieldReference(YAMLRoot):
+    """
+    A two-level reference, identifying a field or column in a named series of two-dimensional datasets
+    """
+
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = PEHTERMS["ContextualFieldReference"]
+    class_class_curie: ClassVar[str] = "pehterms:ContextualFieldReference"
+    class_name: ClassVar[str] = "ContextualFieldReference"
+    class_model_uri: ClassVar[URIRef] = PEHTERMS.ContextualFieldReference
+
+    dataset_label: Optional[str] = None
+    field_label: Optional[str] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self.dataset_label is not None and not isinstance(self.dataset_label, str):
+            self.dataset_label = str(self.dataset_label)
+
+        if self.field_label is not None and not isinstance(self.field_label, str):
+            self.field_label = str(self.field_label)
 
         super().__post_init__(**kwargs)
 
@@ -5147,17 +5150,6 @@ slots.function_name = Slot(
     range=Optional[str],
 )
 
-slots.function_args = Slot(
-    uri=PEHTERMS.function_args,
-    name="function_args",
-    curie=PEHTERMS.curie("function_args"),
-    model_uri=PEHTERMS.function_args,
-    domain=None,
-    range=Optional[
-        Union[Union[dict, CalculationArgument], list[Union[dict, CalculationArgument]]]
-    ],
-)
-
 slots.function_kwargs = Slot(
     uri=PEHTERMS.function_kwargs,
     name="function_kwargs",
@@ -5239,13 +5231,18 @@ slots.validation_error_message_template = Slot(
     range=Optional[str],
 )
 
-slots.validation_subject_source_paths = Slot(
-    uri=PEHTERMS.validation_subject_source_paths,
-    name="validation_subject_source_paths",
-    curie=PEHTERMS.curie("validation_subject_source_paths"),
-    model_uri=PEHTERMS.validation_subject_source_paths,
+slots.validation_subject_contextual_field_references = Slot(
+    uri=PEHTERMS.validation_subject_contextual_field_references,
+    name="validation_subject_contextual_field_references",
+    curie=PEHTERMS.curie("validation_subject_contextual_field_references"),
+    model_uri=PEHTERMS.validation_subject_contextual_field_references,
     domain=None,
-    range=Optional[Union[str, list[str]]],
+    range=Optional[
+        Union[
+            Union[dict, ContextualFieldReference],
+            list[Union[dict, ContextualFieldReference]],
+        ]
+    ],
 )
 
 slots.validation_command = Slot(
@@ -5266,13 +5263,18 @@ slots.validation_arg_values = Slot(
     range=Optional[Union[str, list[str]]],
 )
 
-slots.validation_arg_source_paths = Slot(
-    uri=PEHTERMS.validation_arg_source_paths,
-    name="validation_arg_source_paths",
-    curie=PEHTERMS.curie("validation_arg_source_paths"),
-    model_uri=PEHTERMS.validation_arg_source_paths,
+slots.validation_arg_contextual_field_references = Slot(
+    uri=PEHTERMS.validation_arg_contextual_field_references,
+    name="validation_arg_contextual_field_references",
+    curie=PEHTERMS.curie("validation_arg_contextual_field_references"),
+    model_uri=PEHTERMS.validation_arg_contextual_field_references,
     domain=None,
-    range=Optional[Union[str, list[str]]],
+    range=Optional[
+        Union[
+            Union[dict, ContextualFieldReference],
+            list[Union[dict, ContextualFieldReference]],
+        ]
+    ],
 )
 
 slots.validation_arg_expressions = Slot(
@@ -5286,6 +5288,33 @@ slots.validation_arg_expressions = Slot(
             Union[dict, ValidationExpression], list[Union[dict, ValidationExpression]]
         ]
     ],
+)
+
+slots.contextual_field_reference = Slot(
+    uri=PEHTERMS.contextual_field_reference,
+    name="contextual_field_reference",
+    curie=PEHTERMS.curie("contextual_field_reference"),
+    model_uri=PEHTERMS.contextual_field_reference,
+    domain=None,
+    range=Optional[Union[dict, ContextualFieldReference]],
+)
+
+slots.dataset_label = Slot(
+    uri=PEHTERMS.dataset_label,
+    name="dataset_label",
+    curie=PEHTERMS.curie("dataset_label"),
+    model_uri=PEHTERMS.dataset_label,
+    domain=None,
+    range=Optional[str],
+)
+
+slots.field_label = Slot(
+    uri=PEHTERMS.field_label,
+    name="field_label",
+    curie=PEHTERMS.curie("field_label"),
+    model_uri=PEHTERMS.field_label,
+    domain=None,
+    range=Optional[str],
 )
 
 slots.process_state = Slot(
@@ -5311,24 +5340,6 @@ slots.mapping_name = Slot(
     name="mapping_name",
     curie=PEHTERMS.curie("mapping_name"),
     model_uri=PEHTERMS.mapping_name,
-    domain=None,
-    range=Optional[str],
-)
-
-slots.source_path = Slot(
-    uri=PEHTERMS.source_path,
-    name="source_path",
-    curie=PEHTERMS.curie("source_path"),
-    model_uri=PEHTERMS.source_path,
-    domain=None,
-    range=Optional[str],
-)
-
-slots.destination_path = Slot(
-    uri=PEHTERMS.destination_path,
-    name="destination_path",
-    curie=PEHTERMS.curie("destination_path"),
-    model_uri=PEHTERMS.destination_path,
     domain=None,
     range=Optional[str],
 )

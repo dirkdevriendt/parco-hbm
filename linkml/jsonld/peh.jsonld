@@ -2,7 +2,7 @@
   "name": "PEH-Model",
   "description": "Entity and relation ontology and datamodel for Personal Exposure and Health data",
   "id": "https://w3id.org/peh/peh-model",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "imports": [
     "linkml:types"
   ],
@@ -1937,7 +1937,6 @@
       "domain_of": [
         "ObservableProperty",
         "ObservablePropertyMetadataField",
-        "CalculationArgument",
         "CalculationKeywordArgument",
         "CalculationResult"
       ],
@@ -2151,21 +2150,6 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "function_args",
-      "definition_uri": "https://w3id.org/peh/terms/function_args",
-      "from_schema": "https://w3id.org/peh/peh-model",
-      "slot_uri": "https://w3id.org/peh/terms/function_args",
-      "owner": "CalculationImplementation",
-      "domain_of": [
-        "CalculationImplementation"
-      ],
-      "range": "CalculationArgument",
-      "multivalued": true,
-      "inlined": true,
-      "inlined_as_list": true,
-      "@type": "SlotDefinition"
-    },
-    {
       "name": "function_kwargs",
       "definition_uri": "https://w3id.org/peh/terms/function_kwargs",
       "from_schema": "https://w3id.org/peh/peh-model",
@@ -2276,16 +2260,18 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "validation_subject_source_paths",
-      "definition_uri": "https://w3id.org/peh/terms/validation_subject_source_paths",
+      "name": "validation_subject_contextual_field_references",
+      "definition_uri": "https://w3id.org/peh/terms/validation_subject_contextual_field_references",
       "from_schema": "https://w3id.org/peh/peh-model",
-      "slot_uri": "https://w3id.org/peh/terms/validation_subject_source_paths",
+      "slot_uri": "https://w3id.org/peh/terms/validation_subject_contextual_field_references",
       "owner": "ValidationExpression",
       "domain_of": [
         "ValidationExpression"
       ],
-      "range": "string",
+      "range": "ContextualFieldReference",
       "multivalued": true,
+      "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -2314,16 +2300,18 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "validation_arg_source_paths",
-      "definition_uri": "https://w3id.org/peh/terms/validation_arg_source_paths",
+      "name": "validation_arg_contextual_field_references",
+      "definition_uri": "https://w3id.org/peh/terms/validation_arg_contextual_field_references",
       "from_schema": "https://w3id.org/peh/peh-model",
-      "slot_uri": "https://w3id.org/peh/terms/validation_arg_source_paths",
+      "slot_uri": "https://w3id.org/peh/terms/validation_arg_contextual_field_references",
       "owner": "ValidationExpression",
       "domain_of": [
         "ValidationExpression"
       ],
-      "range": "string",
+      "range": "ContextualFieldReference",
       "multivalued": true,
+      "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -2342,13 +2330,51 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "contextual_field_reference",
+      "definition_uri": "https://w3id.org/peh/terms/contextual_field_reference",
+      "from_schema": "https://w3id.org/peh/peh-model",
+      "slot_uri": "https://w3id.org/peh/terms/contextual_field_reference",
+      "owner": "CalculationResult",
+      "domain_of": [
+        "CalculationKeywordArgument",
+        "CalculationResult"
+      ],
+      "range": "ContextualFieldReference",
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "dataset_label",
+      "definition_uri": "https://w3id.org/peh/terms/dataset_label",
+      "from_schema": "https://w3id.org/peh/peh-model",
+      "slot_uri": "https://w3id.org/peh/terms/dataset_label",
+      "owner": "ContextualFieldReference",
+      "domain_of": [
+        "ContextualFieldReference"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "field_label",
+      "definition_uri": "https://w3id.org/peh/terms/field_label",
+      "from_schema": "https://w3id.org/peh/peh-model",
+      "slot_uri": "https://w3id.org/peh/terms/field_label",
+      "owner": "ContextualFieldReference",
+      "domain_of": [
+        "ContextualFieldReference"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "process_state",
       "definition_uri": "https://w3id.org/peh/terms/process_state",
       "from_schema": "https://w3id.org/peh/peh-model",
       "slot_uri": "https://w3id.org/peh/terms/process_state",
       "owner": "CalculationKeywordArgument",
       "domain_of": [
-        "CalculationArgument",
         "CalculationKeywordArgument"
       ],
       "range": "string",
@@ -2361,7 +2387,6 @@
       "slot_uri": "https://w3id.org/peh/terms/imputation_state",
       "owner": "CalculationKeywordArgument",
       "domain_of": [
-        "CalculationArgument",
         "CalculationKeywordArgument"
       ],
       "range": "string",
@@ -2375,31 +2400,6 @@
       "owner": "CalculationResult",
       "domain_of": [
         "CalculationKeywordArgument",
-        "CalculationResult"
-      ],
-      "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "source_path",
-      "definition_uri": "https://w3id.org/peh/terms/source_path",
-      "from_schema": "https://w3id.org/peh/peh-model",
-      "slot_uri": "https://w3id.org/peh/terms/source_path",
-      "owner": "CalculationKeywordArgument",
-      "domain_of": [
-        "CalculationArgument",
-        "CalculationKeywordArgument"
-      ],
-      "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "destination_path",
-      "definition_uri": "https://w3id.org/peh/terms/destination_path",
-      "from_schema": "https://w3id.org/peh/peh-model",
-      "slot_uri": "https://w3id.org/peh/terms/destination_path",
-      "owner": "CalculationResult",
-      "domain_of": [
         "CalculationResult"
       ],
       "range": "string",
@@ -3092,6 +3092,8 @@
       "slot_uri": "https://w3id.org/peh/terms/observable_property",
       "owner": "ObservedEntityProperty",
       "domain_of": [
+        "CalculationKeywordArgument",
+        "CalculationResult",
         "ObservedValue",
         "DataLayoutElement",
         "ObservedEntityProperty"
@@ -3123,7 +3125,6 @@
       "slot_uri": "https://w3id.org/peh/terms/unit",
       "owner": "ObservedValue",
       "domain_of": [
-        "CalculationArgument",
         "CalculationKeywordArgument",
         "CalculationResult",
         "ObservedValue"
@@ -4412,28 +4413,11 @@
       "from_schema": "https://w3id.org/peh/peh-model",
       "slots": [
         "function_name",
-        "function_args",
         "function_kwargs",
         "function_results"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/peh/terms/CalculationImplementation",
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "CalculationArgument",
-      "definition_uri": "https://w3id.org/peh/terms/CalculationArgument",
-      "description": "The definition of a positional argument used in the calculation, including the information needed to pick it from the project or study data structure",
-      "from_schema": "https://w3id.org/peh/peh-model",
-      "slots": [
-        "source_path",
-        "process_state",
-        "imputation_state",
-        "value_type",
-        "unit"
-      ],
-      "slot_usage": {},
-      "class_uri": "https://w3id.org/peh/terms/CalculationArgument",
       "@type": "ClassDefinition"
     },
     {
@@ -4443,11 +4427,12 @@
       "from_schema": "https://w3id.org/peh/peh-model",
       "slots": [
         "mapping_name",
-        "source_path",
         "process_state",
         "imputation_state",
         "value_type",
-        "unit"
+        "unit",
+        "observable_property",
+        "contextual_field_reference"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/peh/terms/CalculationKeywordArgument",
@@ -4464,7 +4449,8 @@
         "unit",
         "round_decimals",
         "scale_factor",
-        "destination_path"
+        "observable_property",
+        "contextual_field_reference"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/peh/terms/CalculationResult",
@@ -4492,15 +4478,28 @@
       "description": "A logical expression, allowing for combining arguments into more complex validation rules",
       "from_schema": "https://w3id.org/peh/peh-model",
       "slots": [
-        "validation_subject_source_paths",
+        "validation_subject_contextual_field_references",
         "validation_condition_expression",
         "validation_command",
         "validation_arg_values",
-        "validation_arg_source_paths",
+        "validation_arg_contextual_field_references",
         "validation_arg_expressions"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/peh/terms/ValidationExpression",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ContextualFieldReference",
+      "definition_uri": "https://w3id.org/peh/terms/ContextualFieldReference",
+      "description": "A two-level reference, identifying a field or column in a named series of two-dimensional datasets",
+      "from_schema": "https://w3id.org/peh/peh-model",
+      "slots": [
+        "dataset_label",
+        "field_label"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/peh/terms/ContextualFieldReference",
       "@type": "ClassDefinition"
     },
     {
@@ -5170,9 +5169,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "peh.yaml",
-  "source_file_date": "2025-11-25T14:36:00",
-  "source_file_size": 37960,
-  "generation_date": "2025-11-25T14:36:21",
+  "source_file_date": "2025-11-27T08:25:35",
+  "source_file_size": 38086,
+  "generation_date": "2025-11-27T08:25:55",
   "@type": "SchemaDefinition",
   "@context": [
     "_temp/jsonld/peh.context.jsonld",
