@@ -78,8 +78,6 @@ classes:
       - HasContextAliases
       - HasTranslations
     slots:
-      - sort_order
-      - abstract
       - parent_grouping_id_list
 
   HasValidationStatus:
@@ -137,8 +135,6 @@ classes:
       A unit of measurement, a quantity chosen as a standard in terms of which other quantities may be expressed
     is_a: NamedThing
     mixins:
-      - HasAliases
-      - HasContextAliases
       - HasTranslations
       - HasValidationStatus
     slots:
@@ -183,10 +179,7 @@ classes:
       - HasContextAliases
       - HasTranslations
     slots:
-      - sort_order
-      - aggregation_target
       - parent_matrix
-      - secondary_parent_matrix_id_list
   Indicator:
     description: >-
       Any measurable or observable variable that can describe data or context in the Personal Exposure and Health domain
@@ -274,14 +267,14 @@ classes:
       - value_options
       - value_metadata
       - quantity_kind
-      - default_unit
-      - default_unit_label
-      - default_required
-      - default_zeroallowed
-      - default_significantdecimals
-      - default_immutable
+      - unit
+      - unit_label
+      - required
+      - zeroallowed
+      - significantdecimals
+      - immutable
       - grouping_id_list
-      - default_observation_result_type
+      - observation_result_type
       - relevant_observable_entity_types
       - relevant_observation_types
       - indicator
@@ -453,7 +446,6 @@ classes:
       A grouped collection of observations, intended and/or executed, as part of a Personal Exposure and Health research study
     is_a: StudyEntity
     slots:
-      - sort_order
       - start_date
       - end_date
       - observation_id_list
@@ -515,7 +507,6 @@ classes:
     slots:
       - observable_entity
       - observable_property
-      - default_unit
       - raw_value
       - raw_unit
       - imputed_value
@@ -759,16 +750,9 @@ slots:
   validation_institute:
   validation_remark:
 
-  sort_order:
-    range: decimal
-  aggregation_target:
-    range: boolean
   parent_matrix:
     range: Matrix
     slot_uri: skos:broader
-  secondary_parent_matrix_id_list:
-    multivalued: true
-    range: Matrix
   indicator_type:
     range: IndicatorType
   property:
@@ -780,8 +764,6 @@ slots:
     range: Matrix
   constraints:
     multivalued: true
-  default_observation_result_type:
-    range: ObservationResultType
   relevant_observable_entity_types:
     multivalued: true
     range: ObservableEntityType
@@ -801,8 +783,6 @@ slots:
     range: boolean
   multivalued:
     range: boolean
-  abstract:
-    range: boolean
   value_type:
   value_metadata:
     multivalued: true
@@ -812,15 +792,16 @@ slots:
     multivalued: true
     inlined_as_list: true
     range: ObservablePropertyValueOption
-  default_required:
+  required:
     range: boolean
-  default_zeroallowed:
+  zeroallowed:
     range: boolean
-  default_significantdecimals:
+  significantdecimals:
+    description: Variable precision indication, expressed as the number of significant decimals
     range: integer
-  default_unit:
-  default_unit_label:
-  default_immutable:
+  unit_label:
+  immutable:
+    description: Variable values are not expected to change over time (e.g. birthdate of a person)
     range: boolean
   relevant_observation_types:
     multivalued: true
@@ -1046,10 +1027,13 @@ slots:
     range: Unit
   raw_value:
   raw_unit:
+    range: Unit
   imputed_value:
   imputed_unit:
+    range: Unit
   normalised_value:
   normalised_unit:
+    range: Unit
   value_as_string:
   quality_data:
     multivalued: true
