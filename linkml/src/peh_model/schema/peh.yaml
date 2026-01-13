@@ -13,6 +13,7 @@ prefixes:
   peh: https://w3id.org/peh/
   linkml: https://w3id.org/linkml/
   schema: http://schema.org/
+  wikidata: https://www.wikidata.org/wiki/
   rdfs: http://www.w3.org/2000/01/rdf-schema#
   skos: http://www.w3.org/2004/02/skos/core#
   prov: http://www.w3.org/ns/prov#
@@ -1208,19 +1209,58 @@ enums:
   ObservableEntityType:
     permissible_values:
       project:
+        exact_mappings:
+        - schema:Project
+        - wikidata:Q170584
       organisation:
+        exact_mappings:
+        - schema:Organization
+        - wikidata:Q43229
       study:
+        exact_mappings:
+        - schema:study
+        - wikidata:Q124222085 #scientific study
       environment:
+        exact_mappings:
+        - wikidata:Q2249676
       location:
+        exact_mappings:
+        - schema:location
+        - wikidata:Q2221906 #geographic location
+        - wikidata:Q17334923 #physical location
       persongroup:
+        exact_mappings:
+        - wikidata:Q134601727
+        broad_mappings:
+        - schema:Collection
+        - wikidata:Q2668072
       person:
+        exact_mappings:
+        - schema:Person
+        - wikidata:Q215627
       samplegroup:
+        broad_mappings:
+        - schema:Collection
+        - wikidata:Q2668072
       sample:
+        exact_mappings:
+        - wikidata:Q485146
       dataset:
+        exact_mappings:
+        - schema:Dataset
+        - wikidata:Q1172284
       collection_process:
+        exact_mappings:
+        - wikidata:Q104595226 #sample collection
       lab_analysis_process:
+        exact_mappings:
+        - wikidata:Q9150363 #chemical analysis
       model_execution_process:
+        exact_mappings:
+        - wikidata:Q1077724 #execution
       data_process:
+        exact_mappings:
+        - wikidata:Q6661985 #data processing
   ObservationType:
     permissible_values:
       sampling:

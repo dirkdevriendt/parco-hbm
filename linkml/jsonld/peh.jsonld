@@ -25,6 +25,10 @@
       "prefix_reference": "http://schema.org/"
     },
     {
+      "prefix_prefix": "wikidata",
+      "prefix_reference": "https://www.wikidata.org/wiki/"
+    },
+    {
       "prefix_prefix": "rdfs",
       "prefix_reference": "http://www.w3.org/2000/01/rdf-schema#"
     },
@@ -568,46 +572,100 @@
       "from_schema": "https://w3id.org/peh/peh-model",
       "permissible_values": [
         {
-          "text": "project"
+          "text": "project",
+          "exact_mappings": [
+            "schema:Project",
+            "wikidata:Q170584"
+          ]
         },
         {
-          "text": "organisation"
+          "text": "organisation",
+          "exact_mappings": [
+            "schema:Organization",
+            "wikidata:Q43229"
+          ]
         },
         {
-          "text": "study"
+          "text": "study",
+          "exact_mappings": [
+            "schema:study",
+            "wikidata:Q124222085"
+          ]
         },
         {
-          "text": "environment"
+          "text": "environment",
+          "exact_mappings": [
+            "wikidata:Q2249676"
+          ]
         },
         {
-          "text": "location"
+          "text": "location",
+          "exact_mappings": [
+            "schema:location",
+            "wikidata:Q2221906",
+            "wikidata:Q17334923"
+          ]
         },
         {
-          "text": "persongroup"
+          "text": "persongroup",
+          "exact_mappings": [
+            "wikidata:Q134601727"
+          ],
+          "broad_mappings": [
+            "schema:Collection",
+            "wikidata:Q2668072"
+          ]
         },
         {
-          "text": "person"
+          "text": "person",
+          "exact_mappings": [
+            "schema:Person",
+            "wikidata:Q215627"
+          ]
         },
         {
-          "text": "samplegroup"
+          "text": "samplegroup",
+          "broad_mappings": [
+            "schema:Collection",
+            "wikidata:Q2668072"
+          ]
         },
         {
-          "text": "sample"
+          "text": "sample",
+          "exact_mappings": [
+            "wikidata:Q485146"
+          ]
         },
         {
-          "text": "dataset"
+          "text": "dataset",
+          "exact_mappings": [
+            "schema:Dataset",
+            "wikidata:Q1172284"
+          ]
         },
         {
-          "text": "collection_process"
+          "text": "collection_process",
+          "exact_mappings": [
+            "wikidata:Q104595226"
+          ]
         },
         {
-          "text": "lab_analysis_process"
+          "text": "lab_analysis_process",
+          "exact_mappings": [
+            "wikidata:Q9150363"
+          ]
         },
         {
-          "text": "model_execution_process"
+          "text": "model_execution_process",
+          "exact_mappings": [
+            "wikidata:Q1077724"
+          ]
         },
         {
-          "text": "data_process"
+          "text": "data_process",
+          "exact_mappings": [
+            "wikidata:Q6661985"
+          ]
         }
       ]
     },
@@ -5086,9 +5144,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "peh.yaml",
-  "source_file_date": "2026-01-13T13:39:30",
-  "source_file_size": 37762,
-  "generation_date": "2026-01-13T13:39:54",
+  "source_file_date": "2026-01-13T13:44:19",
+  "source_file_size": 38948,
+  "generation_date": "2026-01-13T13:44:43",
   "@type": "SchemaDefinition",
   "@context": [
     "_temp/jsonld/peh.context.jsonld",

@@ -14,28 +14,30 @@
     dcterms:license "https://creativecommons.org/publicdomain/zero/1.0/" ;
     pav:version "0.3.2" ;
     skos:definition "Entity and relation ontology and datamodel for Personal Exposure and Health data" ;
-    sh:declare [ sh:namespace <https://w3id.org/peh/> ;
-            sh:prefix "peh" ],
+    sh:declare [ sh:namespace <https://w3id.org/peh/terms/> ;
+            sh:prefix "pehterms" ],
+        [ sh:namespace <http://qudt.org/2.1/schema/qudt> ;
+            sh:prefix "qudt" ],
+        [ sh:namespace schema1: ;
+            sh:prefix "schema" ],
+        [ sh:namespace <https://www.wikidata.org/wiki/> ;
+            sh:prefix "wikidata" ],
         [ sh:namespace <http://qudt.org/2.1/vocab/quantitykind> ;
             sh:prefix "qudtqk" ],
+        [ sh:namespace skos: ;
+            sh:prefix "skos" ],
+        [ sh:namespace linkml: ;
+            sh:prefix "linkml" ],
         [ sh:namespace <https://w3id.org/iadopt/ont/> ;
             sh:prefix "iop" ],
         [ sh:namespace <https://qudt.org/vocab/unit/> ;
             sh:prefix "qudtunit" ],
-        [ sh:namespace <http://qudt.org/2.1/schema/qudt> ;
-            sh:prefix "qudt" ],
         [ sh:namespace rdfs: ;
             sh:prefix "rdfs" ],
-        [ sh:namespace <https://w3id.org/peh/terms/> ;
-            sh:prefix "pehterms" ],
-        [ sh:namespace skos: ;
-            sh:prefix "skos" ],
-        [ sh:namespace schema1: ;
-            sh:prefix "schema" ],
         [ sh:namespace prov: ;
             sh:prefix "prov" ],
-        [ sh:namespace linkml: ;
-            sh:prefix "linkml" ] ;
+        [ sh:namespace <https://w3id.org/peh/> ;
+            sh:prefix "peh" ] ;
     linkml:classes <https://w3id.org/peh/terms/BioChemEntity>,
         <https://w3id.org/peh/terms/BioChemEntityLink>,
         <https://w3id.org/peh/terms/BioChemIdentifier>,
@@ -127,7 +129,7 @@
         <https://w3id.org/peh/terms/ValidationCommand>,
         <https://w3id.org/peh/terms/ValidationErrorLevel>,
         <https://w3id.org/peh/terms/ValidationStatus> ;
-    linkml:generation_date "2026-01-13T13:39:58"^^xsd:dateTime ;
+    linkml:generation_date "2026-01-13T13:44:48"^^xsd:dateTime ;
     linkml:id <https://w3id.org/peh/peh-model> ;
     linkml:imports linkml:types ;
     linkml:metamodel_version "1.7.0" ;
@@ -320,8 +322,8 @@
         <https://w3id.org/peh/terms/web_uri>,
         <https://w3id.org/peh/terms/zeroallowed> ;
     linkml:source_file "peh.yaml" ;
-    linkml:source_file_date "2026-01-13T13:39:30"^^xsd:dateTime ;
-    linkml:source_file_size 37762 ;
+    linkml:source_file_date "2026-01-13T13:44:19"^^xsd:dateTime ;
+    linkml:source_file_size 38948 ;
     linkml:types <https://w3id.org/peh/terms/boolean>,
         <https://w3id.org/peh/terms/curie>,
         <https://w3id.org/peh/terms/date>,
@@ -492,6 +494,8 @@
 
 <https://w3id.org/peh/terms/YR> linkml:meaning <qudtunit:YR> .
 
+<https://w3id.org/peh/terms/collection_process> skos:exactMatch <wikidata:Q104595226> .
+
 <https://w3id.org/peh/terms/curie> a linkml:TypeDefinition ;
     dcterms:conformsTo "https://www.w3.org/TR/curie/" ;
     skos:definition "a compact URI" ;
@@ -504,6 +508,11 @@
     linkml:imported_from "linkml:types" ;
     linkml:repr "str" ;
     linkml:uri xsd:string .
+
+<https://w3id.org/peh/terms/data_process> skos:exactMatch <wikidata:Q6661985> .
+
+<https://w3id.org/peh/terms/dataset> skos:exactMatch schema1:Dataset,
+        <wikidata:Q1172284> .
 
 <https://w3id.org/peh/terms/date_or_datetime> a linkml:TypeDefinition ;
     skos:definition "Either a date or a datetime" ;
@@ -524,6 +533,8 @@
     linkml:definition_uri linkml:Double ;
     linkml:imported_from "linkml:types" ;
     linkml:uri xsd:double .
+
+<https://w3id.org/peh/terms/environment> skos:exactMatch <wikidata:Q2249676> .
 
 <https://w3id.org/peh/terms/float> a linkml:TypeDefinition ;
     skos:definition "A real number that conforms to the xsd:float specification" ;
@@ -557,6 +568,10 @@
     linkml:repr "str" ;
     linkml:uri xsd:string .
 
+<https://w3id.org/peh/terms/lab_analysis_process> skos:exactMatch <wikidata:Q9150363> .
+
+<https://w3id.org/peh/terms/model_execution_process> skos:exactMatch <wikidata:Q1077724> .
+
 <https://w3id.org/peh/terms/ncname> a linkml:TypeDefinition ;
     skos:definition "Prefix part of CURIE" ;
     skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"ncname\"." ;
@@ -588,6 +603,21 @@
     linkml:repr "str" ;
     linkml:uri shex:iri .
 
+<https://w3id.org/peh/terms/organisation> skos:exactMatch schema1:Organization,
+        <wikidata:Q43229> .
+
+<https://w3id.org/peh/terms/persongroup> skos:broadMatch schema1:Collection,
+        <wikidata:Q2668072> ;
+    skos:exactMatch <wikidata:Q134601727> .
+
+<https://w3id.org/peh/terms/project> skos:exactMatch schema1:Project,
+        <wikidata:Q170584> .
+
+<https://w3id.org/peh/terms/sample> skos:exactMatch <wikidata:Q485146> .
+
+<https://w3id.org/peh/terms/samplegroup> skos:broadMatch schema1:Collection,
+        <wikidata:Q2668072> .
+
 <https://w3id.org/peh/terms/sparqlpath> a linkml:TypeDefinition ;
     dcterms:conformsTo "https://www.w3.org/TR/sparql11-query/#propertypaths" ;
     skos:definition "A string encoding a SPARQL Property Path. The value of the string MUST conform to SPARQL syntax and SHOULD dereference to zero or more valid objects within the current instance document when encoded as RDF." ;
@@ -598,6 +628,9 @@
     linkml:imported_from "linkml:types" ;
     linkml:repr "str" ;
     linkml:uri xsd:string .
+
+<https://w3id.org/peh/terms/study> skos:exactMatch schema1:study,
+        <wikidata:Q124222085> .
 
 <https://w3id.org/peh/terms/time> a linkml:TypeDefinition ;
     skos:definition "A time object represents a (local) time of day, independent of any particular day" ;
@@ -644,6 +677,9 @@
     linkml:imported_from "linkml:types" ;
     linkml:repr "str" ;
     linkml:uri xsd:dateTime .
+
+<https://w3id.org/peh/terms/person> skos:exactMatch schema1:Person,
+        <wikidata:Q215627> .
 
 <https://w3id.org/peh/terms/BioChemEntityLinkType> skos:inScheme <https://w3id.org/peh/peh-model> ;
     linkml:definition_uri <https://w3id.org/peh/terms/BioChemEntityLinkType> ;
@@ -2425,6 +2461,9 @@
     linkml:slot_uri <https://w3id.org/peh/terms/linktype> .
 
 <https://w3id.org/peh/terms/location> a linkml:SlotDefinition ;
+    skos:exactMatch schema1:location,
+        <wikidata:Q17334923>,
+        <wikidata:Q2221906> ;
     skos:inScheme <https://w3id.org/peh/peh-model> ;
     linkml:definition_uri <https://w3id.org/peh/terms/location> ;
     linkml:domain_of <https://w3id.org/peh/terms/Geolocation> ;
