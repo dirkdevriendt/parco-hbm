@@ -1,5 +1,5 @@
 # Auto generated from peh.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-01-13T13:44:43
+# Generation date: 2026-01-13T14:27:21
 # Schema: PEH-Model
 #
 # id: https://w3id.org/peh/peh-model
@@ -42,7 +42,7 @@ from linkml_runtime.linkml_model.types import (
 from linkml_runtime.utils.metamodelcore import Bool, Decimal, XSDDate, XSDDateTime
 
 metamodel_version = "1.7.0"
-version = "0.3.2"
+version = "0.4.0"
 
 # Namespaces
 IOP = CurieNamespace("iop", "https://w3id.org/iadopt/ont/")
@@ -454,6 +454,7 @@ class NamedThing(YAMLRoot):
     ui_label: Optional[str] = None
     description: Optional[str] = None
     remark: Optional[str] = None
+    exact_matches: Optional[Union[str, list[str]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
@@ -478,6 +479,14 @@ class NamedThing(YAMLRoot):
 
         if self.remark is not None and not isinstance(self.remark, str):
             self.remark = str(self.remark)
+
+        if not isinstance(self.exact_matches, list):
+            self.exact_matches = (
+                [self.exact_matches] if self.exact_matches is not None else []
+            )
+        self.exact_matches = [
+            v if isinstance(v, str) else str(v) for v in self.exact_matches
+        ]
 
         super().__post_init__(**kwargs)
 
@@ -4503,6 +4512,15 @@ slots.context_aliases = Slot(
     model_uri=PEHTERMS.context_aliases,
     domain=None,
     range=Optional[Union[Union[dict, ContextAlias], list[Union[dict, ContextAlias]]]],
+)
+
+slots.exact_matches = Slot(
+    uri=PEHTERMS.exact_matches,
+    name="exact_matches",
+    curie=PEHTERMS.curie("exact_matches"),
+    model_uri=PEHTERMS.exact_matches,
+    domain=None,
+    range=Optional[Union[str, list[str]]],
 )
 
 slots.context = Slot(

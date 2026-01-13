@@ -20,7 +20,7 @@ from pydantic import (
 
 
 metamodel_version = "None"
-version = "0.3.2"
+version = "0.4.0"
 
 
 class ConfiguredBaseModel(BaseModel):
@@ -372,6 +372,7 @@ class NamedThing(ConfiguredBaseModel):
         default=None,
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
+    exact_matches: Optional[list[str]] = Field(default=[])
 
 
 class HasValidationStatus(ConfiguredBaseModel):
@@ -464,6 +465,7 @@ class Grouping(HasTranslations, HasContextAliases, NamedThing):
         default=None,
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
+    exact_matches: Optional[list[str]] = Field(default=[])
 
 
 class Translation(ConfiguredBaseModel):
@@ -513,6 +515,7 @@ class Unit(HasTranslations, HasValidationStatus, NamedThing):
         default=None,
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
+    exact_matches: Optional[list[str]] = Field(default=[])
 
 
 class BioChemEntity(
@@ -558,6 +561,7 @@ class BioChemEntity(
         default=None,
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
+    exact_matches: Optional[list[str]] = Field(default=[])
 
 
 class BioChemIdentifier(HasValidationStatus):
@@ -604,6 +608,7 @@ class BioChemIdentifierSchema(NamedThing):
         default=None,
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
+    exact_matches: Optional[list[str]] = Field(default=[])
 
 
 class Matrix(HasTranslations, HasContextAliases, NamedThing):
@@ -641,6 +646,7 @@ class Matrix(HasTranslations, HasContextAliases, NamedThing):
         default=None,
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
+    exact_matches: Optional[list[str]] = Field(default=[])
 
 
 class Indicator(HasTranslations, HasContextAliases, NamedThing):
@@ -687,6 +693,7 @@ class Indicator(HasTranslations, HasContextAliases, NamedThing):
         default=None,
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
+    exact_matches: Optional[list[str]] = Field(default=[])
 
 
 class BioChemEntityLink(ConfiguredBaseModel):
@@ -731,6 +738,7 @@ class PhysicalEntity(NamedThing):
         default=None,
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
+    exact_matches: Optional[list[str]] = Field(default=[])
 
 
 class PhysicalEntityLink(ConfiguredBaseModel):
@@ -780,6 +788,7 @@ class Sample(PhysicalEntity):
         default=None,
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
+    exact_matches: Optional[list[str]] = Field(default=[])
 
 
 class Person(PhysicalEntity):
@@ -816,6 +825,7 @@ class Person(PhysicalEntity):
         default=None,
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
+    exact_matches: Optional[list[str]] = Field(default=[])
 
 
 class Geolocation(PhysicalEntity):
@@ -852,6 +862,7 @@ class Geolocation(PhysicalEntity):
         default=None,
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
+    exact_matches: Optional[list[str]] = Field(default=[])
 
 
 class Environment(PhysicalEntity):
@@ -887,6 +898,7 @@ class Environment(PhysicalEntity):
         default=None,
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
+    exact_matches: Optional[list[str]] = Field(default=[])
 
 
 class HomeEnvironment(Environment):
@@ -922,6 +934,7 @@ class HomeEnvironment(Environment):
         default=None,
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
+    exact_matches: Optional[list[str]] = Field(default=[])
 
 
 class WorkEnvironment(Environment):
@@ -957,6 +970,7 @@ class WorkEnvironment(Environment):
         default=None,
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
+    exact_matches: Optional[list[str]] = Field(default=[])
 
 
 class ObservableProperty(HasTranslations, HasContextAliases, NamedThing):
@@ -1022,6 +1036,7 @@ class ObservableProperty(HasTranslations, HasContextAliases, NamedThing):
         default=None,
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
+    exact_matches: Optional[list[str]] = Field(default=[])
 
 
 class ObservablePropertyValueOption(HasContextAliases):
@@ -1077,6 +1092,7 @@ class ObservablePropertyMetadataField(NamedThing):
         default=None,
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
+    exact_matches: Optional[list[str]] = Field(default=[])
 
 
 class CalculationDesign(ConfiguredBaseModel):
@@ -1220,6 +1236,7 @@ class Stakeholder(HasTranslations, NamedThing):
         default=None,
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
+    exact_matches: Optional[list[str]] = Field(default=[])
 
 
 class ProjectStakeholder(HasTranslations):
@@ -1267,6 +1284,7 @@ class StudyEntity(NamedThing):
         default=None,
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
+    exact_matches: Optional[list[str]] = Field(default=[])
 
 
 class Project(StudyEntity, HasTranslations, HasContextAliases):
@@ -1310,6 +1328,7 @@ class Project(StudyEntity, HasTranslations, HasContextAliases):
         default=None,
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
+    exact_matches: Optional[list[str]] = Field(default=[])
 
 
 class StudyEntityLink(ConfiguredBaseModel):
@@ -1364,6 +1383,7 @@ class Study(StudyEntity, HasTranslations, HasContextAliases):
         default=None,
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
+    exact_matches: Optional[list[str]] = Field(default=[])
 
 
 class StudyStakeholder(ConfiguredBaseModel):
@@ -1413,6 +1433,7 @@ class ObservationGroup(StudyEntity):
         default=None,
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
+    exact_matches: Optional[list[str]] = Field(default=[])
 
 
 class StudyPopulation(StudyEntity):
@@ -1451,6 +1472,7 @@ class StudyPopulation(StudyEntity):
         default=None,
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
+    exact_matches: Optional[list[str]] = Field(default=[])
 
 
 class SampleCollection(StudyEntity):
@@ -1490,6 +1512,7 @@ class SampleCollection(StudyEntity):
         default=None,
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
+    exact_matches: Optional[list[str]] = Field(default=[])
 
 
 class StudySubject(StudyEntity):
@@ -1526,6 +1549,7 @@ class StudySubject(StudyEntity):
         default=None,
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
+    exact_matches: Optional[list[str]] = Field(default=[])
 
 
 class StudySubjectGroup(StudyEntity):
@@ -1562,6 +1586,7 @@ class StudySubjectGroup(StudyEntity):
         default=None,
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
+    exact_matches: Optional[list[str]] = Field(default=[])
 
 
 class Observation(NamedThing):
@@ -1599,6 +1624,7 @@ class Observation(NamedThing):
         default=None,
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
+    exact_matches: Optional[list[str]] = Field(default=[])
 
 
 class ObservationDesign(ConfiguredBaseModel):
@@ -1650,6 +1676,7 @@ class ObservationResult(NamedThing):
         default=None,
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
+    exact_matches: Optional[list[str]] = Field(default=[])
 
 
 class ObservedValue(ConfiguredBaseModel):
@@ -1723,6 +1750,7 @@ class DataLayout(NamedThing):
         default=None,
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
+    exact_matches: Optional[list[str]] = Field(default=[])
 
 
 class DataLayoutSection(NamedThing):
@@ -1761,6 +1789,7 @@ class DataLayoutSection(NamedThing):
         default=None,
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
+    exact_matches: Optional[list[str]] = Field(default=[])
 
 
 class DataLayoutElement(ConfiguredBaseModel):
@@ -1819,6 +1848,7 @@ class DataImportConfig(NamedThing):
         default=None,
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
+    exact_matches: Optional[list[str]] = Field(default=[])
 
 
 class DataImportSectionMapping(ConfiguredBaseModel):
@@ -1884,6 +1914,7 @@ class DataRequest(NamedThing):
         default=None,
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
+    exact_matches: Optional[list[str]] = Field(default=[])
 
 
 class ObservedEntityProperty(ConfiguredBaseModel):
@@ -1931,6 +1962,7 @@ class DataStakeholder(NamedThing):
         default=None,
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
+    exact_matches: Optional[list[str]] = Field(default=[])
 
 
 class ResearchObjective(NamedThing):
@@ -1967,6 +1999,7 @@ class ResearchObjective(NamedThing):
         default=None,
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
+    exact_matches: Optional[list[str]] = Field(default=[])
 
 
 class ProcessingAction(NamedThing):
@@ -2001,6 +2034,7 @@ class ProcessingAction(NamedThing):
         default=None,
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
+    exact_matches: Optional[list[str]] = Field(default=[])
 
 
 class ProcessingStep(NamedThing):
@@ -2037,6 +2071,7 @@ class ProcessingStep(NamedThing):
         default=None,
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
+    exact_matches: Optional[list[str]] = Field(default=[])
 
 
 class DataExtract(ConfiguredBaseModel):

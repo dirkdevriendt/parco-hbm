@@ -2,7 +2,7 @@
   "name": "PEH-Model",
   "description": "Entity and relation ontology and datamodel for Personal Exposure and Health data",
   "id": "https://w3id.org/peh/peh-model",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "imports": [
     "linkml:types"
   ],
@@ -602,8 +602,7 @@
           "text": "location",
           "exact_mappings": [
             "schema:location",
-            "wikidata:Q2221906",
-            "wikidata:Q17334923"
+            "wikidata:Q2221906"
           ]
         },
         {
@@ -1426,6 +1425,19 @@
       "multivalued": true,
       "inlined": true,
       "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "exact_matches",
+      "definition_uri": "https://w3id.org/peh/terms/exact_matches",
+      "from_schema": "https://w3id.org/peh/peh-model",
+      "slot_uri": "https://w3id.org/peh/terms/exact_matches",
+      "owner": "NamedThing",
+      "domain_of": [
+        "NamedThing"
+      ],
+      "range": "string",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -3805,7 +3817,8 @@
         "name",
         "ui_label",
         "description",
-        "remark"
+        "remark",
+        "exact_matches"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/peh/terms/NamedThing",
@@ -3829,6 +3842,7 @@
         "ui_label",
         "description",
         "remark",
+        "exact_matches",
         "parent_grouping_id_list",
         "context_aliases",
         "translations"
@@ -3952,6 +3966,7 @@
         "ui_label",
         "description",
         "remark",
+        "exact_matches",
         "same_unit_as",
         "quantity_kind",
         "translations",
@@ -3985,6 +4000,7 @@
         "ui_label",
         "description",
         "remark",
+        "exact_matches",
         "grouping_id_list",
         "molweight_grampermol",
         "biochemidentifiers",
@@ -4031,6 +4047,7 @@
         "ui_label",
         "description",
         "remark",
+        "exact_matches",
         "web_uri"
       ],
       "slot_usage": {},
@@ -4055,6 +4072,7 @@
         "ui_label",
         "description",
         "remark",
+        "exact_matches",
         "parent_matrix",
         "context_aliases",
         "translations"
@@ -4084,6 +4102,7 @@
         "ui_label",
         "description",
         "remark",
+        "exact_matches",
         "indicator_type",
         "property",
         "quantity_kind",
@@ -4127,6 +4146,7 @@
         "ui_label",
         "description",
         "remark",
+        "exact_matches",
         "physical_entity_links"
       ],
       "slot_usage": {},
@@ -4160,6 +4180,7 @@
         "ui_label",
         "description",
         "remark",
+        "exact_matches",
         "physical_entity_links",
         "matrix",
         "constraints",
@@ -4185,6 +4206,7 @@
         "ui_label",
         "description",
         "remark",
+        "exact_matches",
         "physical_entity_links",
         "recruited_in_project"
       ],
@@ -4206,6 +4228,7 @@
         "ui_label",
         "description",
         "remark",
+        "exact_matches",
         "physical_entity_links",
         "location"
       ],
@@ -4227,6 +4250,7 @@
         "ui_label",
         "description",
         "remark",
+        "exact_matches",
         "physical_entity_links"
       ],
       "slot_usage": {},
@@ -4247,6 +4271,7 @@
         "ui_label",
         "description",
         "remark",
+        "exact_matches",
         "physical_entity_links"
       ],
       "slot_usage": {},
@@ -4267,6 +4292,7 @@
         "ui_label",
         "description",
         "remark",
+        "exact_matches",
         "physical_entity_links"
       ],
       "slot_usage": {},
@@ -4291,6 +4317,7 @@
         "ui_label",
         "description",
         "remark",
+        "exact_matches",
         "value_type",
         "categorical",
         "multivalued",
@@ -4362,6 +4389,7 @@
         "ui_label",
         "description",
         "remark",
+        "exact_matches",
         "value_type"
       ],
       "slot_usage": {},
@@ -4516,6 +4544,7 @@
         "ui_label",
         "description",
         "remark",
+        "exact_matches",
         "rorid",
         "geographic_scope",
         "translations"
@@ -4542,6 +4571,7 @@
         "ui_label",
         "description",
         "remark",
+        "exact_matches",
         "physical_entity",
         "study_entity_links",
         "default_language",
@@ -4589,6 +4619,7 @@
         "ui_label",
         "description",
         "remark",
+        "exact_matches",
         "physical_entity",
         "study_entity_links"
       ],
@@ -4627,6 +4658,7 @@
         "ui_label",
         "description",
         "remark",
+        "exact_matches",
         "physical_entity",
         "study_entity_links",
         "default_language",
@@ -4671,6 +4703,7 @@
         "ui_label",
         "description",
         "remark",
+        "exact_matches",
         "physical_entity",
         "study_entity_links",
         "start_date",
@@ -4695,6 +4728,7 @@
         "ui_label",
         "description",
         "remark",
+        "exact_matches",
         "physical_entity",
         "study_entity_links",
         "research_population_type",
@@ -4718,6 +4752,7 @@
         "ui_label",
         "description",
         "remark",
+        "exact_matches",
         "physical_entity",
         "study_entity_links",
         "matrix",
@@ -4742,6 +4777,7 @@
         "ui_label",
         "description",
         "remark",
+        "exact_matches",
         "physical_entity",
         "study_entity_links"
       ],
@@ -4763,6 +4799,7 @@
         "ui_label",
         "description",
         "remark",
+        "exact_matches",
         "physical_entity",
         "study_entity_links"
       ],
@@ -4785,6 +4822,7 @@
         "ui_label",
         "description",
         "remark",
+        "exact_matches",
         "observation_type",
         "observation_design",
         "observation_result_id_list"
@@ -4825,6 +4863,7 @@
         "ui_label",
         "description",
         "remark",
+        "exact_matches",
         "observation_result_type",
         "observation_start_date",
         "observation_end_date",
@@ -4898,6 +4937,7 @@
         "ui_label",
         "description",
         "remark",
+        "exact_matches",
         "sections"
       ],
       "slot_usage": {},
@@ -4918,6 +4958,7 @@
         "ui_label",
         "description",
         "remark",
+        "exact_matches",
         "section_type",
         "observable_entity_type",
         "elements",
@@ -4971,6 +5012,7 @@
         "ui_label",
         "description",
         "remark",
+        "exact_matches",
         "layout",
         "section_mapping"
       ],
@@ -5017,6 +5059,7 @@
         "ui_label",
         "description",
         "remark",
+        "exact_matches",
         "contacts",
         "request_properties",
         "data_stakeholders",
@@ -5059,6 +5102,7 @@
         "ui_label",
         "description",
         "remark",
+        "exact_matches",
         "stakeholder",
         "data_roles",
         "contacts",
@@ -5082,6 +5126,7 @@
         "ui_label",
         "description",
         "remark",
+        "exact_matches",
         "objective_type",
         "authors"
       ],
@@ -5102,7 +5147,8 @@
         "name",
         "ui_label",
         "description",
-        "remark"
+        "remark",
+        "exact_matches"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/peh/terms/ProcessingAction",
@@ -5122,6 +5168,7 @@
         "ui_label",
         "description",
         "remark",
+        "exact_matches",
         "start_date",
         "delivery_date"
       ],
@@ -5144,9 +5191,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "peh.yaml",
-  "source_file_date": "2026-01-13T13:44:19",
-  "source_file_size": 38948,
-  "generation_date": "2026-01-13T13:44:43",
+  "source_file_date": "2026-01-13T14:26:53",
+  "source_file_size": 38961,
+  "generation_date": "2026-01-13T14:27:20",
   "@type": "SchemaDefinition",
   "@context": [
     "_temp/jsonld/peh.context.jsonld",

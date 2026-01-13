@@ -3,7 +3,7 @@ name: PEH-Model
 description: |-
   Entity and relation ontology and datamodel for Personal Exposure and Health data
 
-version: 0.3.2
+version: 0.4.0
 
 imports:
   - linkml:types
@@ -68,6 +68,7 @@ classes:
       - ui_label
       - description
       - remark
+      - exact_matches
     close_mappings:
      - schema:Thing
 
@@ -687,6 +688,8 @@ slots:
     multivalued: true
     inlined_as_list: true
     range: ContextAlias
+  exact_matches:
+    multivalued: true
   context:
     range: NamedThing
     inlined: false
@@ -1227,7 +1230,6 @@ enums:
         exact_mappings:
         - schema:location
         - wikidata:Q2221906 #geographic location
-        - wikidata:Q17334923 #physical location
       persongroup:
         exact_mappings:
         - wikidata:Q134601727
