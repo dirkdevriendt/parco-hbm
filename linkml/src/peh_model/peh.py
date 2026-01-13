@@ -1,5 +1,5 @@
 # Auto generated from peh.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-01-13T13:39:54
+# Generation date: 2026-01-13T13:44:43
 # Schema: PEH-Model
 #
 # id: https://w3id.org/peh/peh-model
@@ -56,6 +56,7 @@ QUDTUNIT = CurieNamespace("qudtunit", "https://qudt.org/vocab/unit/")
 RDFS = CurieNamespace("rdfs", "http://www.w3.org/2000/01/rdf-schema#")
 SCHEMA = CurieNamespace("schema", "http://schema.org/")
 SKOS = CurieNamespace("skos", "http://www.w3.org/2004/02/skos/core#")
+WIKIDATA = CurieNamespace("wikidata", "https://www.wikidata.org/wiki/")
 DEFAULT_ = PEHTERMS
 
 
