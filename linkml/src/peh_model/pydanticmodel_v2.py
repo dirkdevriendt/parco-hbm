@@ -434,8 +434,6 @@ class Grouping(HasTranslations, HasContextAliases, NamedThing):
     A generic grouping entity that allows categorising entities in a hierarchical structure
     """
 
-    sort_order: Optional[Decimal] = Field(default=None)
-    abstract: Optional[bool] = Field(default=None)
     parent_grouping_id_list: Optional[list[str]] = Field(default=[])
     context_aliases: Optional[list[ContextAlias]] = Field(default=[])
     translations: Optional[list[Translation]] = Field(default=[])
@@ -478,17 +476,13 @@ class Translation(ConfiguredBaseModel):
     translated_value: Optional[str] = Field(default=None)
 
 
-class Unit(
-    HasTranslations, HasContextAliases, HasAliases, HasValidationStatus, NamedThing
-):
+class Unit(HasTranslations, HasValidationStatus, NamedThing):
     """
     A unit of measurement, a quantity chosen as a standard in terms of which other quantities may be expressed
     """
 
     same_unit_as: Optional[QudtUnit] = Field(default=None)
     quantity_kind: Optional[QudtQuantityKind] = Field(default=None)
-    aliases: Optional[list[str]] = Field(default=[])
-    context_aliases: Optional[list[ContextAlias]] = Field(default=[])
     translations: Optional[list[Translation]] = Field(default=[])
     current_validation_status: Optional[ValidationStatus] = Field(default=None)
     validation_history: Optional[list[ValidationHistoryRecord]] = Field(default=[])
@@ -617,10 +611,7 @@ class Matrix(HasTranslations, HasContextAliases, NamedThing):
     The physical medium or biological substrate from which a biomarker, or other analyte is quantified in observational studies
     """
 
-    sort_order: Optional[Decimal] = Field(default=None)
-    aggregation_target: Optional[bool] = Field(default=None)
     parent_matrix: Optional[str] = Field(default=None)
-    secondary_parent_matrix_id_list: Optional[list[str]] = Field(default=[])
     context_aliases: Optional[list[ContextAlias]] = Field(default=[])
     translations: Optional[list[Translation]] = Field(default=[])
     id: str = Field(
@@ -981,16 +972,20 @@ class ObservableProperty(HasTranslations, HasContextAliases, NamedThing):
         default=[]
     )
     quantity_kind: Optional[QudtQuantityKind] = Field(default=None)
-    default_unit: Optional[str] = Field(default=None)
-    default_unit_label: Optional[str] = Field(default=None)
-    default_required: Optional[bool] = Field(default=None)
-    default_zeroallowed: Optional[bool] = Field(default=None)
-    default_significantdecimals: Optional[int] = Field(default=None)
-    default_immutable: Optional[bool] = Field(default=None)
-    grouping_id_list: Optional[list[str]] = Field(default=[])
-    default_observation_result_type: Optional[ObservationResultType] = Field(
-        default=None
+    unit: Optional[str] = Field(default=None)
+    unit_label: Optional[str] = Field(default=None)
+    required: Optional[bool] = Field(default=None)
+    zeroallowed: Optional[bool] = Field(default=None)
+    significantdecimals: Optional[int] = Field(
+        default=None,
+        description="""Variable precision indication, expressed as the number of significant decimals""",
     )
+    immutable: Optional[bool] = Field(
+        default=None,
+        description="""Variable values are not expected to change over time (e.g. birthdate of a person)""",
+    )
+    grouping_id_list: Optional[list[str]] = Field(default=[])
+    observation_result_type: Optional[ObservationResultType] = Field(default=None)
     relevant_observable_entity_types: Optional[list[ObservableEntityType]] = Field(
         default=[]
     )
@@ -1386,7 +1381,6 @@ class ObservationGroup(StudyEntity):
     A grouped collection of observations, intended and/or executed, as part of a Personal Exposure and Health research study
     """
 
-    sort_order: Optional[Decimal] = Field(default=None)
     start_date: Optional[date] = Field(default=None)
     end_date: Optional[date] = Field(default=None)
     observation_id_list: Optional[list[str]] = Field(default=[])
@@ -1665,7 +1659,6 @@ class ObservedValue(ConfiguredBaseModel):
 
     observable_entity: Optional[str] = Field(default=None)
     observable_property: Optional[str] = Field(default=None)
-    default_unit: Optional[str] = Field(default=None)
     raw_value: Optional[str] = Field(default=None)
     raw_unit: Optional[str] = Field(default=None)
     imputed_value: Optional[str] = Field(default=None)

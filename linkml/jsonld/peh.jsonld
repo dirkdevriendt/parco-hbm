@@ -1693,32 +1693,6 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "sort_order",
-      "definition_uri": "https://w3id.org/peh/terms/sort_order",
-      "from_schema": "https://w3id.org/peh/peh-model",
-      "slot_uri": "https://w3id.org/peh/terms/sort_order",
-      "owner": "ObservationGroup",
-      "domain_of": [
-        "Grouping",
-        "Matrix",
-        "ObservationGroup"
-      ],
-      "range": "decimal",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "aggregation_target",
-      "definition_uri": "https://w3id.org/peh/terms/aggregation_target",
-      "from_schema": "https://w3id.org/peh/peh-model",
-      "slot_uri": "https://w3id.org/peh/terms/aggregation_target",
-      "owner": "Matrix",
-      "domain_of": [
-        "Matrix"
-      ],
-      "range": "boolean",
-      "@type": "SlotDefinition"
-    },
-    {
       "name": "parent_matrix",
       "definition_uri": "https://w3id.org/peh/terms/parent_matrix",
       "from_schema": "https://w3id.org/peh/peh-model",
@@ -1731,19 +1705,6 @@
         "Matrix"
       ],
       "range": "Matrix",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "secondary_parent_matrix_id_list",
-      "definition_uri": "https://w3id.org/peh/terms/secondary_parent_matrix_id_list",
-      "from_schema": "https://w3id.org/peh/peh-model",
-      "slot_uri": "https://w3id.org/peh/terms/secondary_parent_matrix_id_list",
-      "owner": "Matrix",
-      "domain_of": [
-        "Matrix"
-      ],
-      "range": "Matrix",
-      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1812,18 +1773,6 @@
       ],
       "range": "string",
       "multivalued": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "default_observation_result_type",
-      "definition_uri": "https://w3id.org/peh/terms/default_observation_result_type",
-      "from_schema": "https://w3id.org/peh/peh-model",
-      "slot_uri": "https://w3id.org/peh/terms/default_observation_result_type",
-      "owner": "ObservableProperty",
-      "domain_of": [
-        "ObservableProperty"
-      ],
-      "range": "ObservationResultType",
       "@type": "SlotDefinition"
     },
     {
@@ -1917,18 +1866,6 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "abstract",
-      "definition_uri": "https://w3id.org/peh/terms/abstract",
-      "from_schema": "https://w3id.org/peh/peh-model",
-      "slot_uri": "https://w3id.org/peh/terms/abstract",
-      "owner": "Grouping",
-      "domain_of": [
-        "Grouping"
-      ],
-      "range": "boolean",
-      "@type": "SlotDefinition"
-    },
-    {
       "name": "value_type",
       "definition_uri": "https://w3id.org/peh/terms/value_type",
       "from_schema": "https://w3id.org/peh/peh-model",
@@ -1974,10 +1911,10 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "default_required",
-      "definition_uri": "https://w3id.org/peh/terms/default_required",
+      "name": "required",
+      "definition_uri": "https://w3id.org/peh/terms/required",
       "from_schema": "https://w3id.org/peh/peh-model",
-      "slot_uri": "https://w3id.org/peh/terms/default_required",
+      "slot_uri": "https://w3id.org/peh/terms/required",
       "owner": "ObservableProperty",
       "domain_of": [
         "ObservableProperty"
@@ -1986,10 +1923,10 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "default_zeroallowed",
-      "definition_uri": "https://w3id.org/peh/terms/default_zeroallowed",
+      "name": "zeroallowed",
+      "definition_uri": "https://w3id.org/peh/terms/zeroallowed",
       "from_schema": "https://w3id.org/peh/peh-model",
-      "slot_uri": "https://w3id.org/peh/terms/default_zeroallowed",
+      "slot_uri": "https://w3id.org/peh/terms/zeroallowed",
       "owner": "ObservableProperty",
       "domain_of": [
         "ObservableProperty"
@@ -1998,10 +1935,11 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "default_significantdecimals",
-      "definition_uri": "https://w3id.org/peh/terms/default_significantdecimals",
+      "name": "significantdecimals",
+      "definition_uri": "https://w3id.org/peh/terms/significantdecimals",
+      "description": "Variable precision indication, expressed as the number of significant decimals",
       "from_schema": "https://w3id.org/peh/peh-model",
-      "slot_uri": "https://w3id.org/peh/terms/default_significantdecimals",
+      "slot_uri": "https://w3id.org/peh/terms/significantdecimals",
       "owner": "ObservableProperty",
       "domain_of": [
         "ObservableProperty"
@@ -2010,23 +1948,10 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "default_unit",
-      "definition_uri": "https://w3id.org/peh/terms/default_unit",
+      "name": "unit_label",
+      "definition_uri": "https://w3id.org/peh/terms/unit_label",
       "from_schema": "https://w3id.org/peh/peh-model",
-      "slot_uri": "https://w3id.org/peh/terms/default_unit",
-      "owner": "ObservedValue",
-      "domain_of": [
-        "ObservableProperty",
-        "ObservedValue"
-      ],
-      "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "default_unit_label",
-      "definition_uri": "https://w3id.org/peh/terms/default_unit_label",
-      "from_schema": "https://w3id.org/peh/peh-model",
-      "slot_uri": "https://w3id.org/peh/terms/default_unit_label",
+      "slot_uri": "https://w3id.org/peh/terms/unit_label",
       "owner": "ObservableProperty",
       "domain_of": [
         "ObservableProperty"
@@ -2035,10 +1960,11 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "default_immutable",
-      "definition_uri": "https://w3id.org/peh/terms/default_immutable",
+      "name": "immutable",
+      "definition_uri": "https://w3id.org/peh/terms/immutable",
+      "description": "Variable values are not expected to change over time (e.g. birthdate of a person)",
       "from_schema": "https://w3id.org/peh/peh-model",
-      "slot_uri": "https://w3id.org/peh/terms/default_immutable",
+      "slot_uri": "https://w3id.org/peh/terms/immutable",
       "owner": "ObservableProperty",
       "domain_of": [
         "ObservableProperty"
@@ -2958,6 +2884,7 @@
       "slot_uri": "https://w3id.org/peh/terms/observation_result_type",
       "owner": "ObservationResult",
       "domain_of": [
+        "ObservableProperty",
         "ObservationDesign",
         "ObservationResult"
       ],
@@ -3125,6 +3052,7 @@
       "slot_uri": "https://w3id.org/peh/terms/unit",
       "owner": "ObservedValue",
       "domain_of": [
+        "ObservableProperty",
         "CalculationKeywordArgument",
         "CalculationResult",
         "ObservedValue"
@@ -3153,7 +3081,7 @@
       "domain_of": [
         "ObservedValue"
       ],
-      "range": "string",
+      "range": "Unit",
       "@type": "SlotDefinition"
     },
     {
@@ -3177,7 +3105,7 @@
       "domain_of": [
         "ObservedValue"
       ],
-      "range": "string",
+      "range": "Unit",
       "@type": "SlotDefinition"
     },
     {
@@ -3201,7 +3129,7 @@
       "domain_of": [
         "ObservedValue"
       ],
-      "range": "string",
+      "range": "Unit",
       "@type": "SlotDefinition"
     },
     {
@@ -3843,8 +3771,6 @@
         "ui_label",
         "description",
         "remark",
-        "sort_order",
-        "abstract",
         "parent_grouping_id_list",
         "context_aliases",
         "translations"
@@ -3957,8 +3883,6 @@
       "from_schema": "https://w3id.org/peh/peh-model",
       "is_a": "NamedThing",
       "mixins": [
-        "HasAliases",
-        "HasContextAliases",
         "HasTranslations",
         "HasValidationStatus"
       ],
@@ -3972,8 +3896,6 @@
         "remark",
         "same_unit_as",
         "quantity_kind",
-        "aliases",
-        "context_aliases",
         "translations",
         "current_validation_status",
         "validation_history"
@@ -4075,10 +3997,7 @@
         "ui_label",
         "description",
         "remark",
-        "sort_order",
-        "aggregation_target",
         "parent_matrix",
-        "secondary_parent_matrix_id_list",
         "context_aliases",
         "translations"
       ],
@@ -4320,14 +4239,14 @@
         "value_options",
         "value_metadata",
         "quantity_kind",
-        "default_unit",
-        "default_unit_label",
-        "default_required",
-        "default_zeroallowed",
-        "default_significantdecimals",
-        "default_immutable",
+        "unit",
+        "unit_label",
+        "required",
+        "zeroallowed",
+        "significantdecimals",
+        "immutable",
         "grouping_id_list",
-        "default_observation_result_type",
+        "observation_result_type",
         "relevant_observable_entity_types",
         "relevant_observation_types",
         "indicator",
@@ -4696,7 +4615,6 @@
         "remark",
         "physical_entity",
         "study_entity_links",
-        "sort_order",
         "start_date",
         "end_date",
         "observation_id_list"
@@ -4866,7 +4784,6 @@
       "slots": [
         "observable_entity",
         "observable_property",
-        "default_unit",
         "raw_value",
         "raw_unit",
         "imputed_value",
@@ -5169,9 +5086,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "peh.yaml",
-  "source_file_date": "2025-11-27T08:25:35",
-  "source_file_size": 38086,
-  "generation_date": "2025-11-27T08:25:55",
+  "source_file_date": "2026-01-13T13:39:30",
+  "source_file_size": 37762,
+  "generation_date": "2026-01-13T13:39:54",
   "@type": "SchemaDefinition",
   "@context": [
     "_temp/jsonld/peh.context.jsonld",

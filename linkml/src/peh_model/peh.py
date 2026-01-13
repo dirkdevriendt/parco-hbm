@@ -1,5 +1,5 @@
 # Auto generated from peh.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-11-27T08:25:55
+# Generation date: 2026-01-13T13:39:54
 # Schema: PEH-Model
 #
 # id: https://w3id.org/peh/peh-model
@@ -495,8 +495,6 @@ class Grouping(NamedThing):
     class_model_uri: ClassVar[URIRef] = PEHTERMS.Grouping
 
     id: Union[str, GroupingId] = None
-    sort_order: Optional[Decimal] = None
-    abstract: Optional[Union[bool, Bool]] = None
     parent_grouping_id_list: Optional[
         Union[Union[str, GroupingId], list[Union[str, GroupingId]]]
     ] = empty_list()
@@ -512,12 +510,6 @@ class Grouping(NamedThing):
             self.MissingRequiredField("id")
         if not isinstance(self.id, GroupingId):
             self.id = GroupingId(self.id)
-
-        if self.sort_order is not None and not isinstance(self.sort_order, Decimal):
-            self.sort_order = Decimal(self.sort_order)
-
-        if self.abstract is not None and not isinstance(self.abstract, Bool):
-            self.abstract = Bool(self.abstract)
 
         if not isinstance(self.parent_grouping_id_list, list):
             self.parent_grouping_id_list = (
@@ -806,10 +798,6 @@ class Unit(NamedThing):
     id: Union[str, UnitId] = None
     same_unit_as: Optional[Union[str, "QudtUnit"]] = None
     quantity_kind: Optional[Union[str, "QudtQuantityKind"]] = None
-    aliases: Optional[Union[str, list[str]]] = empty_list()
-    context_aliases: Optional[
-        Union[Union[dict, ContextAlias], list[Union[dict, ContextAlias]]]
-    ] = empty_list()
     translations: Optional[
         Union[Union[dict, Translation], list[Union[dict, Translation]]]
     ] = empty_list()
@@ -836,19 +824,6 @@ class Unit(NamedThing):
             self.quantity_kind, QudtQuantityKind
         ):
             self.quantity_kind = QudtQuantityKind(self.quantity_kind)
-
-        if not isinstance(self.aliases, list):
-            self.aliases = [self.aliases] if self.aliases is not None else []
-        self.aliases = [v if isinstance(v, str) else str(v) for v in self.aliases]
-
-        if not isinstance(self.context_aliases, list):
-            self.context_aliases = (
-                [self.context_aliases] if self.context_aliases is not None else []
-            )
-        self.context_aliases = [
-            v if isinstance(v, ContextAlias) else ContextAlias(**as_dict(v))
-            for v in self.context_aliases
-        ]
 
         if not isinstance(self.translations, list):
             self.translations = (
@@ -1108,12 +1083,7 @@ class Matrix(NamedThing):
     class_model_uri: ClassVar[URIRef] = PEHTERMS.Matrix
 
     id: Union[str, MatrixId] = None
-    sort_order: Optional[Decimal] = None
-    aggregation_target: Optional[Union[bool, Bool]] = None
     parent_matrix: Optional[Union[str, MatrixId]] = None
-    secondary_parent_matrix_id_list: Optional[
-        Union[Union[str, MatrixId], list[Union[str, MatrixId]]]
-    ] = empty_list()
     context_aliases: Optional[
         Union[Union[dict, ContextAlias], list[Union[dict, ContextAlias]]]
     ] = empty_list()
@@ -1127,29 +1097,10 @@ class Matrix(NamedThing):
         if not isinstance(self.id, MatrixId):
             self.id = MatrixId(self.id)
 
-        if self.sort_order is not None and not isinstance(self.sort_order, Decimal):
-            self.sort_order = Decimal(self.sort_order)
-
-        if self.aggregation_target is not None and not isinstance(
-            self.aggregation_target, Bool
-        ):
-            self.aggregation_target = Bool(self.aggregation_target)
-
         if self.parent_matrix is not None and not isinstance(
             self.parent_matrix, MatrixId
         ):
             self.parent_matrix = MatrixId(self.parent_matrix)
-
-        if not isinstance(self.secondary_parent_matrix_id_list, list):
-            self.secondary_parent_matrix_id_list = (
-                [self.secondary_parent_matrix_id_list]
-                if self.secondary_parent_matrix_id_list is not None
-                else []
-            )
-        self.secondary_parent_matrix_id_list = [
-            v if isinstance(v, MatrixId) else MatrixId(v)
-            for v in self.secondary_parent_matrix_id_list
-        ]
 
         if not isinstance(self.context_aliases, list):
             self.context_aliases = (
@@ -1600,18 +1551,16 @@ class ObservableProperty(NamedThing):
         ]
     ] = empty_list()
     quantity_kind: Optional[Union[str, "QudtQuantityKind"]] = None
-    default_unit: Optional[str] = None
-    default_unit_label: Optional[str] = None
-    default_required: Optional[Union[bool, Bool]] = None
-    default_zeroallowed: Optional[Union[bool, Bool]] = None
-    default_significantdecimals: Optional[int] = None
-    default_immutable: Optional[Union[bool, Bool]] = None
+    unit: Optional[Union[str, UnitId]] = None
+    unit_label: Optional[str] = None
+    required: Optional[Union[bool, Bool]] = None
+    zeroallowed: Optional[Union[bool, Bool]] = None
+    significantdecimals: Optional[int] = None
+    immutable: Optional[Union[bool, Bool]] = None
     grouping_id_list: Optional[
         Union[Union[str, GroupingId], list[Union[str, GroupingId]]]
     ] = empty_list()
-    default_observation_result_type: Optional[Union[str, "ObservationResultType"]] = (
-        None
-    )
+    observation_result_type: Optional[Union[str, "ObservationResultType"]] = None
     relevant_observable_entity_types: Optional[
         Union[
             Union[str, "ObservableEntityType"], list[Union[str, "ObservableEntityType"]]
@@ -1680,33 +1629,25 @@ class ObservableProperty(NamedThing):
         ):
             self.quantity_kind = QudtQuantityKind(self.quantity_kind)
 
-        if self.default_unit is not None and not isinstance(self.default_unit, str):
-            self.default_unit = str(self.default_unit)
+        if self.unit is not None and not isinstance(self.unit, UnitId):
+            self.unit = UnitId(self.unit)
 
-        if self.default_unit_label is not None and not isinstance(
-            self.default_unit_label, str
-        ):
-            self.default_unit_label = str(self.default_unit_label)
+        if self.unit_label is not None and not isinstance(self.unit_label, str):
+            self.unit_label = str(self.unit_label)
 
-        if self.default_required is not None and not isinstance(
-            self.default_required, Bool
-        ):
-            self.default_required = Bool(self.default_required)
+        if self.required is not None and not isinstance(self.required, Bool):
+            self.required = Bool(self.required)
 
-        if self.default_zeroallowed is not None and not isinstance(
-            self.default_zeroallowed, Bool
-        ):
-            self.default_zeroallowed = Bool(self.default_zeroallowed)
+        if self.zeroallowed is not None and not isinstance(self.zeroallowed, Bool):
+            self.zeroallowed = Bool(self.zeroallowed)
 
-        if self.default_significantdecimals is not None and not isinstance(
-            self.default_significantdecimals, int
+        if self.significantdecimals is not None and not isinstance(
+            self.significantdecimals, int
         ):
-            self.default_significantdecimals = int(self.default_significantdecimals)
+            self.significantdecimals = int(self.significantdecimals)
 
-        if self.default_immutable is not None and not isinstance(
-            self.default_immutable, Bool
-        ):
-            self.default_immutable = Bool(self.default_immutable)
+        if self.immutable is not None and not isinstance(self.immutable, Bool):
+            self.immutable = Bool(self.immutable)
 
         if not isinstance(self.grouping_id_list, list):
             self.grouping_id_list = (
@@ -1717,11 +1658,11 @@ class ObservableProperty(NamedThing):
             for v in self.grouping_id_list
         ]
 
-        if self.default_observation_result_type is not None and not isinstance(
-            self.default_observation_result_type, ObservationResultType
+        if self.observation_result_type is not None and not isinstance(
+            self.observation_result_type, ObservationResultType
         ):
-            self.default_observation_result_type = ObservationResultType(
-                self.default_observation_result_type
+            self.observation_result_type = ObservationResultType(
+                self.observation_result_type
             )
 
         if not isinstance(self.relevant_observable_entity_types, list):
@@ -2769,7 +2710,6 @@ class ObservationGroup(StudyEntity):
     class_model_uri: ClassVar[URIRef] = PEHTERMS.ObservationGroup
 
     id: Union[str, ObservationGroupId] = None
-    sort_order: Optional[Decimal] = None
     start_date: Optional[Union[str, XSDDate]] = None
     end_date: Optional[Union[str, XSDDate]] = None
     observation_id_list: Optional[
@@ -2781,9 +2721,6 @@ class ObservationGroup(StudyEntity):
             self.MissingRequiredField("id")
         if not isinstance(self.id, ObservationGroupId):
             self.id = ObservationGroupId(self.id)
-
-        if self.sort_order is not None and not isinstance(self.sort_order, Decimal):
-            self.sort_order = Decimal(self.sort_order)
 
         if self.start_date is not None and not isinstance(self.start_date, XSDDate):
             self.start_date = XSDDate(self.start_date)
@@ -3149,13 +3086,12 @@ class ObservedValue(YAMLRoot):
 
     observable_entity: Optional[Union[str, StudyEntityId]] = None
     observable_property: Optional[Union[str, ObservablePropertyId]] = None
-    default_unit: Optional[str] = None
     raw_value: Optional[str] = None
-    raw_unit: Optional[str] = None
+    raw_unit: Optional[Union[str, UnitId]] = None
     imputed_value: Optional[str] = None
-    imputed_unit: Optional[str] = None
+    imputed_unit: Optional[Union[str, UnitId]] = None
     normalised_value: Optional[str] = None
-    normalised_unit: Optional[str] = None
+    normalised_unit: Optional[Union[str, UnitId]] = None
     value: Optional[str] = None
     unit: Optional[Union[str, UnitId]] = None
     value_as_string: Optional[str] = None
@@ -3177,20 +3113,17 @@ class ObservedValue(YAMLRoot):
         ):
             self.observable_property = ObservablePropertyId(self.observable_property)
 
-        if self.default_unit is not None and not isinstance(self.default_unit, str):
-            self.default_unit = str(self.default_unit)
-
         if self.raw_value is not None and not isinstance(self.raw_value, str):
             self.raw_value = str(self.raw_value)
 
-        if self.raw_unit is not None and not isinstance(self.raw_unit, str):
-            self.raw_unit = str(self.raw_unit)
+        if self.raw_unit is not None and not isinstance(self.raw_unit, UnitId):
+            self.raw_unit = UnitId(self.raw_unit)
 
         if self.imputed_value is not None and not isinstance(self.imputed_value, str):
             self.imputed_value = str(self.imputed_value)
 
-        if self.imputed_unit is not None and not isinstance(self.imputed_unit, str):
-            self.imputed_unit = str(self.imputed_unit)
+        if self.imputed_unit is not None and not isinstance(self.imputed_unit, UnitId):
+            self.imputed_unit = UnitId(self.imputed_unit)
 
         if self.normalised_value is not None and not isinstance(
             self.normalised_value, str
@@ -3198,9 +3131,9 @@ class ObservedValue(YAMLRoot):
             self.normalised_value = str(self.normalised_value)
 
         if self.normalised_unit is not None and not isinstance(
-            self.normalised_unit, str
+            self.normalised_unit, UnitId
         ):
-            self.normalised_unit = str(self.normalised_unit)
+            self.normalised_unit = UnitId(self.normalised_unit)
 
         if self.value is not None and not isinstance(self.value, str):
             self.value = str(self.value)
@@ -4811,24 +4744,6 @@ slots.validation_remark = Slot(
     range=Optional[str],
 )
 
-slots.sort_order = Slot(
-    uri=PEHTERMS.sort_order,
-    name="sort_order",
-    curie=PEHTERMS.curie("sort_order"),
-    model_uri=PEHTERMS.sort_order,
-    domain=None,
-    range=Optional[Decimal],
-)
-
-slots.aggregation_target = Slot(
-    uri=PEHTERMS.aggregation_target,
-    name="aggregation_target",
-    curie=PEHTERMS.curie("aggregation_target"),
-    model_uri=PEHTERMS.aggregation_target,
-    domain=None,
-    range=Optional[Union[bool, Bool]],
-)
-
 slots.parent_matrix = Slot(
     uri=SKOS.broader,
     name="parent_matrix",
@@ -4836,15 +4751,6 @@ slots.parent_matrix = Slot(
     model_uri=PEHTERMS.parent_matrix,
     domain=None,
     range=Optional[Union[str, MatrixId]],
-)
-
-slots.secondary_parent_matrix_id_list = Slot(
-    uri=PEHTERMS.secondary_parent_matrix_id_list,
-    name="secondary_parent_matrix_id_list",
-    curie=PEHTERMS.curie("secondary_parent_matrix_id_list"),
-    model_uri=PEHTERMS.secondary_parent_matrix_id_list,
-    domain=None,
-    range=Optional[Union[Union[str, MatrixId], list[Union[str, MatrixId]]]],
 )
 
 slots.indicator_type = Slot(
@@ -4894,15 +4800,6 @@ slots.constraints = Slot(
     model_uri=PEHTERMS.constraints,
     domain=None,
     range=Optional[Union[str, list[str]]],
-)
-
-slots.default_observation_result_type = Slot(
-    uri=PEHTERMS.default_observation_result_type,
-    name="default_observation_result_type",
-    curie=PEHTERMS.curie("default_observation_result_type"),
-    model_uri=PEHTERMS.default_observation_result_type,
-    domain=None,
-    range=Optional[Union[str, "ObservationResultType"]],
 )
 
 slots.relevant_observable_entity_types = Slot(
@@ -4974,15 +4871,6 @@ slots.multivalued = Slot(
     range=Optional[Union[bool, Bool]],
 )
 
-slots.abstract = Slot(
-    uri=PEHTERMS.abstract,
-    name="abstract",
-    curie=PEHTERMS.curie("abstract"),
-    model_uri=PEHTERMS.abstract,
-    domain=None,
-    range=Optional[Union[bool, Bool]],
-)
-
 slots.value_type = Slot(
     uri=PEHTERMS.value_type,
     name="value_type",
@@ -5020,56 +4908,47 @@ slots.value_options = Slot(
     ],
 )
 
-slots.default_required = Slot(
-    uri=PEHTERMS.default_required,
-    name="default_required",
-    curie=PEHTERMS.curie("default_required"),
-    model_uri=PEHTERMS.default_required,
+slots.required = Slot(
+    uri=PEHTERMS.required,
+    name="required",
+    curie=PEHTERMS.curie("required"),
+    model_uri=PEHTERMS.required,
     domain=None,
     range=Optional[Union[bool, Bool]],
 )
 
-slots.default_zeroallowed = Slot(
-    uri=PEHTERMS.default_zeroallowed,
-    name="default_zeroallowed",
-    curie=PEHTERMS.curie("default_zeroallowed"),
-    model_uri=PEHTERMS.default_zeroallowed,
+slots.zeroallowed = Slot(
+    uri=PEHTERMS.zeroallowed,
+    name="zeroallowed",
+    curie=PEHTERMS.curie("zeroallowed"),
+    model_uri=PEHTERMS.zeroallowed,
     domain=None,
     range=Optional[Union[bool, Bool]],
 )
 
-slots.default_significantdecimals = Slot(
-    uri=PEHTERMS.default_significantdecimals,
-    name="default_significantdecimals",
-    curie=PEHTERMS.curie("default_significantdecimals"),
-    model_uri=PEHTERMS.default_significantdecimals,
+slots.significantdecimals = Slot(
+    uri=PEHTERMS.significantdecimals,
+    name="significantdecimals",
+    curie=PEHTERMS.curie("significantdecimals"),
+    model_uri=PEHTERMS.significantdecimals,
     domain=None,
     range=Optional[int],
 )
 
-slots.default_unit = Slot(
-    uri=PEHTERMS.default_unit,
-    name="default_unit",
-    curie=PEHTERMS.curie("default_unit"),
-    model_uri=PEHTERMS.default_unit,
+slots.unit_label = Slot(
+    uri=PEHTERMS.unit_label,
+    name="unit_label",
+    curie=PEHTERMS.curie("unit_label"),
+    model_uri=PEHTERMS.unit_label,
     domain=None,
     range=Optional[str],
 )
 
-slots.default_unit_label = Slot(
-    uri=PEHTERMS.default_unit_label,
-    name="default_unit_label",
-    curie=PEHTERMS.curie("default_unit_label"),
-    model_uri=PEHTERMS.default_unit_label,
-    domain=None,
-    range=Optional[str],
-)
-
-slots.default_immutable = Slot(
-    uri=PEHTERMS.default_immutable,
-    name="default_immutable",
-    curie=PEHTERMS.curie("default_immutable"),
-    model_uri=PEHTERMS.default_immutable,
+slots.immutable = Slot(
+    uri=PEHTERMS.immutable,
+    name="immutable",
+    curie=PEHTERMS.curie("immutable"),
+    model_uri=PEHTERMS.immutable,
     domain=None,
     range=Optional[Union[bool, Bool]],
 )
@@ -5915,7 +5794,7 @@ slots.raw_unit = Slot(
     curie=PEHTERMS.curie("raw_unit"),
     model_uri=PEHTERMS.raw_unit,
     domain=None,
-    range=Optional[str],
+    range=Optional[Union[str, UnitId]],
 )
 
 slots.imputed_value = Slot(
@@ -5933,7 +5812,7 @@ slots.imputed_unit = Slot(
     curie=PEHTERMS.curie("imputed_unit"),
     model_uri=PEHTERMS.imputed_unit,
     domain=None,
-    range=Optional[str],
+    range=Optional[Union[str, UnitId]],
 )
 
 slots.normalised_value = Slot(
@@ -5951,7 +5830,7 @@ slots.normalised_unit = Slot(
     curie=PEHTERMS.curie("normalised_unit"),
     model_uri=PEHTERMS.normalised_unit,
     domain=None,
-    range=Optional[str],
+    range=Optional[Union[str, UnitId]],
 )
 
 slots.value_as_string = Slot(
