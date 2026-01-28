@@ -187,7 +187,7 @@ classes:
       - constraints
       - grouping_id_list
       - relevant_observable_entity_types
-      - biochementity_id_list
+      - biochementity
 
   PhysicalEntity:
     description: >-
@@ -761,9 +761,9 @@ slots:
   relevant_observable_entity_types:
     multivalued: true
     range: ObservableEntityType
-  biochementity_id_list:
+  biochementity:
     range: BioChemEntity
-    multivalued: true
+    inlined: false
 
   categorical:
     range: boolean
