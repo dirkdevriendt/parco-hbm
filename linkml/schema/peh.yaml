@@ -156,23 +156,11 @@ classes:
       - HasValidationStatus
     slots:
       - grouping_id_list
+      - biochementity_type
       - molweight_grampermol
-      - biochemidentifiers
-      - biochementity_links
-  BioChemIdentifier:
-    description: >-
-      An identifier by which a biochemical entity is known in a schema (the BioChemIdentifierSchema) used by a certain community or system
-    mixins:
-      - HasValidationStatus
-    slots:
-      - identifier_schema
-      - identifier_code
-  BioChemIdentifierSchema:
-    description: >-
-      A well-defined schema used by a certain community or system, listing biochemical entities with individual identifiers 
-    is_a: NamedThing
-    slots:
-      - web_uri
+      - parent_compounds
+      - compound_group_members
+      - member_of
   Matrix:
     description: >-
       The physical medium or biological substrate from which a biomarker, or other analyte is quantified in observational studies
@@ -199,13 +187,7 @@ classes:
       - constraints
       - grouping_id_list
       - relevant_observable_entity_types
-      - biochementity_links
-  BioChemEntityLink:
-    description: >-
-      A relational property that allows creating qualified links to biochemical entities
-    slots:
-      - biochementity_linktype
-      - biochementity
+      - biochementity_id_list
 
   PhysicalEntity:
     description: >-
@@ -690,6 +672,7 @@ slots:
     range: ContextAlias
   exact_matches:
     multivalued: true
+    range: uriorcurie
   context:
     range: NamedThing
     inlined: false
@@ -727,10 +710,6 @@ slots:
     multivalued: true
     range: Grouping
     slot_uri: skos:broader
-  biochemidentifiers:
-    multivalued: true
-    inlined_as_list: true
-    range: BioChemIdentifier
   biochementities:
     multivalued: true
     inlined_as_list: true
@@ -740,10 +719,6 @@ slots:
     inlined_as_list: true
     range: Indicator
 
-  web_uri:
-  identifier_schema:
-    range: BioChemIdentifierSchema
-  identifier_code:
   current_validation_status:
     range: ValidationStatus
   validation_datetime:
@@ -753,6 +728,21 @@ slots:
   validation_actor:
   validation_institute:
   validation_remark:
+
+  biochementity_type:
+    range: BioChemEntityType
+  molweight_grampermol:
+    range: decimal
+  parent_compounds:
+    multivalued: true
+    range: BioChemEntity
+    slot_uri: skos:broader
+  compound_group_members:
+    multivalued: true
+    range: BioChemEntity
+  member_of:
+    multivalued: true
+    range: BioChemEntity
 
   parent_matrix:
     range: Matrix
@@ -771,17 +761,9 @@ slots:
   relevant_observable_entity_types:
     multivalued: true
     range: ObservableEntityType
-  molweight_grampermol:
-    range: decimal
-  biochementity_links:
-    multivalued: true
-    inlined_as_list: true
-    range: BioChemEntityLink
-  biochementity_linktype:
-    range: BioChemEntityLinkType
-  biochementity:
+  biochementity_id_list:
     range: BioChemEntity
-    inlined: false
+    multivalued: true
 
   categorical:
     range: boolean
@@ -1190,15 +1172,12 @@ enums:
       exposuremarker:
       geomarker:
       observation:
-  BioChemEntityLinkType:
+  BioChemEntityType:
     permissible_values:
-      exact_match:
-      close_match:
-      broader:
-      part_of:
-      group_contains:
-      has_parent_compound:
-      branched_version_of:
+      compound_group:
+      compound:
+      conjugated_compound:
+      unconjugated_compound:
   ResearchPopulationType:
     permissible_values:
       general_population:
