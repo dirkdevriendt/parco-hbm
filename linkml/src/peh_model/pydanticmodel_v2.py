@@ -18,7 +18,6 @@ from pydantic import (
     model_serializer,
 )
 
-
 metamodel_version = "None"
 version = "0.4.0"
 
@@ -118,14 +117,11 @@ class IndicatorType(str, Enum):
     observation = "observation"
 
 
-class BioChemEntityLinkType(str, Enum):
-    exact_match = "exact_match"
-    close_match = "close_match"
-    broader = "broader"
-    part_of = "part_of"
-    group_contains = "group_contains"
-    has_parent_compound = "has_parent_compound"
-    branched_version_of = "branched_version_of"
+class BioChemEntityType(str, Enum):
+    compound_group = "compound_group"
+    compound = "compound"
+    conjugated_compound = "conjugated_compound"
+    unconjugated_compound = "unconjugated_compound"
 
 
 class ResearchPopulationType(str, Enum):
@@ -526,61 +522,22 @@ class BioChemEntity(
     """
 
     grouping_id_list: Optional[list[str]] = Field(default=[])
+    biochementity_type: Optional[BioChemEntityType] = Field(default=None)
     molweight_grampermol: Optional[Decimal] = Field(default=None)
-    biochemidentifiers: Optional[list[BioChemIdentifier]] = Field(default=[])
-    biochementity_links: Optional[list[BioChemEntityLink]] = Field(default=[])
+    parent_compounds: Optional[list[str]] = Field(default=[])
+    group_compound_members: Optional[list[str]] = Field(
+        default=[],
+        description="""For a compound that groups other compounds, links to members of the group. Inverse of the BioChemEntity member_of_group_compounds slot""",
+    )
+    member_of_group_compounds: Optional[list[str]] = Field(
+        default=[],
+        description="""Declares the compound being part of one or more group compounds. Inverse of the BioChemEntity group_compound_members slot""",
+    )
     aliases: Optional[list[str]] = Field(default=[])
     context_aliases: Optional[list[ContextAlias]] = Field(default=[])
     translations: Optional[list[Translation]] = Field(default=[])
     current_validation_status: Optional[ValidationStatus] = Field(default=None)
     validation_history: Optional[list[ValidationHistoryRecord]] = Field(default=[])
-    id: str = Field(
-        default=...,
-        description="""Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).""",
-    )
-    unique_name: Optional[str] = Field(
-        default=None,
-        description="""Human readable name, unique across the context the entity is defined in.""",
-    )
-    short_name: Optional[str] = Field(
-        default=None,
-        description="""Shortened name or code, preferrable unique across the context the entity is defined in.""",
-    )
-    name: Optional[str] = Field(
-        default=None, description="""Common human readable name"""
-    )
-    ui_label: Optional[str] = Field(
-        default=None,
-        description="""Human readable label, to be used in user facing interfaces in the most common use cases.""",
-    )
-    description: Optional[str] = Field(
-        default=None,
-        description="""Long form description or definition for the entity.""",
-    )
-    remark: Optional[str] = Field(
-        default=None,
-        description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
-    )
-    exact_matches: Optional[list[str]] = Field(default=[])
-
-
-class BioChemIdentifier(HasValidationStatus):
-    """
-    An identifier by which a biochemical entity is known in a schema (the BioChemIdentifierSchema) used by a certain community or system
-    """
-
-    identifier_schema: Optional[str] = Field(default=None)
-    identifier_code: Optional[str] = Field(default=None)
-    current_validation_status: Optional[ValidationStatus] = Field(default=None)
-    validation_history: Optional[list[ValidationHistoryRecord]] = Field(default=[])
-
-
-class BioChemIdentifierSchema(NamedThing):
-    """
-    A well-defined schema used by a certain community or system, listing biochemical entities with individual identifiers
-    """
-
-    web_uri: Optional[str] = Field(default=None)
     id: str = Field(
         default=...,
         description="""Machine readable, unique identifier; ideally a URI/GUPRI (Globally Unique, Persistent, Resolvable Identifier).""",
@@ -663,7 +620,7 @@ class Indicator(HasTranslations, HasContextAliases, NamedThing):
     relevant_observable_entity_types: Optional[list[ObservableEntityType]] = Field(
         default=[]
     )
-    biochementity_links: Optional[list[BioChemEntityLink]] = Field(default=[])
+    biochementity: Optional[str] = Field(default=None)
     context_aliases: Optional[list[ContextAlias]] = Field(default=[])
     translations: Optional[list[Translation]] = Field(default=[])
     id: str = Field(
@@ -694,15 +651,6 @@ class Indicator(HasTranslations, HasContextAliases, NamedThing):
         description="""Additional comment, note or remark providing context on the use of an entity or the interpretation of its properties.""",
     )
     exact_matches: Optional[list[str]] = Field(default=[])
-
-
-class BioChemEntityLink(ConfiguredBaseModel):
-    """
-    A relational property that allows creating qualified links to biochemical entities
-    """
-
-    biochementity_linktype: Optional[BioChemEntityLinkType] = Field(default=None)
-    biochementity: Optional[str] = Field(default=None)
 
 
 class PhysicalEntity(NamedThing):
@@ -2096,11 +2044,8 @@ Grouping.model_rebuild()
 Translation.model_rebuild()
 Unit.model_rebuild()
 BioChemEntity.model_rebuild()
-BioChemIdentifier.model_rebuild()
-BioChemIdentifierSchema.model_rebuild()
 Matrix.model_rebuild()
 Indicator.model_rebuild()
-BioChemEntityLink.model_rebuild()
 PhysicalEntity.model_rebuild()
 PhysicalEntityLink.model_rebuild()
 Sample.model_rebuild()

@@ -1,5 +1,5 @@
 # Auto generated from peh.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-01-13T14:27:21
+# Generation date: 2026-01-30T15:37:14
 # Schema: PEH-Model
 #
 # id: https://w3id.org/peh/peh-model
@@ -38,8 +38,15 @@ from linkml_runtime.linkml_model.types import (
     Decimal,
     Integer,
     String,
+    Uriorcurie,
 )
-from linkml_runtime.utils.metamodelcore import Bool, Decimal, XSDDate, XSDDateTime
+from linkml_runtime.utils.metamodelcore import (
+    Bool,
+    Decimal,
+    URIorCURIE,
+    XSDDate,
+    XSDDateTime,
+)
 
 metamodel_version = "1.7.0"
 version = "0.4.0"
@@ -77,10 +84,6 @@ class UnitId(NamedThingId):
 
 
 class BioChemEntityId(NamedThingId):
-    pass
-
-
-class BioChemIdentifierSchemaId(NamedThingId):
     pass
 
 
@@ -454,7 +457,9 @@ class NamedThing(YAMLRoot):
     ui_label: Optional[str] = None
     description: Optional[str] = None
     remark: Optional[str] = None
-    exact_matches: Optional[Union[str, list[str]]] = empty_list()
+    exact_matches: Optional[
+        Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]
+    ] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
@@ -485,7 +490,8 @@ class NamedThing(YAMLRoot):
                 [self.exact_matches] if self.exact_matches is not None else []
             )
         self.exact_matches = [
-            v if isinstance(v, str) else str(v) for v in self.exact_matches
+            v if isinstance(v, URIorCURIE) else URIorCURIE(v)
+            for v in self.exact_matches
         ]
 
         super().__post_init__(**kwargs)
@@ -800,8 +806,8 @@ class Unit(NamedThing):
 
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PEHTERMS["Unit"]
-    class_class_curie: ClassVar[str] = "pehterms:Unit"
+    class_class_uri: ClassVar[URIRef] = WIKIDATA["Q2198779"]
+    class_class_curie: ClassVar[str] = "wikidata:Q2198779"
     class_name: ClassVar[str] = "Unit"
     class_model_uri: ClassVar[URIRef] = PEHTERMS.Unit
 
@@ -884,12 +890,16 @@ class BioChemEntity(NamedThing):
     grouping_id_list: Optional[
         Union[Union[str, GroupingId], list[Union[str, GroupingId]]]
     ] = empty_list()
+    biochementity_type: Optional[Union[str, "BioChemEntityType"]] = None
     molweight_grampermol: Optional[Decimal] = None
-    biochemidentifiers: Optional[
-        Union[Union[dict, "BioChemIdentifier"], list[Union[dict, "BioChemIdentifier"]]]
+    parent_compounds: Optional[
+        Union[Union[str, BioChemEntityId], list[Union[str, BioChemEntityId]]]
     ] = empty_list()
-    biochementity_links: Optional[
-        Union[Union[dict, "BioChemEntityLink"], list[Union[dict, "BioChemEntityLink"]]]
+    group_compound_members: Optional[
+        Union[Union[str, BioChemEntityId], list[Union[str, BioChemEntityId]]]
+    ] = empty_list()
+    member_of_group_compounds: Optional[
+        Union[Union[str, BioChemEntityId], list[Union[str, BioChemEntityId]]]
     ] = empty_list()
     aliases: Optional[Union[str, list[str]]] = empty_list()
     context_aliases: Optional[
@@ -921,29 +931,45 @@ class BioChemEntity(NamedThing):
             for v in self.grouping_id_list
         ]
 
+        if self.biochementity_type is not None and not isinstance(
+            self.biochementity_type, BioChemEntityType
+        ):
+            self.biochementity_type = BioChemEntityType(self.biochementity_type)
+
         if self.molweight_grampermol is not None and not isinstance(
             self.molweight_grampermol, Decimal
         ):
             self.molweight_grampermol = Decimal(self.molweight_grampermol)
 
-        if not isinstance(self.biochemidentifiers, list):
-            self.biochemidentifiers = (
-                [self.biochemidentifiers] if self.biochemidentifiers is not None else []
+        if not isinstance(self.parent_compounds, list):
+            self.parent_compounds = (
+                [self.parent_compounds] if self.parent_compounds is not None else []
             )
-        self.biochemidentifiers = [
-            v if isinstance(v, BioChemIdentifier) else BioChemIdentifier(**as_dict(v))
-            for v in self.biochemidentifiers
+        self.parent_compounds = [
+            v if isinstance(v, BioChemEntityId) else BioChemEntityId(v)
+            for v in self.parent_compounds
         ]
 
-        if not isinstance(self.biochementity_links, list):
-            self.biochementity_links = (
-                [self.biochementity_links]
-                if self.biochementity_links is not None
+        if not isinstance(self.group_compound_members, list):
+            self.group_compound_members = (
+                [self.group_compound_members]
+                if self.group_compound_members is not None
                 else []
             )
-        self.biochementity_links = [
-            v if isinstance(v, BioChemEntityLink) else BioChemEntityLink(**as_dict(v))
-            for v in self.biochementity_links
+        self.group_compound_members = [
+            v if isinstance(v, BioChemEntityId) else BioChemEntityId(v)
+            for v in self.group_compound_members
+        ]
+
+        if not isinstance(self.member_of_group_compounds, list):
+            self.member_of_group_compounds = (
+                [self.member_of_group_compounds]
+                if self.member_of_group_compounds is not None
+                else []
+            )
+        self.member_of_group_compounds = [
+            v if isinstance(v, BioChemEntityId) else BioChemEntityId(v)
+            for v in self.member_of_group_compounds
         ]
 
         if not isinstance(self.aliases, list):
@@ -992,93 +1018,6 @@ class BioChemEntity(NamedThing):
 
 
 @dataclass(repr=False)
-class BioChemIdentifier(YAMLRoot):
-    """
-    An identifier by which a biochemical entity is known in a schema (the BioChemIdentifierSchema) used by a certain
-    community or system
-    """
-
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = PEHTERMS["BioChemIdentifier"]
-    class_class_curie: ClassVar[str] = "pehterms:BioChemIdentifier"
-    class_name: ClassVar[str] = "BioChemIdentifier"
-    class_model_uri: ClassVar[URIRef] = PEHTERMS.BioChemIdentifier
-
-    identifier_schema: Optional[Union[str, BioChemIdentifierSchemaId]] = None
-    identifier_code: Optional[str] = None
-    current_validation_status: Optional[Union[str, "ValidationStatus"]] = None
-    validation_history: Optional[
-        Union[
-            Union[dict, ValidationHistoryRecord],
-            list[Union[dict, ValidationHistoryRecord]],
-        ]
-    ] = empty_list()
-
-    def __post_init__(self, *_: str, **kwargs: Any):
-        if self.identifier_schema is not None and not isinstance(
-            self.identifier_schema, BioChemIdentifierSchemaId
-        ):
-            self.identifier_schema = BioChemIdentifierSchemaId(self.identifier_schema)
-
-        if self.identifier_code is not None and not isinstance(
-            self.identifier_code, str
-        ):
-            self.identifier_code = str(self.identifier_code)
-
-        if self.current_validation_status is not None and not isinstance(
-            self.current_validation_status, ValidationStatus
-        ):
-            self.current_validation_status = ValidationStatus(
-                self.current_validation_status
-            )
-
-        if not isinstance(self.validation_history, list):
-            self.validation_history = (
-                [self.validation_history] if self.validation_history is not None else []
-            )
-        self.validation_history = [
-            (
-                v
-                if isinstance(v, ValidationHistoryRecord)
-                else ValidationHistoryRecord(**as_dict(v))
-            )
-            for v in self.validation_history
-        ]
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass(repr=False)
-class BioChemIdentifierSchema(NamedThing):
-    """
-    A well-defined schema used by a certain community or system, listing biochemical entities with individual
-    identifiers
-    """
-
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = PEHTERMS["BioChemIdentifierSchema"]
-    class_class_curie: ClassVar[str] = "pehterms:BioChemIdentifierSchema"
-    class_name: ClassVar[str] = "BioChemIdentifierSchema"
-    class_model_uri: ClassVar[URIRef] = PEHTERMS.BioChemIdentifierSchema
-
-    id: Union[str, BioChemIdentifierSchemaId] = None
-    web_uri: Optional[str] = None
-
-    def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, BioChemIdentifierSchemaId):
-            self.id = BioChemIdentifierSchemaId(self.id)
-
-        if self.web_uri is not None and not isinstance(self.web_uri, str):
-            self.web_uri = str(self.web_uri)
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass(repr=False)
 class Matrix(NamedThing):
     """
     The physical medium or biological substrate from which a biomarker, or other analyte is quantified in
@@ -1087,8 +1026,8 @@ class Matrix(NamedThing):
 
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PEHTERMS["Matrix"]
-    class_class_curie: ClassVar[str] = "pehterms:Matrix"
+    class_class_uri: ClassVar[URIRef] = WIKIDATA["Q685816"]
+    class_class_curie: ClassVar[str] = "wikidata:Q685816"
     class_name: ClassVar[str] = "Matrix"
     class_model_uri: ClassVar[URIRef] = PEHTERMS.Matrix
 
@@ -1141,8 +1080,8 @@ class Indicator(NamedThing):
 
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = PEHTERMS["Indicator"]
-    class_class_curie: ClassVar[str] = "pehterms:Indicator"
+    class_class_uri: ClassVar[URIRef] = WIKIDATA["Q937228"]
+    class_class_curie: ClassVar[str] = "wikidata:Q937228"
     class_name: ClassVar[str] = "Indicator"
     class_model_uri: ClassVar[URIRef] = PEHTERMS.Indicator
 
@@ -1160,9 +1099,7 @@ class Indicator(NamedThing):
             Union[str, "ObservableEntityType"], list[Union[str, "ObservableEntityType"]]
         ]
     ] = empty_list()
-    biochementity_links: Optional[
-        Union[Union[dict, "BioChemEntityLink"], list[Union[dict, "BioChemEntityLink"]]]
-    ] = empty_list()
+    biochementity: Optional[Union[str, BioChemEntityId]] = None
     context_aliases: Optional[
         Union[Union[dict, ContextAlias], list[Union[dict, ContextAlias]]]
     ] = empty_list()
@@ -1220,16 +1157,10 @@ class Indicator(NamedThing):
             for v in self.relevant_observable_entity_types
         ]
 
-        if not isinstance(self.biochementity_links, list):
-            self.biochementity_links = (
-                [self.biochementity_links]
-                if self.biochementity_links is not None
-                else []
-            )
-        self.biochementity_links = [
-            v if isinstance(v, BioChemEntityLink) else BioChemEntityLink(**as_dict(v))
-            for v in self.biochementity_links
-        ]
+        if self.biochementity is not None and not isinstance(
+            self.biochementity, BioChemEntityId
+        ):
+            self.biochementity = BioChemEntityId(self.biochementity)
 
         if not isinstance(self.context_aliases, list):
             self.context_aliases = (
@@ -1248,38 +1179,6 @@ class Indicator(NamedThing):
             v if isinstance(v, Translation) else Translation(**as_dict(v))
             for v in self.translations
         ]
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass(repr=False)
-class BioChemEntityLink(YAMLRoot):
-    """
-    A relational property that allows creating qualified links to biochemical entities
-    """
-
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = PEHTERMS["BioChemEntityLink"]
-    class_class_curie: ClassVar[str] = "pehterms:BioChemEntityLink"
-    class_name: ClassVar[str] = "BioChemEntityLink"
-    class_model_uri: ClassVar[URIRef] = PEHTERMS.BioChemEntityLink
-
-    biochementity_linktype: Optional[Union[str, "BioChemEntityLinkType"]] = None
-    biochementity: Optional[Union[str, BioChemEntityId]] = None
-
-    def __post_init__(self, *_: str, **kwargs: Any):
-        if self.biochementity_linktype is not None and not isinstance(
-            self.biochementity_linktype, BioChemEntityLinkType
-        ):
-            self.biochementity_linktype = BioChemEntityLinkType(
-                self.biochementity_linktype
-            )
-
-        if self.biochementity is not None and not isinstance(
-            self.biochementity, BioChemEntityId
-        ):
-            self.biochementity = BioChemEntityId(self.biochementity)
 
         super().__post_init__(**kwargs)
 
@@ -3947,18 +3846,15 @@ class IndicatorType(EnumDefinitionImpl):
     )
 
 
-class BioChemEntityLinkType(EnumDefinitionImpl):
+class BioChemEntityType(EnumDefinitionImpl):
 
-    exact_match = PermissibleValue(text="exact_match")
-    close_match = PermissibleValue(text="close_match")
-    broader = PermissibleValue(text="broader")
-    part_of = PermissibleValue(text="part_of")
-    group_contains = PermissibleValue(text="group_contains")
-    has_parent_compound = PermissibleValue(text="has_parent_compound")
-    branched_version_of = PermissibleValue(text="branched_version_of")
+    compound_group = PermissibleValue(text="compound_group")
+    compound = PermissibleValue(text="compound")
+    conjugated_compound = PermissibleValue(text="conjugated_compound")
+    unconjugated_compound = PermissibleValue(text="unconjugated_compound")
 
     _defn = EnumDefinition(
-        name="BioChemEntityLinkType",
+        name="BioChemEntityType",
     )
 
 
@@ -4515,12 +4411,12 @@ slots.context_aliases = Slot(
 )
 
 slots.exact_matches = Slot(
-    uri=PEHTERMS.exact_matches,
+    uri=SKOS.exactMatch,
     name="exact_matches",
-    curie=PEHTERMS.curie("exact_matches"),
+    curie=SKOS.curie("exactMatch"),
     model_uri=PEHTERMS.exact_matches,
     domain=None,
-    range=Optional[Union[str, list[str]]],
+    range=Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]],
 )
 
 slots.context = Slot(
@@ -4594,9 +4490,9 @@ slots.units = Slot(
 )
 
 slots.same_unit_as = Slot(
-    uri=PEHTERMS.same_unit_as,
+    uri=SKOS.exactMatch,
     name="same_unit_as",
-    curie=PEHTERMS.curie("same_unit_as"),
+    curie=SKOS.curie("exactMatch"),
     model_uri=PEHTERMS.same_unit_as,
     domain=None,
     range=Optional[Union[str, "QudtUnit"]],
@@ -4626,32 +4522,21 @@ slots.groupings = Slot(
 )
 
 slots.grouping_id_list = Slot(
-    uri=PEHTERMS.grouping_id_list,
+    uri=SKOS.broader,
     name="grouping_id_list",
-    curie=PEHTERMS.curie("grouping_id_list"),
+    curie=SKOS.curie("broader"),
     model_uri=PEHTERMS.grouping_id_list,
     domain=None,
     range=Optional[Union[Union[str, GroupingId], list[Union[str, GroupingId]]]],
 )
 
 slots.parent_grouping_id_list = Slot(
-    uri=SKOS.broader,
+    uri=RDFS.subClassOf,
     name="parent_grouping_id_list",
-    curie=SKOS.curie("broader"),
+    curie=RDFS.curie("subClassOf"),
     model_uri=PEHTERMS.parent_grouping_id_list,
     domain=None,
     range=Optional[Union[Union[str, GroupingId], list[Union[str, GroupingId]]]],
-)
-
-slots.biochemidentifiers = Slot(
-    uri=PEHTERMS.biochemidentifiers,
-    name="biochemidentifiers",
-    curie=PEHTERMS.curie("biochemidentifiers"),
-    model_uri=PEHTERMS.biochemidentifiers,
-    domain=None,
-    range=Optional[
-        Union[Union[dict, BioChemIdentifier], list[Union[dict, BioChemIdentifier]]]
-    ],
 )
 
 slots.biochementities = Slot(
@@ -4680,33 +4565,6 @@ slots.indicators = Slot(
             list[Union[dict, Indicator]],
         ]
     ],
-)
-
-slots.web_uri = Slot(
-    uri=PEHTERMS.web_uri,
-    name="web_uri",
-    curie=PEHTERMS.curie("web_uri"),
-    model_uri=PEHTERMS.web_uri,
-    domain=None,
-    range=Optional[str],
-)
-
-slots.identifier_schema = Slot(
-    uri=PEHTERMS.identifier_schema,
-    name="identifier_schema",
-    curie=PEHTERMS.curie("identifier_schema"),
-    model_uri=PEHTERMS.identifier_schema,
-    domain=None,
-    range=Optional[Union[str, BioChemIdentifierSchemaId]],
-)
-
-slots.identifier_code = Slot(
-    uri=PEHTERMS.identifier_code,
-    name="identifier_code",
-    curie=PEHTERMS.curie("identifier_code"),
-    model_uri=PEHTERMS.identifier_code,
-    domain=None,
-    range=Optional[str],
 )
 
 slots.current_validation_status = Slot(
@@ -4763,10 +4621,61 @@ slots.validation_remark = Slot(
     range=Optional[str],
 )
 
-slots.parent_matrix = Slot(
+slots.biochementity_type = Slot(
+    uri=PEHTERMS.biochementity_type,
+    name="biochementity_type",
+    curie=PEHTERMS.curie("biochementity_type"),
+    model_uri=PEHTERMS.biochementity_type,
+    domain=None,
+    range=Optional[Union[str, "BioChemEntityType"]],
+)
+
+slots.molweight_grampermol = Slot(
+    uri=PEHTERMS.molweight_grampermol,
+    name="molweight_grampermol",
+    curie=PEHTERMS.curie("molweight_grampermol"),
+    model_uri=PEHTERMS.molweight_grampermol,
+    domain=None,
+    range=Optional[Decimal],
+)
+
+slots.parent_compounds = Slot(
+    uri=RDFS.subClassOf,
+    name="parent_compounds",
+    curie=RDFS.curie("subClassOf"),
+    model_uri=PEHTERMS.parent_compounds,
+    domain=None,
+    range=Optional[
+        Union[Union[str, BioChemEntityId], list[Union[str, BioChemEntityId]]]
+    ],
+)
+
+slots.group_compound_members = Slot(
+    uri=SKOS.narrower,
+    name="group_compound_members",
+    curie=SKOS.curie("narrower"),
+    model_uri=PEHTERMS.group_compound_members,
+    domain=None,
+    range=Optional[
+        Union[Union[str, BioChemEntityId], list[Union[str, BioChemEntityId]]]
+    ],
+)
+
+slots.member_of_group_compounds = Slot(
     uri=SKOS.broader,
-    name="parent_matrix",
+    name="member_of_group_compounds",
     curie=SKOS.curie("broader"),
+    model_uri=PEHTERMS.member_of_group_compounds,
+    domain=None,
+    range=Optional[
+        Union[Union[str, BioChemEntityId], list[Union[str, BioChemEntityId]]]
+    ],
+)
+
+slots.parent_matrix = Slot(
+    uri=RDFS.subClassOf,
+    name="parent_matrix",
+    curie=RDFS.curie("subClassOf"),
     model_uri=PEHTERMS.parent_matrix,
     domain=None,
     range=Optional[Union[str, MatrixId]],
@@ -4832,35 +4741,6 @@ slots.relevant_observable_entity_types = Slot(
             Union[str, "ObservableEntityType"], list[Union[str, "ObservableEntityType"]]
         ]
     ],
-)
-
-slots.molweight_grampermol = Slot(
-    uri=PEHTERMS.molweight_grampermol,
-    name="molweight_grampermol",
-    curie=PEHTERMS.curie("molweight_grampermol"),
-    model_uri=PEHTERMS.molweight_grampermol,
-    domain=None,
-    range=Optional[Decimal],
-)
-
-slots.biochementity_links = Slot(
-    uri=PEHTERMS.biochementity_links,
-    name="biochementity_links",
-    curie=PEHTERMS.curie("biochementity_links"),
-    model_uri=PEHTERMS.biochementity_links,
-    domain=None,
-    range=Optional[
-        Union[Union[dict, BioChemEntityLink], list[Union[dict, BioChemEntityLink]]]
-    ],
-)
-
-slots.biochementity_linktype = Slot(
-    uri=PEHTERMS.biochementity_linktype,
-    name="biochementity_linktype",
-    curie=PEHTERMS.curie("biochementity_linktype"),
-    model_uri=PEHTERMS.biochementity_linktype,
-    domain=None,
-    range=Optional[Union[str, "BioChemEntityLinkType"]],
 )
 
 slots.biochementity = Slot(
@@ -4984,9 +4864,9 @@ slots.relevant_observation_types = Slot(
 )
 
 slots.indicator = Slot(
-    uri=PEHTERMS.indicator,
+    uri=RDFS.subClassOf,
     name="indicator",
-    curie=PEHTERMS.curie("indicator"),
+    curie=RDFS.curie("subClassOf"),
     model_uri=PEHTERMS.indicator,
     domain=None,
     range=Optional[Union[str, IndicatorId]],
