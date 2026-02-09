@@ -1,5 +1,6 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix linkml: <https://w3id.org/linkml/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix pav: <http://purl.org/pav/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix qudt: <http://qudt.org/schema/qudt/> .
@@ -14,30 +15,30 @@
     dcterms:license "https://creativecommons.org/publicdomain/zero/1.0/" ;
     pav:version "0.4.0" ;
     skos:definition "Entity and relation ontology and datamodel for Personal Exposure and Health data" ;
-    sh:declare [ sh:namespace schema1: ;
+    sh:declare [ sh:namespace <https://www.wikidata.org/wiki/> ;
+            sh:prefix "wikidata" ],
+        [ sh:namespace <https://w3id.org/peh/> ;
+            sh:prefix "peh" ],
+        [ sh:namespace schema1: ;
             sh:prefix "schema" ],
+        [ sh:namespace <https://w3id.org/iadopt/ont/> ;
+            sh:prefix "iop" ],
+        [ sh:namespace <http://qudt.org/2.1/vocab/quantitykind> ;
+            sh:prefix "qudtqk" ],
+        [ sh:namespace <http://qudt.org/2.1/schema/qudt> ;
+            sh:prefix "qudt" ],
+        [ sh:namespace rdfs: ;
+            sh:prefix "rdfs" ],
+        [ sh:namespace <https://qudt.org/vocab/unit/> ;
+            sh:prefix "qudtunit" ],
         [ sh:namespace prov: ;
             sh:prefix "prov" ],
         [ sh:namespace linkml: ;
             sh:prefix "linkml" ],
-        [ sh:namespace <https://w3id.org/iadopt/ont/> ;
-            sh:prefix "iop" ],
-        [ sh:namespace skos: ;
-            sh:prefix "skos" ],
         [ sh:namespace <https://w3id.org/peh/terms/> ;
             sh:prefix "pehterms" ],
-        [ sh:namespace <https://www.wikidata.org/wiki/> ;
-            sh:prefix "wikidata" ],
-        [ sh:namespace <http://qudt.org/2.1/schema/qudt> ;
-            sh:prefix "qudt" ],
-        [ sh:namespace <https://w3id.org/peh/> ;
-            sh:prefix "peh" ],
-        [ sh:namespace <http://qudt.org/2.1/vocab/quantitykind> ;
-            sh:prefix "qudtqk" ],
-        [ sh:namespace <https://qudt.org/vocab/unit/> ;
-            sh:prefix "qudtunit" ],
-        [ sh:namespace rdfs: ;
-            sh:prefix "rdfs" ] ;
+        [ sh:namespace skos: ;
+            sh:prefix "skos" ] ;
     linkml:classes <https://w3id.org/peh/terms/BioChemEntity>,
         <https://w3id.org/peh/terms/CalculationDesign>,
         <https://w3id.org/peh/terms/CalculationImplementation>,
@@ -126,7 +127,7 @@
         <https://w3id.org/peh/terms/ValidationCommand>,
         <https://w3id.org/peh/terms/ValidationErrorLevel>,
         <https://w3id.org/peh/terms/ValidationStatus> ;
-    linkml:generation_date "2026-01-30T15:37:18"^^xsd:dateTime ;
+    linkml:generation_date "2026-02-09T11:46:36"^^xsd:dateTime ;
     linkml:id <https://w3id.org/peh/peh-model> ;
     linkml:imports linkml:types ;
     linkml:metamodel_version "1.7.0" ;
@@ -318,8 +319,8 @@
         <https://w3id.org/peh/terms/value_type>,
         <https://w3id.org/peh/terms/zeroallowed> ;
     linkml:source_file "peh.yaml" ;
-    linkml:source_file_date "2026-01-30T15:36:53"^^xsd:dateTime ;
-    linkml:source_file_size 38838 ;
+    linkml:source_file_date "2026-02-09T11:46:14"^^xsd:dateTime ;
+    linkml:source_file_size 38913 ;
     linkml:types <https://w3id.org/peh/terms/boolean>,
         <https://w3id.org/peh/terms/curie>,
         <https://w3id.org/peh/terms/date>,
@@ -973,17 +974,6 @@
     linkml:imported_from "linkml:types" ;
     linkml:uri xsd:decimal .
 
-<https://w3id.org/peh/terms/group_compound_members> a linkml:SlotDefinition ;
-    skos:definition "For a compound that groups other compounds, links to members of the group. Inverse of the BioChemEntity member_of_group_compounds slot" ;
-    skos:inScheme <https://w3id.org/peh/peh-model> ;
-    skos:mappingRelation skos:narrower ;
-    linkml:definition_uri <https://w3id.org/peh/terms/group_compound_members> ;
-    linkml:domain_of <https://w3id.org/peh/terms/BioChemEntity> ;
-    linkml:multivalued true ;
-    linkml:owner <https://w3id.org/peh/terms/BioChemEntity> ;
-    linkml:range <https://w3id.org/peh/terms/BioChemEntity> ;
-    linkml:slot_uri skos:narrower .
-
 <https://w3id.org/peh/terms/indicator> a linkml:SlotDefinition ;
     skos:inScheme <https://w3id.org/peh/peh-model> ;
     skos:mappingRelation rdfs:subClassOf ;
@@ -1002,17 +992,6 @@
     linkml:definition_uri linkml:Integer ;
     linkml:imported_from "linkml:types" ;
     linkml:uri xsd:integer .
-
-<https://w3id.org/peh/terms/member_of_group_compounds> a linkml:SlotDefinition ;
-    skos:definition "Declares the compound being part of one or more group compounds. Inverse of the BioChemEntity group_compound_members slot" ;
-    skos:inScheme <https://w3id.org/peh/peh-model> ;
-    skos:mappingRelation skos:broader ;
-    linkml:definition_uri <https://w3id.org/peh/terms/member_of_group_compounds> ;
-    linkml:domain_of <https://w3id.org/peh/terms/BioChemEntity> ;
-    linkml:multivalued true ;
-    linkml:owner <https://w3id.org/peh/terms/BioChemEntity> ;
-    linkml:range <https://w3id.org/peh/terms/BioChemEntity> ;
-    linkml:slot_uri skos:broader .
 
 <https://w3id.org/peh/terms/orcid> a linkml:SlotDefinition ;
     skos:inScheme <https://w3id.org/peh/peh-model> ;
@@ -1384,6 +1363,18 @@
     linkml:range <https://w3id.org/peh/terms/string> ;
     linkml:slot_uri <https://w3id.org/peh/terms/geographic_scope> .
 
+<https://w3id.org/peh/terms/group_compound_members> a linkml:SlotDefinition ;
+    owl:inverseOf <https://w3id.org/peh/terms/member_of_group_compounds> ;
+    skos:definition "For a compound that groups other compounds, links to members of the group. Inverse of the BioChemEntity member_of_group_compounds slot" ;
+    skos:inScheme <https://w3id.org/peh/peh-model> ;
+    skos:mappingRelation skos:narrower ;
+    linkml:definition_uri <https://w3id.org/peh/terms/group_compound_members> ;
+    linkml:domain_of <https://w3id.org/peh/terms/BioChemEntity> ;
+    linkml:multivalued true ;
+    linkml:owner <https://w3id.org/peh/terms/BioChemEntity> ;
+    linkml:range <https://w3id.org/peh/terms/BioChemEntity> ;
+    linkml:slot_uri skos:narrower .
+
 <https://w3id.org/peh/terms/groupings> a linkml:SlotDefinition ;
     skos:inScheme <https://w3id.org/peh/peh-model> ;
     linkml:definition_uri <https://w3id.org/peh/terms/groupings> ;
@@ -1529,6 +1520,18 @@
     linkml:owner <https://w3id.org/peh/terms/StudyPopulation> ;
     linkml:range <https://w3id.org/peh/terms/StudyEntity> ;
     linkml:slot_uri <https://w3id.org/peh/terms/member_id_list> .
+
+<https://w3id.org/peh/terms/member_of_group_compounds> a linkml:SlotDefinition ;
+    owl:inverseOf <https://w3id.org/peh/terms/group_compound_members> ;
+    skos:definition "Declares the compound being part of one or more group compounds. Inverse of the BioChemEntity group_compound_members slot" ;
+    skos:inScheme <https://w3id.org/peh/peh-model> ;
+    skos:mappingRelation skos:broader ;
+    linkml:definition_uri <https://w3id.org/peh/terms/member_of_group_compounds> ;
+    linkml:domain_of <https://w3id.org/peh/terms/BioChemEntity> ;
+    linkml:multivalued true ;
+    linkml:owner <https://w3id.org/peh/terms/BioChemEntity> ;
+    linkml:range <https://w3id.org/peh/terms/BioChemEntity> ;
+    linkml:slot_uri skos:broader .
 
 <https://w3id.org/peh/terms/metadata_fields> a linkml:SlotDefinition ;
     skos:inScheme <https://w3id.org/peh/peh-model> ;

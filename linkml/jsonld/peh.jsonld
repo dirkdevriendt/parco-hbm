@@ -1764,6 +1764,7 @@
       "domain_of": [
         "BioChemEntity"
       ],
+      "inverse": "member_of_group_compounds",
       "range": "BioChemEntity",
       "multivalued": true,
       "@type": "SlotDefinition"
@@ -1781,6 +1782,7 @@
       "domain_of": [
         "BioChemEntity"
       ],
+      "inverse": "group_compound_members",
       "range": "BioChemEntity",
       "multivalued": true,
       "@type": "SlotDefinition"
@@ -5136,9 +5138,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "peh.yaml",
-  "source_file_date": "2026-01-30T15:36:53",
-  "source_file_size": 38838,
-  "generation_date": "2026-01-30T15:37:14",
+  "source_file_date": "2026-02-09T11:46:14",
+  "source_file_size": 38913,
+  "generation_date": "2026-02-09T11:46:32",
   "@type": "SchemaDefinition",
   "@context": [
     "_temp/jsonld/peh.context.jsonld",
